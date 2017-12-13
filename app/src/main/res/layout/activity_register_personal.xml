@@ -26,11 +26,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:inputType="textEmailAddress"
+        android:hint="user@example.com"
+        android:inputType="textAutoComplete|textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_email_personal"
-        tools:text="user@example.com" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_email_personal" />
 
     <TextView
         android:id="@+id/txt_password_personal"
@@ -77,13 +78,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="bestuser"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_username_personal"
-        tools:text="bestuser"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp" />
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="16dp" />
 
     <Button
         android:id="@+id/btn_createAccount_personal"
