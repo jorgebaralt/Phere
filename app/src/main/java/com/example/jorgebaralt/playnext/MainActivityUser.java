@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -19,6 +21,7 @@ public class MainActivityUser extends AppCompatActivity {
     private TextView mTextMessage;
     private TextView mUsernameDisplay;
     private String mUsername;
+
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -43,7 +46,7 @@ public class MainActivityUser extends AppCompatActivity {
     };
 
     //Firebase Variables
-    private FirebaseAuth mAuth;
+    public static FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,7 @@ public class MainActivityUser extends AppCompatActivity {
 
         //layout views initialization
         mTextMessage = (TextView) findViewById(R.id.message);
-        mUsernameDisplay = (TextView) findViewById(R.id.username_home);
+        mUsernameDisplay = (TextView) findViewById(R.id.txt_username_home);
 
         mUsernameDisplay.setText(mUsername);
 
@@ -76,11 +79,35 @@ public class MainActivityUser extends AppCompatActivity {
             Log.d(TAG, "onStart: user is not logged in, Move to login Activity");
             Intent loginIntent = new Intent(this,StartActivity.class);
             startActivity(loginIntent);
+            finish();
         }
         
     }
 
-    private void updateUI(String username){
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.settings,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.settings_logout:
+                //sign out
+                mAuth.getInstance().signOut();
+                Log.d(TAG, "onOptionsItemSelected: Logging out...");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void userLogout() {
+    }
+
+    public void updateUI(String username){
         mUsername = username;
     }
 }

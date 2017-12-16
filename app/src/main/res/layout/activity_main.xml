@@ -31,7 +31,7 @@
         app:menu="@menu/navigation" />
 
     <TextView
-        android:id="@+id/username_home"
+        android:id="@+id/txt_username_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
@@ -39,6 +39,7 @@
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Username" />
+        tools:text="Username"
+        android:layout_marginLeft="140dp" />
 
 </android.support.constraint.ConstraintLayout>

@@ -14,6 +14,7 @@ import com.example.jorgebaralt.playnext.R;
 public class StartActivity extends AppCompatActivity {
 
     private Button mSignupBtn;
+    private Button mSigninBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,14 @@ public class StartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent registerIntent = new Intent(StartActivity.this,SelectActivity.class);
                 startActivity(registerIntent);
+            }
+        });
+
+        mSigninBtn = (Button) findViewById(R.id.btn_email_signin);
+        mSigninBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent SigninIntent = new Intent(StartActivity.this,SigninActivity.class);
             }
         });
 
