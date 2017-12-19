@@ -27,7 +27,10 @@
         <activity
             android:name=".login.RegisterPersonalActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".login.SigninActivity"></activity>
+        <activity
+            android:name=".login.SigninActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            />
     </application>
 
 </manifest>

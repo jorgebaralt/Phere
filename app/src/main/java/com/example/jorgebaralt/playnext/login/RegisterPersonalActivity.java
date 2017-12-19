@@ -48,6 +48,7 @@ public class RegisterPersonalActivity extends AppCompatActivity {
         mCreateAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO: check for empty email and password, do also a trim for blank spaces.
                 email = mEmail.getText().toString();
                 password = mPassword.getText().toString();
 

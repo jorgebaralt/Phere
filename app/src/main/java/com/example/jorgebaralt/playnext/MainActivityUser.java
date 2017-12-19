@@ -20,8 +20,8 @@ public class MainActivityUser extends AppCompatActivity {
     private final static String TAG = "MainActivityUser";
     private TextView mTextMessage;
     private TextView mUsernameDisplay;
-    private String mUsername;
-
+    private static String mUsername;
+    Intent startIntent;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -46,7 +46,7 @@ public class MainActivityUser extends AppCompatActivity {
     };
 
     //Firebase Variables
-    public static FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public class MainActivityUser extends AppCompatActivity {
 
         //initialize all Firebase instances
         mAuth = FirebaseAuth.getInstance();
-
+        startIntent = new Intent(this,StartActivity.class);
     }
 
     @Override
@@ -74,11 +74,12 @@ public class MainActivityUser extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            updateUI(currentUser.getDisplayName());
+            //TODO
+            updateUI(currentUser);
         }else {
             Log.d(TAG, "onStart: user is not logged in, Move to login Activity");
-            Intent loginIntent = new Intent(this,StartActivity.class);
-            startActivity(loginIntent);
+
+            startActivity(startIntent);
             finish();
         }
         
@@ -96,18 +97,19 @@ public class MainActivityUser extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.settings_logout:
                 //sign out
-                mAuth.getInstance().signOut();
                 Log.d(TAG, "onOptionsItemSelected: Logging out...");
+                FirebaseAuth.getInstance().signOut();
+                startActivity(startIntent);
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void userLogout() {
-    }
 
-    public void updateUI(String username){
-        mUsername = username;
+    private void updateUI(FirebaseUser user){
+
+        mUsername = user.getDisplayName();
     }
 }
