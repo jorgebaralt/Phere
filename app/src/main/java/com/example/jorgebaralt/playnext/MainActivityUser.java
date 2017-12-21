@@ -12,8 +12,14 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.jorgebaralt.playnext.login.StartActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivityUser extends AppCompatActivity {
 
@@ -21,9 +27,13 @@ public class MainActivityUser extends AppCompatActivity {
     private TextView mTextMessage;
     private TextView mUsernameDisplay;
     private static String mUsername;
-    Intent startIntent;
+    private Intent startIntent;
 
+    //Firebase Variables
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
+    //Bottom navigation view!
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -45,8 +55,24 @@ public class MainActivityUser extends AppCompatActivity {
         }
     };
 
-    //Firebase Variables
-    private FirebaseAuth mAuth;
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            db = FirebaseFirestore.getInstance();
+            updateUI(currentUser);
+        }else {
+            Log.d(TAG, "onStart: user is not logged in, Move to login Activity");
+            startActivity(startIntent);
+            finish();
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,32 +84,18 @@ public class MainActivityUser extends AppCompatActivity {
         mUsernameDisplay = (TextView) findViewById(R.id.txt_username_home);
 
         mUsernameDisplay.setText(mUsername);
+        startIntent = new Intent(this,StartActivity.class);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //initialize all Firebase instances
         mAuth = FirebaseAuth.getInstance();
-        startIntent = new Intent(this,StartActivity.class);
+
+
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            //TODO
-            updateUI(currentUser);
-        }else {
-            Log.d(TAG, "onStart: user is not logged in, Move to login Activity");
-
-            startActivity(startIntent);
-            finish();
-        }
-        
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -109,7 +121,21 @@ public class MainActivityUser extends AppCompatActivity {
 
 
     private void updateUI(FirebaseUser user){
+        CollectionReference usersRef = db.collection("users");
+        Query query = usersRef.whereEqualTo("email",user.getEmail()).limit(1);
 
-        mUsername = user.getDisplayName();
+        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot documentSnapshots) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
+
     }
 }
