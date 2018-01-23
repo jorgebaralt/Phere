@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.example.jorgebaralt.playnext.R;
 
 
-
+//choose whether to sign in or sign up.
 public class StartActivity extends AppCompatActivity {
     private Button mSignupBtn;
     private TextView mSigninBtn;
@@ -28,6 +28,9 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
 
         mSignupBtn = (Button) findViewById(R.id.btn_email_start);
+        mSigninBtn = (TextView) findViewById(R.id.btn_signin_start);
+
+        //if we are signing up, we have to go to select activity to pick (business or personal account)
         mSignupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,7 +40,7 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
-        mSigninBtn = (TextView) findViewById(R.id.btn_signin_start);
+        //Regular Sign in (enter credentials)
         mSigninBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

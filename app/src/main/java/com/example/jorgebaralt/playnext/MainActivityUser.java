@@ -12,23 +12,19 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.jorgebaralt.playnext.login.StartActivity;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivityUser extends AppCompatActivity {
 
     private final static String TAG = "MainActivityUser";
     private TextView mTextMessage;
     private TextView mUsernameDisplay;
-    private static String mUsername;
+    private String mUsername;
+    private String mEmail;
     private Intent startIntent;
-
+    private FirebaseUser currentUser;
     //Firebase Variables
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -56,15 +52,18 @@ public class MainActivityUser extends AppCompatActivity {
     };
 
 
-
+    //Loads before OnCreate
     @Override
     protected void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         //get current user
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null){
+            Log.d(TAG, "onStart: user: " + currentUser.getEmail() + "is logged in");
+            //get the database
             db = FirebaseFirestore.getInstance();
+            //update the ui to display the name of current user.
             updateUI(currentUser);
         }else {
             Log.d(TAG, "onStart: user is not logged in, Move to login Activity");
@@ -83,6 +82,7 @@ public class MainActivityUser extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         mUsernameDisplay = (TextView) findViewById(R.id.txt_username_home);
 
+        //set all views.
         mUsernameDisplay.setText(mUsername);
         startIntent = new Intent(this,StartActivity.class);
 
@@ -91,12 +91,10 @@ public class MainActivityUser extends AppCompatActivity {
 
         //initialize all Firebase instances
         mAuth = FirebaseAuth.getInstance();
-
-
     }
 
 
-
+    //create menu button oni top right.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -104,6 +102,7 @@ public class MainActivityUser extends AppCompatActivity {
         return true;
     }
 
+    //when an option is selected from the menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -119,23 +118,14 @@ public class MainActivityUser extends AppCompatActivity {
         }
     }
 
-
+    //update to current user information. from database or authentication info.
     private void updateUI(FirebaseUser user){
-        CollectionReference usersRef = db.collection("users");
-        Query query = usersRef.whereEqualTo("email",user.getEmail()).limit(1);
-
-        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot documentSnapshots) {
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
-
+        //get the current user information from the authenticated user.
+        mUsername = user.getDisplayName();
+        mEmail = user.getEmail();
+        Log.d(TAG, "updateUI: username = " + mUsername + " email = " + mEmail);
+        //set name on home
+        mUsernameDisplay.setText(mUsername);
 
     }
 }

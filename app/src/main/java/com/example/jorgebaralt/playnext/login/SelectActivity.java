@@ -12,9 +12,9 @@ import android.widget.Toast;
 import com.example.jorgebaralt.playnext.R;
 
 public class SelectActivity extends AppCompatActivity {
-
+    //buttons
     private Button mPersonalButton;
-    private Button mBussinesButton;
+    private Button mBusinessButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class SelectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select);
 
         mPersonalButton = (Button) findViewById(R.id.btn_personal_select);
-        mBussinesButton = (Button) findViewById(R.id.btn_business_select);
+        mBusinessButton = (Button) findViewById(R.id.btn_business_select);
 
         //Personal button clicked
         mPersonalButton.setOnClickListener(new View.OnClickListener() {
@@ -37,11 +37,11 @@ public class SelectActivity extends AppCompatActivity {
             }
         });
 
-        //Bussines button clicked
-        mBussinesButton.setOnClickListener(new View.OnClickListener() {
+        //Business button clicked
+        mBusinessButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(SelectActivity.this, "Business accounts in Progress...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SelectActivity.this, "Business accounts in Progress...", Toast.LENGTH_LONG).show();
             }
         });
 
