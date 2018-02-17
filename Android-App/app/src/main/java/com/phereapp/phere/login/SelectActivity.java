@@ -3,6 +3,7 @@ package com.phereapp.phere.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -15,7 +16,7 @@ public class SelectActivity extends AppCompatActivity {
     //buttons
     private Button mPersonalButton;
     private Button mBusinessButton;
-
+    private static final String TAG = "SelectActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +31,7 @@ public class SelectActivity extends AppCompatActivity {
         mPersonalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.d(TAG, "onClick: Create A personal Account");
                 Intent registerPersonalIntent = new Intent(SelectActivity.this,RegisterPersonalActivity.class);
                 startActivity(registerPersonalIntent);
 
