@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,7 +23,7 @@ public class MainActivityUser extends AppCompatActivity {
 
     private final static String TAG = "MainActivityUser";
     private TextView mTextMessage;
-    private TextView mUsernameDisplay;
+    //private TextView mUsernameDisplay;
     private String mUsername;
     private String mEmail;
     private Intent startIntent;
@@ -41,8 +43,8 @@ public class MainActivityUser extends AppCompatActivity {
                     //TODO: load new fragment
                     mTextMessage.setText(R.string.title_home);
                     return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                case R.id.navigation_parties:
+                    mTextMessage.setText("Parties");
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
@@ -62,7 +64,7 @@ public class MainActivityUser extends AppCompatActivity {
         //get current user
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null){
-            Log.d(TAG, "onStart: user: " + currentUser.getEmail() + "is logged in");
+            Log.d(TAG, "onStart: user: " + currentUser.getEmail() + " is logged in");
             //get the database
             db = FirebaseFirestore.getInstance();
             //update the ui to display the name of current user.
@@ -78,14 +80,19 @@ public class MainActivityUser extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //get rid of title bar
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_main_user);
 
         //layout views initialization
         mTextMessage = (TextView) findViewById(R.id.message);
-        mUsernameDisplay = (TextView) findViewById(R.id.txt_username_home);
+        //mUsernameDisplay = (TextView) findViewById(R.id.txt_username_home);
 
         //set all views.
-        mUsernameDisplay.setText(mUsername);
+        //mUsernameDisplay.setText(mUsername);
         startIntent = new Intent(this,StartActivity.class);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -124,9 +131,9 @@ public class MainActivityUser extends AppCompatActivity {
         //get the current user information from the authenticated user.
         mUsername = user.getDisplayName();
         mEmail = user.getEmail();
-        Log.d(TAG, "updateUI: username = " + mUsername + " email = " + mEmail);
+        Log.d(TAG, "USER LOGGED IN => updateUI: username = " + mUsername + " email = " + mEmail );
         //set name on home
-        mUsernameDisplay.setText(mUsername);
+        //mUsernameDisplay.setText(mUsername);
 
     }
 }
