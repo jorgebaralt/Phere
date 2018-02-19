@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jorgebaralt.playnext.login.RegisterPersonalActivity">
+    tools:context="com.phereapp.phere.login.RegisterPersonalActivity">
 
     <TextView
         android:id="@+id/txt_email_personal"
@@ -16,7 +16,8 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_register_personal" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_register_personal"
+        android:layout_marginLeft="16dp" />
 
     <EditText
         android:id="@+id/editTxt_email_personal"

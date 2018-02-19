@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jorgebaralt.playnext.login.SigninActivity">
+    tools:context="com.phereapp.phere.login.SigninActivity">
 
     <EditText
         android:id="@+id/editTxt_password_signin"

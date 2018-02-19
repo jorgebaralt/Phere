@@ -44,13 +44,14 @@ public class SigninActivity extends AppCompatActivity {
         mEmail = (EditText) findViewById(R.id.editTxt_email_signin);
         mPassword = (EditText) findViewById(R.id.editTxt_password_signin);
         mForgotPassBtn = (TextView) findViewById(R.id.btn_forgotpass_signin);
+
         currentAuth = FirebaseAuth.getInstance();
 
         mSigninBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //TODO: check for empty email and password, do also a trim for blank spaces.
+                //TODO: check for empty email and password, do also a trim for blank spaces and convert to lower case;.
                 //get the email and password when we click.
                 email = mEmail.getText().toString();
                 password = mPassword.getText().toString();

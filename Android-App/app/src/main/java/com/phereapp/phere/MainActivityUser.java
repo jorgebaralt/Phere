@@ -95,7 +95,7 @@ public class MainActivityUser extends AppCompatActivity {
     }
 
 
-    //create menu button oni top right.
+    //create menu button on top right.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
