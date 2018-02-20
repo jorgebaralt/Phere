@@ -21,7 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.phereapp.phere.home.HomeNewsFragment;
 import com.phereapp.phere.home.MyPartiesFragment;
 import com.phereapp.phere.home.NotificationsFragment;
-import com.phereapp.phere.home.SearchJoinPartiesFragment;
+import com.phereapp.phere.home.CreateJoinPartiesFragment;
 import com.phereapp.phere.login.StartActivity;
 
 public class MainActivityUser extends AppCompatActivity {
@@ -52,9 +52,9 @@ public class MainActivityUser extends AppCompatActivity {
                     return true;
                 case R.id.navigation_newparties:
                     setTitle("Search Join Parties");
-                    SearchJoinPartiesFragment searchJoinPartiesFragment = new SearchJoinPartiesFragment();
+                    CreateJoinPartiesFragment createJoinPartiesFragment = new CreateJoinPartiesFragment();
                     FragmentTransaction fragmentTransactionNewParties = getSupportFragmentManager().beginTransaction();
-                    fragmentTransactionNewParties.replace(R.id.frame_fragment_home,searchJoinPartiesFragment,"Search Join Parties Fragment").commit();
+                    fragmentTransactionNewParties.replace(R.id.frame_fragment_home, createJoinPartiesFragment,"Search Join Parties Fragment").commit();
                     return true;
                 case R.id.navigation_notifications:
                     setTitle("Notifications");
