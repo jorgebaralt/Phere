@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -17,6 +18,10 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.phereapp.phere.home.HomeNewsFragment;
+import com.phereapp.phere.home.MyPartiesFragment;
+import com.phereapp.phere.home.NotificationsFragment;
+import com.phereapp.phere.home.SearchJoinPartiesFragment;
 import com.phereapp.phere.login.StartActivity;
 
 public class MainActivityUser extends AppCompatActivity {
@@ -40,14 +45,28 @@ public class MainActivityUser extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    //TODO: load new fragment
-                    mTextMessage.setText(R.string.title_home);
+                    setTitle("Home News Parties");
+                    HomeNewsFragment homeNewsFragment = new HomeNewsFragment();
+                    FragmentTransaction fragmentTransactionHome = getSupportFragmentManager().beginTransaction();
+                    fragmentTransactionHome.replace(R.id.frame_fragment_home,homeNewsFragment,"Home news Fragment").commit();
                     return true;
-                case R.id.navigation_parties:
-                    mTextMessage.setText("Parties");
+                case R.id.navigation_newparties:
+                    setTitle("Search Join Parties");
+                    SearchJoinPartiesFragment searchJoinPartiesFragment = new SearchJoinPartiesFragment();
+                    FragmentTransaction fragmentTransactionNewParties = getSupportFragmentManager().beginTransaction();
+                    fragmentTransactionNewParties.replace(R.id.frame_fragment_home,searchJoinPartiesFragment,"Search Join Parties Fragment").commit();
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    setTitle("Notifications");
+                    NotificationsFragment notificationsFragment = new NotificationsFragment();
+                    FragmentTransaction fragmentTransactionNotification = getSupportFragmentManager().beginTransaction();
+                    fragmentTransactionNotification.replace(R.id.frame_fragment_home,notificationsFragment,"Notifications Fragment").commit();
+                    return true;
+                case R.id.navigation_myparties:
+                    setTitle("My Parties");
+                    MyPartiesFragment myPartiesFragment = new MyPartiesFragment();
+                    FragmentTransaction fragmentTransactionMyParties = getSupportFragmentManager().beginTransaction();
+                    fragmentTransactionMyParties.replace(R.id.frame_fragment_home,myPartiesFragment,"My Parties").commit();
                     return true;
             }
             return false;
@@ -81,7 +100,7 @@ public class MainActivityUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //get rid of title bar
+        //get rid of notifications
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
