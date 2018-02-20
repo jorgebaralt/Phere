@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.phereapp.phere.home.SearchJoinPartiesFragment;
 import com.phereapp.phere.login.StartActivity;
 
 public class MainActivityUser extends AppCompatActivity {
@@ -44,7 +46,13 @@ public class MainActivityUser extends AppCompatActivity {
                     mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_parties:
-                    mTextMessage.setText("Parties");
+                    setTitle("Search Join Parties");
+                    SearchJoinPartiesFragment fragment = new SearchJoinPartiesFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().
+                            beginTransaction();
+                    fragmentTransaction.replace(R.id.frame_fragment_home,fragment,"Search Join Parties")
+                            .commit();
+
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
