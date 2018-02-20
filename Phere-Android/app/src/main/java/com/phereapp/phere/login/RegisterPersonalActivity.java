@@ -36,7 +36,7 @@ public class RegisterPersonalActivity extends AppCompatActivity {
     private Button mCreateAccountBtn;
     private FirebaseAuth mAuth;
     private String email,password,username;
-
+    private String usersCollection = "users";
     private FirebaseFirestore db;
     private FirebaseUser userCreated;
 
@@ -72,7 +72,8 @@ public class RegisterPersonalActivity extends AppCompatActivity {
                         " username: "+ mUsername
                     );
 
-                //add user to Authentication in Firebase
+
+
                 mAuth.createUserWithEmailAndPassword(email,password)
                         .addOnCompleteListener(RegisterPersonalActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -102,7 +103,7 @@ public class RegisterPersonalActivity extends AppCompatActivity {
         //create new user object to sent to db
         User newUser = new User(email,username,accountType);
         // create a document entry into the database, with the name of the email of the user.
-        db.collection("users").document(email).set(newUser).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection(usersCollection).document(email).set(newUser).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.d(TAG, "onSuccess: User added");

@@ -9,6 +9,7 @@ public class User {
     private String accountType;
     private String username;
 
+    //Constructor
     public User(String email, String username, String accountType){
         this.email = email;
         this.username = username;
@@ -27,3 +28,4 @@ public class User {
         return username;
     }
 }
+

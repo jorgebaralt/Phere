@@ -18,10 +18,10 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.phereapp.phere.home.CreateJoinPheresFragment;
 import com.phereapp.phere.home.HomeNewsFragment;
-import com.phereapp.phere.home.MyPartiesFragment;
+import com.phereapp.phere.home.MyPheresFragment;
 import com.phereapp.phere.home.NotificationsFragment;
-import com.phereapp.phere.home.CreateJoinPartiesFragment;
 import com.phereapp.phere.login.StartActivity;
 
 public class MainActivityUser extends AppCompatActivity {
@@ -45,16 +45,17 @@ public class MainActivityUser extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    setTitle("Home News Parties");
+                    setTitle("Home News Pheres");
+
                     HomeNewsFragment homeNewsFragment = new HomeNewsFragment();
                     FragmentTransaction fragmentTransactionHome = getSupportFragmentManager().beginTransaction();
                     fragmentTransactionHome.replace(R.id.frame_fragment_home,homeNewsFragment,"Home news Fragment").commit();
                     return true;
-                case R.id.navigation_newparties:
-                    setTitle("Search Join Parties");
-                    CreateJoinPartiesFragment createJoinPartiesFragment = new CreateJoinPartiesFragment();
+                case R.id.navigation_newphere:
+                    setTitle("Search Join Pheres");
+                    CreateJoinPheresFragment createJoinPheresFragment = new CreateJoinPheresFragment();
                     FragmentTransaction fragmentTransactionNewParties = getSupportFragmentManager().beginTransaction();
-                    fragmentTransactionNewParties.replace(R.id.frame_fragment_home, createJoinPartiesFragment,"Search Join Parties Fragment").commit();
+                    fragmentTransactionNewParties.replace(R.id.frame_fragment_home, createJoinPheresFragment,"Search Join Parties Fragment").commit();
                     return true;
                 case R.id.navigation_notifications:
                     setTitle("Notifications");
@@ -62,11 +63,11 @@ public class MainActivityUser extends AppCompatActivity {
                     FragmentTransaction fragmentTransactionNotification = getSupportFragmentManager().beginTransaction();
                     fragmentTransactionNotification.replace(R.id.frame_fragment_home,notificationsFragment,"Notifications Fragment").commit();
                     return true;
-                case R.id.navigation_myparties:
-                    setTitle("My Parties");
-                    MyPartiesFragment myPartiesFragment = new MyPartiesFragment();
+                case R.id.navigation_mypheres:
+                    setTitle("My Pheres");
+                    MyPheresFragment myPheresFragment = new MyPheresFragment();
                     FragmentTransaction fragmentTransactionMyParties = getSupportFragmentManager().beginTransaction();
-                    fragmentTransactionMyParties.replace(R.id.frame_fragment_home,myPartiesFragment,"My Parties").commit();
+                    fragmentTransactionMyParties.replace(R.id.frame_fragment_home, myPheresFragment,"My Parties").commit();
                     return true;
             }
             return false;

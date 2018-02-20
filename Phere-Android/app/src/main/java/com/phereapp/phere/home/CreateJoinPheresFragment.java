@@ -12,10 +12,10 @@ import com.phereapp.phere.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CreateJoinPartiesFragment extends Fragment {
+public class CreateJoinPheresFragment extends Fragment {
 
 
-    public CreateJoinPartiesFragment() {
+    public CreateJoinPheresFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class CreateJoinPartiesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_join_parties, container, false);
+        return inflater.inflate(R.layout.fragment_create_join_pheres, container, false);
     }
 
 }
