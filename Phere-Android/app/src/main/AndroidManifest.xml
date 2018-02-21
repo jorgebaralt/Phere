@@ -32,7 +32,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
-            android:name=".createPhere.CreateNewPhereActivity"
+            android:name=".phereHandling.CreateNewPhereActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
     </application>
 

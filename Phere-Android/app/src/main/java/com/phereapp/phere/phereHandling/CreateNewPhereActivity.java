@@ -1,4 +1,4 @@
-package com.phereapp.phere.createPhere;
+package com.phereapp.phere.phereHandling;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

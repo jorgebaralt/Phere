@@ -10,8 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.phereapp.phere.R;
-import com.phereapp.phere.createPhere.CreateNewPhereActivity;
-import com.phereapp.phere.login.SelectActivity;
+import com.phereapp.phere.phereHandling.CreateNewPhereActivity;
 
 /**
  * A simple {@link Fragment} subclass.
