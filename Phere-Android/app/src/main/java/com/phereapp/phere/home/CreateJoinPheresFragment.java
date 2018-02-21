@@ -1,6 +1,7 @@
 package com.phereapp.phere.home;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.phereapp.phere.R;
+import com.phereapp.phere.createPhere.CreateNewPhereActivity;
+import com.phereapp.phere.login.SelectActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +38,8 @@ public class CreateJoinPheresFragment extends Fragment {
         mCreateHostPhere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent createNewPhereIntent = new Intent(getActivity(), CreateNewPhereActivity.class);
+                startActivity(createNewPhereIntent);
                 //TODO : CREATE INTENT AND TRANSITION FROM FRAGMENT TO NEW ACTIVY
             }
         });
