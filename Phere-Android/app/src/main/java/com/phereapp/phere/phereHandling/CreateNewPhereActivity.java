@@ -46,9 +46,12 @@ public class CreateNewPhereActivity extends AppCompatActivity {
 
         mPrivacy = (RadioGroup) findViewById(R.id.radio_choose_createPhere);
 
+        // On click of the OK button
         mCreatePhereButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO: Check if all the fields are filled.
+                // getting all the information of the Phere being created
                 phereName = mPhereName.getText().toString();
                 phereLocation = mPhereLocation.getText().toString();
 
@@ -63,7 +66,9 @@ public class CreateNewPhereActivity extends AppCompatActivity {
     }
 
     public void addUserReference(){
+        // create new Phere object to send to database
         Phere newPhere = new Phere(phereName, phereLocation, choosenPrivacy);
+        // adds the extra information to the document in the database
         db.collection(pheresCollection).document(phereName).set(newPhere);
     }
 
