@@ -1,19 +1,20 @@
 package com.phereapp.phere.phereHandling;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.phereapp.phere.MainActivityUser;
 import com.phereapp.phere.Phere;
 import com.phereapp.phere.R;
 
@@ -28,6 +29,9 @@ public class CreateNewPhereActivity extends AppCompatActivity {
     private String phereName, phereLocation;
     private String pheresCollection = "pheres";
     private FirebaseFirestore db;
+    private static String TAG = "CreateNewPhereActivity: ";
+    private Button mCancelButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +47,7 @@ public class CreateNewPhereActivity extends AppCompatActivity {
         mPhereLocation = (EditText) findViewById(R.id.editTxt_location_createPhere);
         mCreatePhereButton = (Button) findViewById(R.id.btn_ok_create_phere);
         mPrivacy = (RadioGroup) findViewById(R.id.radio_choose_createPhere);
-
+        mCancelButton = (Button) findViewById(R.id.btn_cancel_create_phere);
         db = FirebaseFirestore.getInstance();
 
 
@@ -51,19 +55,39 @@ public class CreateNewPhereActivity extends AppCompatActivity {
         mCreatePhereButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 // getting all the information of the Phere being created
                 phereName = mPhereName.getText().toString();
                 phereLocation = mPhereLocation.getText().toString();
-
                 int selectedId = mPrivacy.getCheckedRadioButtonId();
-                mPrivacyChoosen = (RadioButton) findViewById(selectedId);
-                choosenPrivacy = mPrivacyChoosen.getText().toString();
-                if (phereName != null && phereLocation != null && choosenPrivacy.equals(null)){
+
+                if (phereName != null && phereLocation != null && selectedId != -1) {
+
+                    //Get Privacy
+                    mPrivacyChoosen = (RadioButton) findViewById(selectedId);
+                    choosenPrivacy = mPrivacyChoosen.getText().toString();
+
+                    //TODO: Import or create Playlist
+
+                    //Add Phere into database
                     addUserReference();
+                    Toast.makeText(CreateNewPhereActivity.this, "Your Phere has been created", Toast.LENGTH_SHORT).show();
+
+                    //TODO: next screen depends on import or create playlist.
+
                 }
                 else{
                     Toast.makeText(CreateNewPhereActivity.this, "Please fill all values", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        mCancelButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent backIntent =  new Intent(CreateNewPhereActivity.this,MainActivityUser.class);
+                startActivity(backIntent);
+                finish();
             }
         });
 
@@ -76,7 +100,8 @@ public class CreateNewPhereActivity extends AppCompatActivity {
         db.collection(pheresCollection).document(phereName).set(newPhere);
     }
 
-
 }
+
+
 
 
