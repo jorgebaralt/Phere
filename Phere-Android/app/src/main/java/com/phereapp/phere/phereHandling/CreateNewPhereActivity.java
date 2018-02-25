@@ -1,7 +1,6 @@
 package com.phereapp.phere.phereHandling;
 
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -13,15 +12,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.phereapp.phere.Phere;
 import com.phereapp.phere.R;
-import com.phereapp.phere.User;
 
 public class CreateNewPhereActivity extends AppCompatActivity {
 
@@ -32,13 +26,11 @@ public class CreateNewPhereActivity extends AppCompatActivity {
     private EditText mPhereLocation;
     private RadioGroup mPrivacy;
     private RadioButton mPrivacyChoosen;
-    private Button mDisplay;
     private String choosenPrivacy;
     private Button mCreatePhereButton;
     private String phereName, phereLocation;
     private String pheresCollection = "pheres";
     private FirebaseFirestore db;
-    private FirebaseUser phereCreated;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +47,6 @@ public class CreateNewPhereActivity extends AppCompatActivity {
         mCreatePhereButton = (Button) findViewById(R.id.btn_ok_create_phere);
 
         db = FirebaseFirestore.getInstance();
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         mPrivacy = (RadioGroup) findViewById(R.id.radio_choose_createPhere);
 
