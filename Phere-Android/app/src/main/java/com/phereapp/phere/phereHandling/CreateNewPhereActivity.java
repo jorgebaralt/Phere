@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -41,16 +42,15 @@ public class CreateNewPhereActivity extends AppCompatActivity {
         mPhereName = (EditText) findViewById(R.id.editTxt_phereName_createPhere);
         mPhereLocation = (EditText) findViewById(R.id.editTxt_location_createPhere);
         mCreatePhereButton = (Button) findViewById(R.id.btn_ok_create_phere);
+        mPrivacy = (RadioGroup) findViewById(R.id.radio_choose_createPhere);
 
         db = FirebaseFirestore.getInstance();
 
-        mPrivacy = (RadioGroup) findViewById(R.id.radio_choose_createPhere);
 
         // On click of the OK button
         mCreatePhereButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Check if all the fields are filled.
                 // getting all the information of the Phere being created
                 phereName = mPhereName.getText().toString();
                 phereLocation = mPhereLocation.getText().toString();
@@ -58,8 +58,12 @@ public class CreateNewPhereActivity extends AppCompatActivity {
                 int selectedId = mPrivacy.getCheckedRadioButtonId();
                 mPrivacyChoosen = (RadioButton) findViewById(selectedId);
                 choosenPrivacy = mPrivacyChoosen.getText().toString();
-
-                addUserReference();
+                if (phereName != null && phereLocation != null && choosenPrivacy.equals(null)){
+                    addUserReference();
+                }
+                else{
+                    Toast.makeText(CreateNewPhereActivity.this, "Please fill all values", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
