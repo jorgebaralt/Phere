@@ -172,7 +172,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/btn_cancel"
+        android:id="@+id/btn_cancel_create_phere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -182,13 +182,12 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <Button
-        android:id="@+id/btn_ok"
+        android:id="@+id/btn_ok_create_phere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:text="OK"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn_cancel"
-        app:layout_constraintEnd_toStartOf="@+id/btn_cancel" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_cancel_create_phere"
+        app:layout_constraintEnd_toStartOf="@+id/btn_cancel_create_phere" />
 
 </android.support.constraint.ConstraintLayout>
