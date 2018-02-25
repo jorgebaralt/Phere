@@ -12,15 +12,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.phereapp.phere.Phere;
 import com.phereapp.phere.R;
 
 public class CreateNewPhereActivity extends AppCompatActivity {
-
-    private final static String TAG = "CreateNewPhere";
-    private final String phereType = "privacy";
 
     private EditText mPhereName;
     private EditText mPhereLocation;
