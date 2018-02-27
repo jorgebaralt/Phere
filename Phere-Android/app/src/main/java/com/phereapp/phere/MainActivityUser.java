@@ -8,22 +8,19 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.facebook.login.LoginManager;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.phereapp.phere.home.CreateJoinPheresFragment;
-import com.phereapp.phere.home.HomeNewsFragment;
-import com.phereapp.phere.home.MyPheresFragment;
-import com.phereapp.phere.home.NotificationsFragment;
+import com.phereapp.phere.home_navigation.CreateJoinPheresFragment;
+import com.phereapp.phere.home_navigation.HomeNewsFragment;
+import com.phereapp.phere.home_navigation.NotificationsFragment;
+import com.phereapp.phere.home_navigation.ProfileFragment;
 import com.phereapp.phere.login.StartActivity;
 
 public class MainActivityUser extends AppCompatActivity {
@@ -52,6 +49,7 @@ public class MainActivityUser extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     setTitle("Home News Pheres");
+
                     HomeNewsFragment homeNewsFragment = new HomeNewsFragment();
                     FragmentTransaction fragmentTransactionHome = getSupportFragmentManager().beginTransaction();
                     fragmentTransactionHome.replace(R.id.frame_fragment_home,homeNewsFragment,"Home news Fragment").commit();
@@ -68,11 +66,11 @@ public class MainActivityUser extends AppCompatActivity {
                     FragmentTransaction fragmentTransactionNotification = getSupportFragmentManager().beginTransaction();
                     fragmentTransactionNotification.replace(R.id.frame_fragment_home,notificationsFragment,"Notifications Fragment").commit();
                     return true;
-                case R.id.navigation_mypheres:
-                    setTitle("My Pheres");
-                    MyPheresFragment myPheresFragment = new MyPheresFragment();
+                case R.id.navigation_profile:
+                    setTitle("Profile");
+                    ProfileFragment profileFragment = new ProfileFragment();
                     FragmentTransaction fragmentTransactionMyParties = getSupportFragmentManager().beginTransaction();
-                    fragmentTransactionMyParties.replace(R.id.frame_fragment_home, myPheresFragment,"My Parties").commit();
+                    fragmentTransactionMyParties.replace(R.id.frame_fragment_home, profileFragment,"My Parties").commit();
                     return true;
             }
             return false;
@@ -110,6 +108,8 @@ public class MainActivityUser extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.activity_main_user);
         //move instantly to fragment
         HomeNewsFragment homeNewsFragment = new HomeNewsFragment();
@@ -128,35 +128,6 @@ public class MainActivityUser extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //initialize all Firebase instances        mAuth = FirebaseAuth.getInstance();
-    }
-
-
-    //create menu button on top right.
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.settings,menu);
-        return true;
-    }
-
-    //when an option is selected from the menu
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.settings_logout:
-                //sign out
-                Log.d(TAG, "onOptionsItemSelected: Logging out...");
-                //handles Pheres logout
-                FirebaseAuth.getInstance().signOut();
-                //handles Facebook logout
-                LoginManager.getInstance().logOut();
-                startActivity(startIntent);
-                finish();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     //update to current user information. from database or authentication info.

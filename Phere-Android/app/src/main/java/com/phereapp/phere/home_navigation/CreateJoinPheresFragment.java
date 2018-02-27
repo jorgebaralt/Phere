@@ -1,4 +1,4 @@
-package com.phereapp.phere.home;
+package com.phereapp.phere.home_navigation;
 
 
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.phereapp.phere.R;
-import com.phereapp.phere.phereHandling.CreateNewPhereActivity;
+import com.phereapp.phere.phere_handling.CreateNewPhereActivity;
 
 /**
  * A simple {@link Fragment} subclass.

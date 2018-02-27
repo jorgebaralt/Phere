@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.phereapp.phere.phereHandling.CreateNewPhereActivity">
+    tools:context="com.phereapp.phere.phere_handling.CreateNewPhereActivity">
 
     <TextView
         android:id="@+id/txt_title_createPhere"
@@ -188,6 +188,7 @@
         android:layout_marginEnd="16dp"
         android:text="OK"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_cancel_create_phere"
-        app:layout_constraintEnd_toStartOf="@+id/btn_cancel_create_phere" />
+        app:layout_constraintEnd_toStartOf="@+id/btn_cancel_create_phere"
+        android:layout_marginRight="16dp" />
 
 </android.support.constraint.ConstraintLayout>

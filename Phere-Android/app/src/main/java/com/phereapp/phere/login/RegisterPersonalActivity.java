@@ -73,7 +73,7 @@ public class RegisterPersonalActivity extends AppCompatActivity {
                     );
 
 
-
+                //Creates user in the AUTHENTICATION TAB IN FIREBASE
                 mAuth.createUserWithEmailAndPassword(email,password)
                         .addOnCompleteListener(RegisterPersonalActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override

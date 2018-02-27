@@ -1,4 +1,4 @@
-package com.phereapp.phere.home;
+package com.phereapp.phere.home_navigation;
 
 
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import com.phereapp.phere.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyPheresFragment extends Fragment {
+public class NotificationsFragment extends Fragment {
 
 
-    public MyPheresFragment() {
+    public NotificationsFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class MyPheresFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_pheres, container, false);
+        return inflater.inflate(R.layout.fragment_notifications, container, false);
     }
 
 }

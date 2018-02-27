@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivityUser"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +33,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
-            android:name=".phereHandling.CreateNewPhereActivity"
+            android:name=".phere_handling.CreateNewPhereActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <meta-data android:name="com.facebook.sdk.ApplicationId"

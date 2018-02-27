@@ -1,4 +1,4 @@
-package com.phereapp.phere.home;
+package com.phereapp.phere.home_navigation;
 
 
 import android.os.Bundle;

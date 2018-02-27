@@ -1,4 +1,4 @@
-package com.phereapp.phere.phereHandling;
+package com.phereapp.phere.phere_handling;
 
 import android.content.Intent;
 import android.os.Bundle;
