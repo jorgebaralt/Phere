@@ -145,6 +145,8 @@ public class MainActivityUser extends AppCompatActivity {
                 startActivity(startIntent);
                 finish();
                 return true;
+            case R.id.settings_fbLink:
+                //TODO: LINK ACCOUNT WITH FACEBOOK
             default:
                 return super.onOptionsItemSelected(item);
         }
