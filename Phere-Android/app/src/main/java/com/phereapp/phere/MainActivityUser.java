@@ -14,20 +14,9 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.facebook.CallbackManager;
-import com.facebook.AccessToken;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.facebook.login.LoginManager;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -52,6 +41,8 @@ public class MainActivityUser extends AppCompatActivity {
     //Facebook Variables
     private AuthCredential credential;
 
+
+
     //Bottom navigation view!
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -61,7 +52,6 @@ public class MainActivityUser extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     setTitle("Home News Pheres");
-
                     HomeNewsFragment homeNewsFragment = new HomeNewsFragment();
                     FragmentTransaction fragmentTransactionHome = getSupportFragmentManager().beginTransaction();
                     fragmentTransactionHome.replace(R.id.frame_fragment_home,homeNewsFragment,"Home news Fragment").commit();
@@ -121,6 +111,10 @@ public class MainActivityUser extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_main_user);
+        //move instantly to fragment
+        HomeNewsFragment homeNewsFragment = new HomeNewsFragment();
+        FragmentTransaction fragmentTransactionHome = getSupportFragmentManager().beginTransaction();
+        fragmentTransactionHome.replace(R.id.frame_fragment_home,homeNewsFragment,"Home news Fragment").commit();
 
         //layout views initialization
         mTextMessage = (TextView) findViewById(R.id.message);
@@ -159,22 +153,7 @@ public class MainActivityUser extends AppCompatActivity {
                 startActivity(startIntent);
                 finish();
                 return true;
-            case R.id.settings_fbLink:
-                mAuth.getCurrentUser().linkWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            Log.d(TAG, "linkWithCredential:success");
-                            FirebaseUser user = task.getResult().getUser();
-                            updateUI(user);
-                        }
-                        else {
-                            Log.w(TAG, "linkWithCredential:failure", task.getException());
-                            Toast.makeText(MainActivityUser.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                    }
-                });
+
             default:
                 return super.onOptionsItemSelected(item);
         }

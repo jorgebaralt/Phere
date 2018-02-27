@@ -4,7 +4,5 @@
     <item
         android:id="@+id/settings_logout"
         android:title="Logout" />
-    <item
-        android:id="@+id/settings_fbLink"
-        android:title="Link With Facebook" />
+
 </menu>
