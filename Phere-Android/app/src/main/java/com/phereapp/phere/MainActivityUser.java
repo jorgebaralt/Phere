@@ -15,6 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -137,7 +138,10 @@ public class MainActivityUser extends AppCompatActivity {
             case R.id.settings_logout:
                 //sign out
                 Log.d(TAG, "onOptionsItemSelected: Logging out...");
+                //handles Pheres logout
                 FirebaseAuth.getInstance().signOut();
+                //handles Facebook logout
+                LoginManager.getInstance().logOut();
                 startActivity(startIntent);
                 finish();
                 return true;

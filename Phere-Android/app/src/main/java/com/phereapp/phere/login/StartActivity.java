@@ -14,9 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
-import com.facebook.FacebookSdk;
 import com.facebook.AccessToken;
-import com.facebook.login.LoginManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
@@ -75,7 +73,7 @@ public class StartActivity extends AppCompatActivity {
 
         // Initialize Facebook Login button
         mCallbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = findViewById(R.id.login_button_facebook);
+        LoginButton loginButton = findViewById(R.id.btn_facebookLogin_start);
         loginButton.setReadPermissions("email", "public_profile");
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -95,7 +93,10 @@ public class StartActivity extends AppCompatActivity {
                 Log.e(TAG, "facebook:onError", error);
                 // ...
             }
+
+
         });
+
 
     }
 
