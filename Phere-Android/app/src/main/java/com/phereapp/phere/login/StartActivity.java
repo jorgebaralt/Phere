@@ -119,8 +119,8 @@ public class StartActivity extends AppCompatActivity {
                     // Sign in success, Go to the next Activity (MainActivityUser)
                     Log.d(TAG, "signInWithCredential:success");
                     FirebaseUser user = mAuth.getCurrentUser();
-                    Intent loggedInIntent = new Intent(StartActivity.this, MainActivityUser.class);
-                    startActivity(loggedInIntent);
+                    Intent mainActivityIntent = new Intent(StartActivity.this, MainActivityUser.class);
+                    startActivity(mainActivityIntent);
                 }
 
                 else {
