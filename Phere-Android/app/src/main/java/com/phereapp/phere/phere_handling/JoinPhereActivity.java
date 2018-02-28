@@ -28,6 +28,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.phereapp.phere.R;
 
 import java.util.Collection;
+import java.util.Objects;
 
 public class JoinPhereActivity extends AppCompatActivity {
 
@@ -37,6 +38,7 @@ public class JoinPhereActivity extends AppCompatActivity {
     private String pheresCollection = "pheres";
     private String phereName;
     private static String TAG = "JoinPhereActivity: ";
+    private String comparisonFromDocument;
     // firebase
     private FirebaseFirestore db;
 
@@ -71,16 +73,20 @@ public class JoinPhereActivity extends AppCompatActivity {
                 // Getting the Input of the user
                 phereName = mPhereName.getText().toString();
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                // trying to compare the word inputted with all the pheres in the phere collection but it always gives an exists message
-                db.collection(pheresCollection).whereEqualTo("pheres", phereName).limit(1).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                db.collection(pheresCollection).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
-                            Log.d(TAG, "u typed: " + phereName);
-                            Toast.makeText(JoinPhereActivity.this, "It Exists", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Toast.makeText(JoinPhereActivity.this, "It Doesn't Exist", Toast.LENGTH_SHORT).show();
+                            for (DocumentSnapshot document : task.getResult()) {
+                                comparisonFromDocument = document.getId();
+                                if (comparisonFromDocument == phereName) {
+                                    Toast.makeText(JoinPhereActivity.this, "It Exists", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(JoinPhereActivity.this, "It Doesn't Exist", Toast.LENGTH_SHORT).show();
+                                }
+                                Log.d(TAG, document.getId() + " => " + phereName);
+                            }
                         }
                     }
                 });
