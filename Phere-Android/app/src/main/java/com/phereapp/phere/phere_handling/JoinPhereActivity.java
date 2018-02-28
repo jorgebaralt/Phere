@@ -39,6 +39,7 @@ public class JoinPhereActivity extends AppCompatActivity {
     private String phereName;
     private static String TAG = "JoinPhereActivity: ";
     private String comparisonFromDocument;
+    private Boolean phereExists = false;
     // firebase
     private FirebaseFirestore db;
 
@@ -79,14 +80,22 @@ public class JoinPhereActivity extends AppCompatActivity {
                         if (task.isSuccessful()){
                             for (DocumentSnapshot document : task.getResult()) {
                                 comparisonFromDocument = document.getId();
-                                if (comparisonFromDocument == phereName) {
-                                    Toast.makeText(JoinPhereActivity.this, "It Exists", Toast.LENGTH_SHORT).show();
+
+                                if (comparisonFromDocument.equals(phereName)) {
+                                    phereExists = true;
+                                    break;
                                 }
-                                else {
-                                    Toast.makeText(JoinPhereActivity.this, "It Doesn't Exist", Toast.LENGTH_SHORT).show();
-                                }
-                                Log.d(TAG, document.getId() + " => " + phereName);
+
+                                Log.d(TAG, comparisonFromDocument + " => " + phereName);
                             }
+
+                            if (phereExists){
+                                Toast.makeText(JoinPhereActivity.this, "It Exists", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Toast.makeText(JoinPhereActivity.this, "It Doesn't Exist", Toast.LENGTH_SHORT).show();
+                            }
+
                         }
                     }
                 });
