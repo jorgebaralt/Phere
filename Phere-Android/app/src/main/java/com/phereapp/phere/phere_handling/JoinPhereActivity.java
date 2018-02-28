@@ -39,7 +39,7 @@ public class JoinPhereActivity extends AppCompatActivity {
     private String phereName;
     private static String TAG = "JoinPhereActivity: ";
     private String comparisonFromDocument;
-    private Boolean phereExists = false;
+    private Boolean phereExists;
     // firebase
     private FirebaseFirestore db;
 
@@ -84,6 +84,9 @@ public class JoinPhereActivity extends AppCompatActivity {
                                 if (comparisonFromDocument.equals(phereName)) {
                                     phereExists = true;
                                     break;
+                                }
+                                else {
+                                    phereExists = false;
                                 }
 
                                 Log.d(TAG, comparisonFromDocument + " => " + phereName);
