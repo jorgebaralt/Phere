@@ -78,9 +78,11 @@ public class JoinPhereActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
+                            // Iterating through all the documents
                             for (DocumentSnapshot document : task.getResult()) {
+                                // Making the ID of the document found a string to compare
                                 comparisonFromDocument = document.getId();
-
+                                // Comparing the document ID and the user Input
                                 if (comparisonFromDocument.equals(phereName)) {
                                     phereExists = true;
                                     break;
@@ -90,6 +92,7 @@ public class JoinPhereActivity extends AppCompatActivity {
                                 }
 
                                 Log.d(TAG, comparisonFromDocument + " => " + phereName);
+
                             }
 
                             if (phereExists){
@@ -102,51 +105,6 @@ public class JoinPhereActivity extends AppCompatActivity {
                         }
                     }
                 });
-//                db.collection(pheresCollection).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            for (DocumentSnapshot document : task.getResult()) {
-//                                Log.d(TAG, document.getId() + " => " + document.getData());
-//                            }
-//                        } else {
-//                            Log.d(TAG, "Error getting documents: ", task.getException());
-//                        }
-//                    }
-//                });
-//                DatabaseReference root = FirebaseDatabase.getInstance().getReference();
-//                //DatabaseReference pheres = root.child(pheresCollection);
-//                root.addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot) {
-//                        if (dataSnapshot.child(phereName).exists()){
-//                            Toast.makeText(JoinPhereActivity.this, "It Exists", Toast.LENGTH_SHORT).show();
-//                        }
-//                        else {
-//                            Log.d(TAG, "onDataChange: " + phereName);
-//                            Toast.makeText(JoinPhereActivity.this, "It Doesn't Exist", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//
-//                    }
-//                });
-                //Doing a Query to check if the Phere Exists
-//                DocumentReference documentReference = db.collection(pheresCollection).document(phereName);
-//                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                        DocumentSnapshot documentSnapshot = task.getResult();
-//                        if (documentSnapshot.exists()){
-//                            Toast.makeText(JoinPhereActivity.this, "It Exists", Toast.LENGTH_SHORT).show();
-//                        }
-//                        else {
-//                            Toast.makeText(JoinPhereActivity.this, "It Doesn't Exist", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
             }
         });
     }
