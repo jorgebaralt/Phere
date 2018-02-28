@@ -3,7 +3,7 @@ package com.phereapp.phere.adapters;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.phereapp.phere.phere_handling.HostingFragment;
 import com.phereapp.phere.phere_handling.JoinedPheresFragment;
@@ -12,7 +12,7 @@ import com.phereapp.phere.phere_handling.JoinedPheresFragment;
  * Created by User on 2/27/2018.
  */
 
-public class PhereTabAdapter extends FragmentPagerAdapter {
+public class PhereTabAdapter extends FragmentStatePagerAdapter {
     public PhereTabAdapter(FragmentManager fm) {
         super(fm);
     }

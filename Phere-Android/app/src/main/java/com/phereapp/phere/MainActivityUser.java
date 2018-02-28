@@ -53,6 +53,7 @@ public class MainActivityUser extends AppCompatActivity {
                     HomeNewsFragment homeNewsFragment = new HomeNewsFragment();
                     FragmentTransaction fragmentTransactionHome = getSupportFragmentManager().beginTransaction();
                     fragmentTransactionHome.replace(R.id.frame_fragment_home,homeNewsFragment,"Home news Fragment").commit();
+
                     return true;
                 case R.id.navigation_newphere:
                     setTitle("Search Join Pheres");

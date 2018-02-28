@@ -60,7 +60,7 @@ public class CreateJoinPheresFragment extends Fragment {
 
         //Tab and viewpager
         ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.viewpager_createJoinPhere);
-        PhereTabAdapter phereTabAdapter = new PhereTabAdapter(getFragmentManager());
+        PhereTabAdapter phereTabAdapter = new PhereTabAdapter(getChildFragmentManager());
         viewPager.setAdapter(phereTabAdapter);
         TabLayout tabLayout = rootView.findViewById(R.id.tab_createJoinPhere);
         tabLayout.setupWithViewPager(viewPager);
