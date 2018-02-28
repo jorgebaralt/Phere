@@ -3,7 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorBottomMenu">#2196F3</color>
+    <color name="colorBottomMenu">#40C4FF</color>
     <color name="colorAppBlue">#2196F3</color>
     <color name="colorLogout">#F44336</color>
 </resources>
