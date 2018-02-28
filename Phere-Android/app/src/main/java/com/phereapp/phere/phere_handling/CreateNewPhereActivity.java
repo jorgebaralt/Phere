@@ -13,6 +13,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.phereapp.phere.MainActivityUser;
 import com.phereapp.phere.Phere;
@@ -23,14 +25,18 @@ public class CreateNewPhereActivity extends AppCompatActivity {
     private EditText mPhereName;
     private EditText mPhereLocation;
     private RadioGroup mPrivacy;
-    private RadioButton mPrivacyChoosen;
+    private RadioButton mPrivacyChosen;
     private String choosenPrivacy;
     private Button mCreatePhereButton;
     private String phereName, phereLocation;
     private String pheresCollection = "pheres";
-    private FirebaseFirestore db;
     private static String TAG = "CreateNewPhereActivity: ";
     private Button mCancelButton;
+    private String host;
+    //firebase
+    private FirebaseFirestore db;
+    private FirebaseUser currentUser;
+
 
 
     @Override
@@ -48,7 +54,11 @@ public class CreateNewPhereActivity extends AppCompatActivity {
         mCreatePhereButton = (Button) findViewById(R.id.btn_ok_create_phere);
         mPrivacy = (RadioGroup) findViewById(R.id.radio_choose_createPhere);
         mCancelButton = (Button) findViewById(R.id.btn_cancel_create_phere);
+
+        //firebase
         db = FirebaseFirestore.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        host = currentUser.getEmail();
 
 
         // On click of the OK button
@@ -64,8 +74,8 @@ public class CreateNewPhereActivity extends AppCompatActivity {
                 if (phereName != null && phereLocation != null && selectedId != -1) {
 
                     //Get Privacy
-                    mPrivacyChoosen = (RadioButton) findViewById(selectedId);
-                    choosenPrivacy = mPrivacyChoosen.getText().toString();
+                    mPrivacyChosen = (RadioButton) findViewById(selectedId);
+                    choosenPrivacy = mPrivacyChosen.getText().toString();
 
                     //TODO: Import or create Playlist
 
@@ -95,7 +105,7 @@ public class CreateNewPhereActivity extends AppCompatActivity {
 
     public void addUserReference(){
         // create new Phere object to send to database
-        Phere newPhere = new Phere(phereName, phereLocation, choosenPrivacy);
+        Phere newPhere = new Phere(phereName, phereLocation, choosenPrivacy,host);
         // adds the extra information to the document in the database
         db.collection(pheresCollection).document(phereName).set(newPhere);
     }
