@@ -15,10 +15,15 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.phereapp.phere.MainActivityUser;
 import com.phereapp.phere.Phere;
 import com.phereapp.phere.R;
+
+import java.lang.reflect.Array;
 
 public class CreateNewPhereActivity extends AppCompatActivity {
 
@@ -33,6 +38,7 @@ public class CreateNewPhereActivity extends AppCompatActivity {
     private static String TAG = "CreateNewPhereActivity: ";
     private Button mCancelButton;
     private String host;
+    private Array trying;
     //firebase
     private FirebaseFirestore db;
     private FirebaseUser currentUser;
