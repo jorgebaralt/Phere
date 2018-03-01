@@ -21,8 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.phereapp.phere.MainActivityUser;
-import com.phereapp.phere.pojo.Phere;
 import com.phereapp.phere.R;
+import com.phereapp.phere.pojo.Phere;
 
 import java.lang.reflect.Array;
 
@@ -88,7 +88,6 @@ public class CreateNewPhereActivity extends AppCompatActivity {
 
                     //Add Phere into database
                     addUserReference();
-                    Toast.makeText(CreateNewPhereActivity.this, "Your Phere has been created", Toast.LENGTH_SHORT).show();
 
                     //TODO: next screen depends on import or create playlist.
 
@@ -111,21 +110,24 @@ public class CreateNewPhereActivity extends AppCompatActivity {
     }
 
     public void addUserReference(){
+        Log.d(TAG, "addUserReference: Creating Phere" + phereName + " for = " + host);
         // create new Phere object to send to database
         Phere newPhere = new Phere(phereName, phereLocation, choosenPrivacy,host);
         // adds the extra information to the document in the database
         db.collection(pheresCollection).document(phereName).set(newPhere).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Log.d(TAG, "onSuccess: new Phere created");
+                Log.d(TAG, "onSuccess: Phere Created");
+                Toast.makeText(CreateNewPhereActivity.this, "New Phere Created", Toast.LENGTH_SHORT).show();
+                //TODO: go back to home intent
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.e(TAG, "onFailure: Error creating phere");
-                Toast.makeText(CreateNewPhereActivity.this, "Error...", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "onFailure: Error creating Phere..." );
             }
         });
+
     }
 
 }
