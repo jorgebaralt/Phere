@@ -2,7 +2,9 @@ package com.phereapp.phere.phere_handling;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -13,14 +15,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.phereapp.phere.MainActivityUser;
-import com.phereapp.phere.Phere;
+import com.phereapp.phere.pojo.Phere;
 import com.phereapp.phere.R;
 
 import java.lang.reflect.Array;
@@ -73,15 +74,15 @@ public class CreateNewPhereActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // getting all the information of the Phere being created
-                phereName = mPhereName.getText().toString();
-                phereLocation = mPhereLocation.getText().toString();
+                phereName = mPhereName.getText().toString().toLowerCase();
+                phereLocation = mPhereLocation.getText().toString().toLowerCase();
                 int selectedId = mPrivacy.getCheckedRadioButtonId();
 
                 if (phereName != null && phereLocation != null && selectedId != -1) {
 
                     //Get Privacy
                     mPrivacyChosen = (RadioButton) findViewById(selectedId);
-                    choosenPrivacy = mPrivacyChosen.getText().toString();
+                    choosenPrivacy = mPrivacyChosen.getText().toString().toLowerCase();
 
                     //TODO: Import or create Playlist
 
@@ -113,7 +114,18 @@ public class CreateNewPhereActivity extends AppCompatActivity {
         // create new Phere object to send to database
         Phere newPhere = new Phere(phereName, phereLocation, choosenPrivacy,host);
         // adds the extra information to the document in the database
-        db.collection(pheresCollection).document(phereName).set(newPhere);
+        db.collection(pheresCollection).document(phereName).set(newPhere).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "onSuccess: new Phere created");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, "onFailure: Error creating phere");
+                Toast.makeText(CreateNewPhereActivity.this, "Error...", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

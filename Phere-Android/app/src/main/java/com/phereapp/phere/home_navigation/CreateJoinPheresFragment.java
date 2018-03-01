@@ -15,7 +15,7 @@ import android.widget.Button;
 import com.phereapp.phere.R;
 import com.phereapp.phere.adapters.PhereTabAdapter;
 import com.phereapp.phere.phere_handling.CreateNewPhereActivity;
-import com.phereapp.phere.phere_handling.JoinPhereActivity;
+import com.phereapp.phere.phere_handling.JoinPhereByNameActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,7 +53,7 @@ public class CreateJoinPheresFragment extends Fragment {
         mJoinPhere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent joinPhereIntent = new Intent(getActivity(), JoinPhereActivity.class);
+                Intent joinPhereIntent = new Intent(getActivity(), JoinPhereByNameActivity.class);
                 startActivity(joinPhereIntent);
             }
         });

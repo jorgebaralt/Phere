@@ -12,14 +12,14 @@ import com.phereapp.phere.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HostingFragment extends Fragment {
+public class HostingPheresFragment extends Fragment {
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_hosting, container, false);
+        View rootView = inflater.inflate(R.layout.pheres_list, container, false);
 
 
         return rootView;

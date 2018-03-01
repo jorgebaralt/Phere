@@ -1,4 +1,4 @@
-package com.phereapp.phere;
+package com.phereapp.phere.pojo;
 
 /**
  * Created by Andres on 2/24/2018.
@@ -9,6 +9,8 @@ public class Phere {
     private String phereLocation;
     private String privacy;
     private String host;
+
+    public Phere(){}
 
     // Constructor
     public Phere(String phereName, String phereLocation, String privacy, String host){

@@ -1,4 +1,4 @@
-package com.phereapp.phere;
+package com.phereapp.phere.pojo;
 
 /**
  * Created by jorgebaralt on 12/19/17.
@@ -8,6 +8,8 @@ public class User {
     private String email;
     private String accountType;
     private String username;
+
+    public User(){}
 
     //Constructor
     public User(String email, String username, String accountType){

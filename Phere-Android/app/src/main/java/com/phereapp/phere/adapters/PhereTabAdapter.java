@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.phereapp.phere.phere_handling.HostingFragment;
+import com.phereapp.phere.phere_handling.HostingPheresFragment;
 import com.phereapp.phere.phere_handling.JoinedPheresFragment;
 
 /**
@@ -21,7 +21,7 @@ public class PhereTabAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new HostingFragment();
+                return new HostingPheresFragment();
             default:
                 return new JoinedPheresFragment();
         }

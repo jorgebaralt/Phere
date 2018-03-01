@@ -23,7 +23,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.phereapp.phere.MainActivityUser;
 import com.phereapp.phere.R;
-import com.phereapp.phere.User;
+import com.phereapp.phere.pojo.User;
 
 public class RegisterPersonalActivity extends AppCompatActivity {
 
