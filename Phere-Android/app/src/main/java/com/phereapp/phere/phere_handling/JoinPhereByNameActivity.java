@@ -79,6 +79,7 @@ public class JoinPhereByNameActivity extends AppCompatActivity {
                             Phere phere = documentSnapshot.toObject(Phere.class);
                             //add the current member to the phere.
                             addMemberToPhere(phere);
+                            addUserToPhere(phere);
                         }else {
                             Toast.makeText(JoinPhereByNameActivity.this, "Phere does not Exist!.", Toast.LENGTH_SHORT).show();
                         }
@@ -88,6 +89,9 @@ public class JoinPhereByNameActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void addUserToPhere(Phere phere) {
     }
 
     //add member
