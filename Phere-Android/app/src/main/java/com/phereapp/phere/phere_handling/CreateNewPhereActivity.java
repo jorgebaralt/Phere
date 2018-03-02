@@ -111,8 +111,9 @@ public class CreateNewPhereActivity extends AppCompatActivity {
 
     public void addUserReference(){
         Log.d(TAG, "addUserReference: Creating Phere" + phereName + " for = " + host);
+
         // create new Phere object to send to database
-        Phere newPhere = new Phere(phereName, phereLocation, choosenPrivacy,host);
+        Phere newPhere = new Phere(phereName, phereLocation, choosenPrivacy, host);
         // adds the extra information to the document in the database
         db.collection(pheresCollection).document(phereName).set(newPhere).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

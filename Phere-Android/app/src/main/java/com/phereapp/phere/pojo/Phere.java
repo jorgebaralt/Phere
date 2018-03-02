@@ -1,5 +1,6 @@
 package com.phereapp.phere.pojo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,16 +12,17 @@ public class Phere {
     private String phereLocation;
     private String privacy;
     private String host;
-    private List<String> members;
+    private List<String> members = new ArrayList<>();
     public Phere(){}
 
 
     // Constructor
     public Phere(String phereName, String phereLocation, String privacy, String host){
-        this.phereName = phereName;
+        this.phereName = phereName.toLowerCase();
         this.phereLocation = phereLocation;
         this.privacy = privacy;
         this.host = host;
+        this.members.add(host);
     }
 
     //getters
