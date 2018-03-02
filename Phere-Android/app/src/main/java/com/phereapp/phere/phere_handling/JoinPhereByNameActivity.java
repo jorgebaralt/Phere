@@ -34,10 +34,11 @@ public class JoinPhereByNameActivity extends AppCompatActivity {
     private String phereName;
     private final String phereCollection = "pheres";
     private final String memberCollection = "members";
+    private String currentUserEmail;
 
     // firebase
     private FirebaseFirestore db;
-
+    private FirebaseUser currentUser;
 
 
     @Override
@@ -54,6 +55,9 @@ public class JoinPhereByNameActivity extends AppCompatActivity {
         mPhereNameEditText = (EditText) findViewById(R.id.editTxt_phereName_joinPhere);
         //firebase
         db = FirebaseFirestore.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        assert currentUser != null;
+        currentUserEmail = currentUser.getEmail();
 
         mFindPublicPhere.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,11 +78,12 @@ public class JoinPhereByNameActivity extends AppCompatActivity {
                 db.collection(phereCollection).document(phereName).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        //check if the phere query actually exist.
                         if(documentSnapshot.exists()) {
                             //assign the object
                             Phere phere = documentSnapshot.toObject(Phere.class);
-                            //add the current member to the phere.
-                            addMemberToPhere(phere);
+                            //Member Sub-Collection
+                            //addMemberToPhere(phere);
                             addUserToPhere(phere);
                         }else {
                             Toast.makeText(JoinPhereByNameActivity.this, "Phere does not Exist!.", Toast.LENGTH_SHORT).show();
@@ -92,9 +97,33 @@ public class JoinPhereByNameActivity extends AppCompatActivity {
     }
 
     private void addUserToPhere(Phere phere) {
+        //Add new member to the Phere
+        boolean memberAdded = phere.addMembers(currentUserEmail);
+        Log.d(TAG, "addUserToPhere: " + phere.getMembers().get(phere.getMembers().size() - 1));
+        //Update array in Phere Document
+        //make sure there is a change to update data.
+        if (memberAdded) {
+            db.collection(phereCollection).document(phereName).update("members", phere.getMembers()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(JoinPhereByNameActivity.this, "You have joined a Phere", Toast.LENGTH_SHORT).show();
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.e(TAG, "onFailure: ", e.fillInStackTrace());
+
+                }
+            });
+        }else{
+            Toast.makeText(this, "You are already a member of this Phere", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    //add member
+
+
+    //add member Sub collection
     private void addMemberToPhere(Phere phere) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         //make sure user is logged in
