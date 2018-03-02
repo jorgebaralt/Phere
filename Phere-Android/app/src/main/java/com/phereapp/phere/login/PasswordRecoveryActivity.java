@@ -50,12 +50,14 @@ public class PasswordRecoveryActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Log.d(TAG, "onComplete: Password Recovery Email sent");
                                     Toast.makeText(PasswordRecoveryActivity.this, "Email sent", Toast.LENGTH_SHORT).show();
+                                    Intent SigninIntent = new Intent (PasswordRecoveryActivity.this, SigninActivity.class);
+                                    startActivity(SigninIntent);
+                                } else {
+                                    Toast.makeText(PasswordRecoveryActivity.this, "Invalid Email", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
 
-                Intent SigninIntent = new Intent (PasswordRecoveryActivity.this, SigninActivity.class);
-                startActivity(SigninIntent);
             }
         });
     }
