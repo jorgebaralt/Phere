@@ -7,14 +7,13 @@
     tools:context="com.phereapp.phere.login.SigninActivity">
 
 
-
     <TextView
         android:id="@+id/txt_signin_signin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="Sign in"
         android:textSize="30sp"
         android:textStyle="bold"

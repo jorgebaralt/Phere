@@ -78,5 +78,13 @@ public class SigninActivity extends AppCompatActivity {
             }
         });
 
+        mForgotPassBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent passwordRecoveryIntent = new Intent(SigninActivity.this, PasswordRecoveryActivity.class);
+                startActivity(passwordRecoveryIntent);
+            }
+        });
+
     }
 }

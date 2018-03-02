@@ -113,6 +113,15 @@ public class RegisterPersonalActivity extends AppCompatActivity {
                             .setDisplayName(username)
                             .build();
 
+                    userCreated.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Log.d(TAG, "onComplete: Email Sent");
+                            }
+                        }
+                    });
+
                     userCreated.updateProfile(setUsername)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
