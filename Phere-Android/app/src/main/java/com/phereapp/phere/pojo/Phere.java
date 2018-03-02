@@ -12,7 +12,7 @@ public class Phere {
     private String phereLocation;
     private String privacy;
     private String host;
-    private List<String> members = new ArrayList<>();
+    private List<String> members =  new ArrayList<>();
     public Phere(){}
 
 
