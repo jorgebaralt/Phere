@@ -73,7 +73,7 @@ public class JoinPhereByNameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 phereName = mPhereNameEditText.getText().toString();
-                Log.d(TAG, "onClick: Phere Name = " +phereName);
+                Log.d(TAG, "onClick: Phere Name = " + phereName);
                 //look for the specific Phere name
                 db.collection(phereCollection).document(phereName).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -84,7 +84,7 @@ public class JoinPhereByNameActivity extends AppCompatActivity {
                             Phere phere = documentSnapshot.toObject(Phere.class);
                             //Member Sub-Collection
                             //addMemberToPhere(phere);
-                            addUserToPhere(phere);
+                            addMemberToPhere(phere);
                         }else {
                             Toast.makeText(JoinPhereByNameActivity.this, "Phere does not Exist!.", Toast.LENGTH_SHORT).show();
                         }
@@ -96,14 +96,14 @@ public class JoinPhereByNameActivity extends AppCompatActivity {
         });
     }
 
-    private void addUserToPhere(Phere phere) {
+    private void addMemberToPhere(Phere phere) {
         //Add new member to the Phere
         boolean memberAdded = phere.addMembers(currentUserEmail);
         Log.d(TAG, "addUserToPhere: " + phere.getMembers().get(phere.getMembers().size() - 1));
         //Update array in Phere Document
         //make sure there is a change to update data.
         if (memberAdded) {
-            db.collection(phereCollection).document(phereName).update("members", phere.getMembers()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            db.collection(phereCollection).document(phereName.toLowerCase()).update("members", phere.getMembers()).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(JoinPhereByNameActivity.this, "You have joined a Phere", Toast.LENGTH_SHORT).show();
@@ -124,7 +124,7 @@ public class JoinPhereByNameActivity extends AppCompatActivity {
 
 
     //add member Sub collection
-    private void addMemberToPhere(Phere phere) {
+    private void ddMemberToPhereSubcollection(Phere phere) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         //make sure user is logged in
         if(currentUser != null) {
