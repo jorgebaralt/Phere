@@ -120,7 +120,10 @@ public class CreateNewPhereActivity extends AppCompatActivity {
             public void onSuccess(Void aVoid) {
                 Log.d(TAG, "onSuccess: Phere Created");
                 Toast.makeText(CreateNewPhereActivity.this, "New Phere Created", Toast.LENGTH_SHORT).show();
-                //TODO: go back to home intent
+                //go back to main intent.
+                Intent mainActivityIntent = new Intent(CreateNewPhereActivity.this,MainActivityUser.class);
+                startActivity(mainActivityIntent);
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

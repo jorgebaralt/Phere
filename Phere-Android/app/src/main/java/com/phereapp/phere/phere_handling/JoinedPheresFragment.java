@@ -15,7 +15,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.phereapp.phere.R;
@@ -34,12 +33,13 @@ public class JoinedPheresFragment extends Fragment {
     private FirebaseUser currentUser;
     private FirebaseFirestore db;
     private final String TAG = "JoinedPheresFragment";
+    View rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.pheres_list, container, false);
+        rootView = inflater.inflate(R.layout.pheres_list, container, false);
 
         joinedPheres = new ArrayList<>();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -61,9 +61,22 @@ public class JoinedPheresFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                   for(DocumentSnapshot document : task.getResult()){
-                       Log.d(TAG, document.getId() + " => " + document.getData());
-                   }
+                    List<Phere> queryPhere = task.getResult().toObjects(Phere.class);
+
+                       for(int i = 0; i<queryPhere.size(); i++){
+                           Phere currentPhereQuery = queryPhere.get(i);
+
+                           if(currentPhereQuery.getMembers().contains(currentUser.getEmail())){
+                               Log.d(TAG, "onComplete: Joined Phere => " + currentPhereQuery.getPhereName());
+                               joinedPheres.add(queryPhere.get(i));
+                           }
+                       }
+
+                    //pass JoinedPheres into the ReclyclerView so it get displayed.
+                    RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView_pheres);
+                    RecyclerViewPhereAdapter recyclerViewPhereAdapter = new RecyclerViewPhereAdapter(getContext(),joinedPheres);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    recyclerView.setAdapter(recyclerViewPhereAdapter);
                 }
             }
         });
