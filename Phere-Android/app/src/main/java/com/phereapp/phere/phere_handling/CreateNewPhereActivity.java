@@ -121,8 +121,8 @@ public class CreateNewPhereActivity extends AppCompatActivity {
                 Log.d(TAG, "onSuccess: Phere Created");
                 Toast.makeText(CreateNewPhereActivity.this, "New Phere Created", Toast.LENGTH_SHORT).show();
                 //go back to main intent.
-                Intent mainActivityIntent = new Intent(CreateNewPhereActivity.this,MainActivityUser.class);
-                startActivity(mainActivityIntent);
+                //TODO: Take host to main Phere Activity so they can modify its description, Picture, Etc...
+
 
             }
         }).addOnFailureListener(new OnFailureListener() {
