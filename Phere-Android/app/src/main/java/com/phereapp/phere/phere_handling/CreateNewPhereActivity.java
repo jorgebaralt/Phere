@@ -85,9 +85,11 @@ public class CreateNewPhereActivity extends AppCompatActivity {
                     choosenPrivacy = mPrivacyChosen.getText().toString().toLowerCase();
 
                     //TODO: Import or create Playlist
-
+                    Intent moreInfoIntent = new Intent(CreateNewPhereActivity.this,MoreInfoCreatePhereActivity.class);
+                    startActivity(moreInfoIntent);
                     //Add Phere into database
                     addUserReference();
+
 
                     //TODO: next screen depends on import or create playlist.
 

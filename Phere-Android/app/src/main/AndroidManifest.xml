@@ -59,13 +59,14 @@
         </activity>
         <activity
             android:name=".phere_handling.JoinPhereByNameActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".phere_handling.JoinablePublicPheres"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".login.PasswordRecoveryActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".phere_handling.MoreInfoCreatePhereActivity" />
         <activity android:name=".selected_phere.SelectedPhereMainActivity"></activity>
     </application>
 
