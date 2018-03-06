@@ -1,6 +1,8 @@
 package com.phereapp.phere.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import com.phereapp.phere.R;
 import com.phereapp.phere.pojo.Phere;
+import com.phereapp.phere.selected_phere.SelectedPhereMainActivity;
 
 import java.util.List;
 
@@ -39,13 +42,24 @@ public class RecyclerViewPhereAdapter extends RecyclerView.Adapter<RecyclerViewP
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         //set values here
 
         //TODO: deal with image
         holder.phereName.setText(mPheres.get(position).getPhereName());
         holder.phereLocation.setText(mPheres.get(position).getPhereLocation());
         //holder.phereMemberSize.setText(mPheres.get(position).get);
+
+        //set click listener
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent selectedPhereIntent = new Intent(mContext, SelectedPhereMainActivity.class);
+                Phere selectedPhere = mPheres.get(position);
+                selectedPhereIntent.putExtra("SelectedPhere",  selectedPhere);
+                mContext.startActivity(selectedPhereIntent);
+            }
+        });
 
     }
 
@@ -60,6 +74,7 @@ public class RecyclerViewPhereAdapter extends RecyclerView.Adapter<RecyclerViewP
         private ImageView phereImg;
         private TextView phereLocation;
         private TextView phereMemberSize;
+        private CardView cardView;
 
 
         public MyViewHolder(View itemView){
@@ -68,6 +83,7 @@ public class RecyclerViewPhereAdapter extends RecyclerView.Adapter<RecyclerViewP
             phereName =  itemView.findViewById(R.id.txt_phereName_cardview);
             phereImg =  itemView.findViewById(R.id.img_phere_cardview);
             phereLocation = itemView.findViewById(R.id.txt_location_cardview);
+            cardView = itemView.findViewById(R.id.cardview);
             //phereMemberSize = itemView.findViewById(R.id.txt_memberSize_cardview);
 
         }

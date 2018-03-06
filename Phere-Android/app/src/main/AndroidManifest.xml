@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".login.StartActivity"
+            android:name=".login.StartLoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".login.SelectActivity"

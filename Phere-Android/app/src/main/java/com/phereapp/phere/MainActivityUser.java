@@ -22,7 +22,7 @@ import com.phereapp.phere.home_navigation.CreateJoinPheresFragment;
 import com.phereapp.phere.home_navigation.HomeNewsFragment;
 import com.phereapp.phere.home_navigation.NotificationsFragment;
 import com.phereapp.phere.home_navigation.ProfileFragment;
-import com.phereapp.phere.login.StartActivity;
+import com.phereapp.phere.login.StartLoginActivity;
 
 public class MainActivityUser extends AppCompatActivity {
 
@@ -83,7 +83,7 @@ public class MainActivityUser extends AppCompatActivity {
     //Loads before OnCreate
     @Override
     protected void onStart() {
-        startIntent = new Intent(this,StartActivity.class);
+        startIntent = new Intent(this,StartLoginActivity.class);
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         //get current user
@@ -124,7 +124,7 @@ public class MainActivityUser extends AppCompatActivity {
 
         //set all views.
         //mUsernameDisplay.setText(mUsername);
-        startIntent = new Intent(this,StartActivity.class);
+        startIntent = new Intent(this,StartLoginActivity.class);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
