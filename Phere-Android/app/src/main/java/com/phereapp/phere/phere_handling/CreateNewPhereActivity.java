@@ -23,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.phereapp.phere.MainActivityUser;
 import com.phereapp.phere.R;
 import com.phereapp.phere.pojo.Phere;
+import com.phereapp.phere.selected_phere.SelectedPhereMainActivity;
 
 import java.lang.reflect.Array;
 
@@ -85,6 +86,10 @@ public class CreateNewPhereActivity extends AppCompatActivity {
                     choosenPrivacy = mPrivacyChosen.getText().toString().toLowerCase();
 
                     //TODO: Import or create Playlist
+
+                    // Testing Selected Phere Activity >>>>
+                    Intent selectedPhereIntent = new Intent(CreateNewPhereActivity.this, SelectedPhereMainActivity.class);
+                    startActivity(selectedPhereIntent);
 
                     //Add Phere into database
                     addUserReference();
