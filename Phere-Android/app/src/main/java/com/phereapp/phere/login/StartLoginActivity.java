@@ -31,20 +31,20 @@ import com.phereapp.phere.R;
 
 
 //choose whether to sign in or sign up.
-public class StartActivity extends AppCompatActivity {
+public class StartLoginActivity extends AppCompatActivity {
     private Button mSignupBtn;
     private TextView mSigninBtn;
     private FirebaseAuth mAuth;
     private CallbackManager mCallbackManager;
     private static final String EMAIL = "email";
-    final private static String TAG = "StartActivity";
+    final private static String TAG = "StartLoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_start);
+        setContentView(R.layout.activity_login_start);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -56,7 +56,7 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: Register Personal Account clicked");
-                Intent registerIntent = new Intent(StartActivity.this, SelectActivity.class);
+                Intent registerIntent = new Intent(StartLoginActivity.this, SelectActivity.class);
                 startActivity(registerIntent);
             }
         });
@@ -66,7 +66,7 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: Sign in clicked");
-                Intent signinIntent = new Intent(StartActivity.this, SigninActivity.class);
+                Intent signinIntent = new Intent(StartLoginActivity.this, SigninActivity.class);
                 startActivity(signinIntent);
             }
         });
@@ -119,14 +119,14 @@ public class StartActivity extends AppCompatActivity {
                     // Sign in success, Go to the next Activity (MainActivityUser)
                     Log.d(TAG, "signInWithCredential:success");
                     FirebaseUser user = mAuth.getCurrentUser();
-                    Intent mainActivityIntent = new Intent(StartActivity.this, MainActivityUser.class);
+                    Intent mainActivityIntent = new Intent(StartLoginActivity.this, MainActivityUser.class);
                     startActivity(mainActivityIntent);
                 }
 
                 else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.getException());
-                    Toast.makeText(StartActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StartLoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

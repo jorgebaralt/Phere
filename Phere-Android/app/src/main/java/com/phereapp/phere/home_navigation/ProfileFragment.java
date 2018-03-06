@@ -2,7 +2,6 @@ package com.phereapp.phere.home_navigation;
 
 
 import android.content.Intent;
-import android.media.session.MediaSession;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -17,7 +16,6 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -27,11 +25,9 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.phereapp.phere.MainActivityUser;
 import com.phereapp.phere.R;
-import com.phereapp.phere.login.StartActivity;
+import com.phereapp.phere.login.StartLoginActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,7 +66,7 @@ public class ProfileFragment extends Fragment {
                 //handles Facebook logout
                 LoginManager.getInstance().logOut();
                 //move to start intent for logins options
-                Intent startIntent = new Intent(getActivity(),StartActivity.class);
+                Intent startIntent = new Intent(getActivity(),StartLoginActivity.class);
                 startActivity(startIntent);
                 getActivity().finish();
             }

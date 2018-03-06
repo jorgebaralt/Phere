@@ -1,5 +1,6 @@
 package com.phereapp.phere.pojo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by Andres on 2/24/2018.
  */
 
-public class Phere {
+public class Phere implements Serializable{
     private String phereName;
     private String phereLocation;
     private String privacy;
