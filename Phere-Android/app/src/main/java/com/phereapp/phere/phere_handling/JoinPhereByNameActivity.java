@@ -47,6 +47,8 @@ public class JoinPhereByNameActivity extends AppCompatActivity {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         setContentView(R.layout.activity_join_phere_by_name);
 
@@ -103,7 +105,7 @@ public class JoinPhereByNameActivity extends AppCompatActivity {
         //Update array in Phere Document
         //make sure there is a change to update data.
         if (memberAdded) {
-            db.collection(phereCollection).document(phereName.toLowerCase()).update("members", phere.getMembers()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            db.collection(phereCollection).document(phereName).update("members", phere.getMembers()).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(JoinPhereByNameActivity.this, "You have joined a Phere", Toast.LENGTH_SHORT).show();

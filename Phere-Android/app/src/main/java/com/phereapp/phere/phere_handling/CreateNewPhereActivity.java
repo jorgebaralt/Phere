@@ -51,6 +51,8 @@ public class CreateNewPhereActivity extends AppCompatActivity {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         setContentView(R.layout.activity_create_new_phere);
 
@@ -72,7 +74,7 @@ public class CreateNewPhereActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // getting all the information of the Phere being created
-                phereName = mPhereName.getText().toString().toLowerCase();
+                phereName = mPhereName.getText().toString();
                 phereLocation = mPhereLocation.getText().toString().toLowerCase();
                 int selectedId = mPrivacy.getCheckedRadioButtonId();
 
