@@ -127,7 +127,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             progressDialog.show();
 
             // Creates the reference in the fireface Storage to be able to access the uploaded image
-            StorageReference ref = storageReference.child("phereProfileImage/" + UUID.randomUUID().toString());
+            StorageReference ref = storageReference.child("phereProfileImage/" + newPhere.getPhereName() + "ProfilePicture");
             ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
