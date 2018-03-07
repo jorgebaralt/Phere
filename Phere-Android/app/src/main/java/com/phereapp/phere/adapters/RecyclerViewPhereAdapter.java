@@ -47,7 +47,7 @@ public class RecyclerViewPhereAdapter extends RecyclerView.Adapter<RecyclerViewP
 
         //TODO: deal with image
         holder.phereName.setText(mPheres.get(position).getPhereName());
-        holder.phereLocation.setText(mPheres.get(position).getPhereLocation());
+        //holder.phereLocation.setText(mPheres.get(position).getPhereLocation());
         //holder.phereMemberSize.setText(mPheres.get(position).get);
 
         //set click listener
@@ -81,8 +81,8 @@ public class RecyclerViewPhereAdapter extends RecyclerView.Adapter<RecyclerViewP
             super(itemView);
 
             phereName =  itemView.findViewById(R.id.txt_phereName_cardview);
-            phereImg =  itemView.findViewById(R.id.img_phere_cardview);
-            phereLocation = itemView.findViewById(R.id.txt_location_cardview);
+            //phereImg =  itemView.findViewById(R.id.img_phere_cardview);
+            //phereLocation = itemView.findViewById(R.id.txt_location_cardview);
             cardView = itemView.findViewById(R.id.cardview);
             //phereMemberSize = itemView.findViewById(R.id.txt_memberSize_cardview);
 
