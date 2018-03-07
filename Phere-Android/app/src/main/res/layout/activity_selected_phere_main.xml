@@ -28,7 +28,7 @@
                 app:layout_collapseMode="pin"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:backgroundTint="@color/colorAppBlue"/>
+                />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -36,14 +36,63 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img_selectedPhere"
+                android:layout_width="103dp"
+                android:layout_height="99dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/sym_def_app_icon"
+                android:layout_marginLeft="8dp" />
 
-        <LinearLayout
+            <TextView
+                android:id="@+id/txt_description_selectedPhere"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy te"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img_selectedPhere"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="16dp" />
+
+            <TextView
+                android:id="@+id/txt_host_selectedPhere"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Host: hostname"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_selectedPhere"
+                android:layout_marginLeft="8dp" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/txt_location_selectedPhere"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"></LinearLayout>
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Location: 1234 somewhere, somehere SW "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_host_selectedPhere" />
+
 
     </android.support.v4.widget.NestedScrollView>
 
