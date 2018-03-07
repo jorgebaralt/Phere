@@ -1,9 +1,9 @@
 package com.phereapp.phere.selected_phere;
 
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.phereapp.phere.R;
 import com.phereapp.phere.pojo.Phere;
@@ -11,7 +11,7 @@ import com.phereapp.phere.pojo.Phere;
 public class SelectedPhereMainActivity extends AppCompatActivity {
 
     private static String TAG = "SelectedPhereMainActivity";
-
+    CollapsingToolbarLayout mPhereImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,10 +21,14 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         if(selectedPhere != null){
             Log.d(TAG, "onCreate: WE GOT THE PHERE ************" + selectedPhere.getPhereName());
         }
-        TextView title = findViewById(R.id.txt_title_selectedPhere);
 
+        mPhereImage = findViewById(R.id.toolbar_selectedPhere);
+        mPhereImage.setTitle(selectedPhere.getPhereName());
+        //mPhereImage.setBackground();
         assert selectedPhere != null;
-        title.setText(selectedPhere.getPhereName());
+
+        setTitle(selectedPhere.getPhereName());
+
 
     }
 }

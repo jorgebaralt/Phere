@@ -68,7 +68,10 @@
             android:name=".login.PasswordRecoveryActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".phere_handling.MoreInfoCreatePhereActivity" />
-        <activity android:name=".selected_phere.SelectedPhereMainActivity"></activity>
+
+        <activity
+            android:name=".selected_phere.SelectedPhereMainActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
 
 </manifest>
