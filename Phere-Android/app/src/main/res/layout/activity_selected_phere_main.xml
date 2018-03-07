@@ -18,9 +18,9 @@
             app:layout_scrollFlags="exitUntilCollapsed|scroll"
             app:contentScrim="?attr/colorPrimary"
             app:title="Phere Name"
-            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleMarginStart="8dp"
             app:expandedTitleMarginEnd="64dp"
-            android:background="@drawable/materialdesign">
+            android:background="@drawable/materialdesignblue">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbarid"
