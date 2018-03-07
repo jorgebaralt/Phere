@@ -25,7 +25,6 @@ import com.phereapp.phere.R;
 import com.phereapp.phere.pojo.Phere;
 
 import java.io.IOException;
-import java.util.UUID;
 
 public class MoreInfoCreatePhereActivity extends AppCompatActivity {
     private Button uploadFromGallery;
@@ -127,7 +126,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             progressDialog.show();
 
             // Creates the reference in the fireface Storage to be able to access the uploaded image
-            StorageReference ref = storageReference.child("phereProfileImage/" + newPhere.getPhereName() + "ProfilePicture");
+            StorageReference ref = storageReference.child("phereProfileImage/" + newPhere.getPhereName() + "ProfileImage");
             ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
