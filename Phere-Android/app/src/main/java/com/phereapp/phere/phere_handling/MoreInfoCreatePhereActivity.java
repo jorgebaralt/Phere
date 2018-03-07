@@ -44,7 +44,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
     private static String TAG = "MoreInfoCreatePhereActivity";
     private Uri filePath;
     private Phere newPhere;
-    private String phereDescription, mCurrentPhotoPath;
+    private String phereDescription, mCurrentPhotoPath, trimmedPhereName;
     //Firebase
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -74,6 +74,10 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
         btnOk = (Button) findViewById(R.id.btn_ok_moreInfoPhere);
         btnCancel = (Button) findViewById(R.id.btn_cancel_moreInfoPhere);
         mPhereDescription = (EditText) findViewById(R.id.editTxt_phere_descriptionInput);
+
+        trimmedPhereName = newPhere.getPhereName();
+        trimmedPhereName = trimmedPhereName.replaceAll("\\s", "");
+
 
         // On click of the upload picture Button
         mUploadFromGallery.setOnClickListener(new View.OnClickListener() {
@@ -175,7 +179,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             progressDialog.show();
 
             // Creates the reference in the fireface Storage to be able to access the uploaded image
-            StorageReference ref = storageReference.child("phereProfileImage/" + newPhere.getPhereName() + "ProfileImage");
+            StorageReference ref = storageReference.child("phereProfileImage/" + trimmedPhereName + "ProfileImage");
             ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
