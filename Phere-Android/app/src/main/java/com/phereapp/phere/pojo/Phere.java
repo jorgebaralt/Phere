@@ -14,6 +14,7 @@ public class Phere implements Serializable{
     private String privacy;
     private String host;
     private List<String> members =  new ArrayList<>();
+    private String phereDescription;
     public Phere(){}
 
 
@@ -31,7 +32,9 @@ public class Phere implements Serializable{
     public String getPhereLocation() { return phereLocation;}
     public String getPrivacy() { return privacy;}
     public String getHost() {return host;}
-
+    public String getPhereDescription() {
+        return phereDescription;
+    }
     public List<String> getMembers() {
         return members;
     }
@@ -47,5 +50,7 @@ public class Phere implements Serializable{
         }
         return false;
     }
-
+    public void setPhereDescription(String phereDescription) {
+        this.phereDescription = phereDescription;
+    }
 }

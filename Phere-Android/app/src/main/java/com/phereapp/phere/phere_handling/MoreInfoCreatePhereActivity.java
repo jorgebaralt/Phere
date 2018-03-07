@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -31,9 +33,13 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
     private final int REQUEST_CODE_EXTERNAL_IMAGE = 2000;
     private static String TAG = "MoreInfoCreatePhereActivity";
     private Uri filePath;
+    private Phere newPhere;
+    private String pheresCollection = "pheres";
     //Firebase
-    FirebaseStorage storage;
-    StorageReference storageReference;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
+    private FirebaseFirestore db;
+
 
     private Phere selectedPhere;
     @Override
@@ -41,11 +47,14 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_info_create_phere);
 
+        newPhere = (Phere) MoreInfoCreatePhereActivity.this.getIntent().getSerializableExtra("NewPhere");
+
         //Firebase Storage
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
-        selectedPhere = (Phere) MoreInfoCreatePhereActivity.this.getIntent().getSerializableExtra("SelectedPhere");
+        //Firebase Database
+        db = FirebaseFirestore.getInstance();
 
         //Initializes the Views
         uploadedProfilePic = (ImageView) findViewById(R.id.img_uploaded_fromGallery);
@@ -76,12 +85,38 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 uploadedProfilePic.setImageBitmap(bitmap);
                 uploadImage();
+                addPhereReference();
             }
             catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
+    private void addPhereReference() {
+        Log.d(TAG, "addUserReference: Creating Phere" + newPhere.getPhereName() + " for = " + newPhere.getHost());
+
+        // create new Phere object to send to database
+
+        // adds the extra information to the document in the database
+        db.collection(pheresCollection).document(newPhere.getPhereName()).set(newPhere).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "onSuccess: Phere Created");
+                Toast.makeText(MoreInfoCreatePhereActivity.this, "New Phere Created", Toast.LENGTH_SHORT).show();
+                //go back to main intent.
+                //TODO: Take host to main Phere Activity so they can modify its description, Picture, Etc...
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, "onFailure: Error creating Phere..." );
+            }
+        });
+    }
+
 
     private void uploadImage() {
         if (filePath != null) {

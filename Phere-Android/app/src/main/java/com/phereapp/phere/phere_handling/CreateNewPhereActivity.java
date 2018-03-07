@@ -2,9 +2,7 @@ package com.phereapp.phere.phere_handling;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -15,8 +13,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,6 +36,8 @@ public class CreateNewPhereActivity extends AppCompatActivity {
     private Button mCancelButton;
     private String host;
     private Array trying;
+    private Phere newPhere;
+
     //firebase
     private FirebaseFirestore db;
     private FirebaseUser currentUser;
@@ -84,11 +82,14 @@ public class CreateNewPhereActivity extends AppCompatActivity {
                     mPrivacyChosen = (RadioButton) findViewById(selectedId);
                     choosenPrivacy = mPrivacyChosen.getText().toString().toLowerCase();
 
+                    newPhere = new Phere(phereName, phereLocation, choosenPrivacy, host);
+
                     //TODO: Import or create Playlist
                     Intent moreInfoIntent = new Intent(CreateNewPhereActivity.this,MoreInfoCreatePhereActivity.class);
+                    //pass newPhere info to next activity so we can put it into DB
+                    moreInfoIntent.putExtra("NewPhere",newPhere);
                     startActivity(moreInfoIntent);
-                    //Add Phere into database
-                    addUserReference();
+
 
 
                     //TODO: next screen depends on import or create playlist.
@@ -106,31 +107,6 @@ public class CreateNewPhereActivity extends AppCompatActivity {
                 Intent backIntent =  new Intent(CreateNewPhereActivity.this,MainActivityUser.class);
                 startActivity(backIntent);
                 finish();
-            }
-        });
-
-    }
-
-    public void addUserReference(){
-        Log.d(TAG, "addUserReference: Creating Phere" + phereName + " for = " + host);
-
-        // create new Phere object to send to database
-        Phere newPhere = new Phere(phereName, phereLocation, choosenPrivacy, host);
-        // adds the extra information to the document in the database
-        db.collection(pheresCollection).document(phereName).set(newPhere).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d(TAG, "onSuccess: Phere Created");
-                Toast.makeText(CreateNewPhereActivity.this, "New Phere Created", Toast.LENGTH_SHORT).show();
-                //go back to main intent.
-                //TODO: Take host to main Phere Activity so they can modify its description, Picture, Etc...
-
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.e(TAG, "onFailure: Error creating Phere..." );
             }
         });
 
