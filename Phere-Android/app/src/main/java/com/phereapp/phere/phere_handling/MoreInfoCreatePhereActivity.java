@@ -80,7 +80,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
         mPhereDescription = (EditText) findViewById(R.id.editTxt_phere_descriptionInput);
 
         trimmedPhereName = newPhere.getPhereName();
-        trimmedPhereName = trimmedPhereName.replaceAll("\\s", "");
+        trimmedPhereName = trimmedPhereName.replaceAll("\\s", "-").toLowerCase();
 
 
         // On click of the upload picture Button
@@ -183,7 +183,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             progressDialog.show();
 
             // Creates the reference in the fireface Storage to be able to access the uploaded image
-            StorageReference ref = storageReference.child("phereProfileImage/" + trimmedPhereName + "ProfileImage");
+            StorageReference ref = storageReference.child("phereProfileImage/" + trimmedPhereName + "-profileImage");
             ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
