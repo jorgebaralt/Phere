@@ -15,6 +15,7 @@ public class Phere implements Serializable{
     private String host;
     private List<String> members =  new ArrayList<>();
     private String phereDescription;
+    private String phereDate;
 
 
     public Phere(){}
@@ -42,6 +43,9 @@ public class Phere implements Serializable{
     public String getDisplayPhereName(){
         return this.phereName.replaceAll("_"," ");
     }
+    public String getPhereDate() {
+        return phereDate;
+    }
 
     public void setMembers(List<String> members) {
         this.members = members;
@@ -58,4 +62,7 @@ public class Phere implements Serializable{
         this.phereDescription = phereDescription;
     }
 
+    public void setPhereDate(String phereDate) {
+        this.phereDate = phereDate;
+    }
 }

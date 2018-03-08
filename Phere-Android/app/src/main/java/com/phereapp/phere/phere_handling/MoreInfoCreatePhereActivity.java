@@ -1,5 +1,6 @@
 package com.phereapp.phere.phere_handling;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -32,21 +34,23 @@ import com.phereapp.phere.pojo.Phere;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 public class MoreInfoCreatePhereActivity extends AppCompatActivity {
-    private Button mUploadFromGallery, mUploadFromCamera, mUploadFromOurGallery;
+    private Button mUploadFromGallery, mUploadFromCamera;
     private Button btnOk, btnCancel;
     private ImageView mUploadedProfilePic;
-    private EditText mPhereDescription;
+    private EditText mPhereDescription, mPhereDate;
     private final int REQUEST_CODE_EXTERNAL_IMAGE = 2000;
     private static final int CAMERA_REQUEST_CODE = 1;
     private static String TAG = "MoreInfoCreatePhereActivity";
     private Uri filePath;
     private Phere newPhere;
-    private String phereDescription, mCurrentPhotoPath, trimmedPhereName;
-    private String imagePath;
+    private String phereDescription, mCurrentPhotoPath;
+    private String imagePath, phereDate;
+    private Calendar myCalendar = Calendar.getInstance();
     //Firebase
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -73,26 +77,23 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         //Initializes the Views
+        mPhereDate = (EditText) findViewById(R.id.editTxt_pickDate_MoreInfo);
         mUploadedProfilePic = (ImageView) findViewById(R.id.img_uploaded_fromGallery);
         mUploadFromGallery = (Button) findViewById(R.id.btn_upload_imgFromGallery);
         mUploadFromCamera = (Button) findViewById(R.id.btn_upload_imgFromCamera);
-        mUploadFromOurGallery = (Button) findViewById(R.id.btn_upload_imgFromOurGallery);
         btnOk = (Button) findViewById(R.id.btn_ok_moreInfoPhere);
         btnCancel = (Button) findViewById(R.id.btn_cancel_moreInfoPhere);
         mPhereDescription = (EditText) findViewById(R.id.editTxt_phere_descriptionInput);
-
-        trimmedPhereName = newPhere.getPhereName();
-        trimmedPhereName = trimmedPhereName.replaceAll("\\s", "-");
-
 
         // On click of the upload picture Button
         mUploadFromGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Choose picture from Library (sends the user to their gallery)
+                //Choose picture from Library (sends the user to their gallery)
                 Intent picFromGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(picFromGallery, REQUEST_CODE_EXTERNAL_IMAGE);
-
+                // Gotta test more
+                // CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).setAspectRatio(120, 60).start(MoreInfoCreatePhereActivity.this);
             }
         });
 
@@ -101,6 +102,26 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dispatchTakePictureIntent();
+            }
+        });
+
+        // Listener for when the user picks the date
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, month);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
+
+        // On Click of the pick a date editText
+        mPhereDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(MoreInfoCreatePhereActivity.this, date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
@@ -148,15 +169,27 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             mUploadedProfilePic.setImageURI(filePath);
         }
 
-
+        // Gotta test more
+//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+//            if (resultCode == RESULT_OK) {
+//                filePath = result.getUri();
+//                mUploadedProfilePic.setImageURI(filePath);
+//            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+//                Exception error = result.getError();
+//            }
+//        }
     }
+
 
     //creates the new Phere and adds it to the database.
     private void addPhereReference() {
         Log.d(TAG, "addUserReference: Creating Phere" + newPhere.getPhereName() + " for = " + newPhere.getHost());
         // Getting the phere description from the user
         phereDescription = mPhereDescription.getText().toString();
+        phereDate = mPhereDate.getText().toString();
         newPhere.setPhereDescription(phereDescription);
+        newPhere.setPhereDate(phereDate);
 
         // adds the extra information to the document in the database
         db.collection(pheresCollection).document(newPhere.getPhereName()).set(newPhere).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -247,5 +280,12 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
                 startActivityForResult(picFromCamera, CAMERA_REQUEST_CODE);
             }
         }
+    }
+
+    private void updateLabel() {
+        String myFormat = "MM/dd/yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(myFormat, Locale.US);
+
+        mPhereDate.setText(simpleDateFormat.format(myCalendar.getTime()));
     }
 }

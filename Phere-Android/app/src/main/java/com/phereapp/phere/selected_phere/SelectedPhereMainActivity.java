@@ -4,13 +4,13 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.phereapp.phere.DynamicImageView.DynamicImageView;
 import com.phereapp.phere.R;
 import com.phereapp.phere.pojo.Phere;
 
@@ -18,7 +18,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
 
     private static String TAG = "SelectedPhereMainActivity";
     private TextView mPhereDescription;
-    private ImageView mPhereProfilePicture;
+    private DynamicImageView mPhereProfilePicture;
     CollapsingToolbarLayout mTitle;
     //Firebase
     private FirebaseStorage storage;
@@ -37,7 +37,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         mPhereDescription.setText(selectedPhere.getPhereDescription());
         mTitle = findViewById(R.id.toolbar_selectedPhere);
         mTitle.setTitle(selectedPhere.getDisplayPhereName());
-        mPhereProfilePicture = (ImageView) findViewById(R.id.img_profilePicture_selectedPhere);
+        mPhereProfilePicture = (DynamicImageView) findViewById(R.id.img_profilePicture_selectedPhere);
 
 
         //Firebase Storage

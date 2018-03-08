@@ -22,15 +22,11 @@
             app:expandedTitleMarginEnd="64dp"
             >
 
-            <ImageView
+            <com.phereapp.phere.DynamicImageView.DynamicImageView
                 android:id="@+id/img_profilePicture_selectedPhere"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/materialdesignblue"
-
-                >
-
-            </ImageView>
+                android:scaleType="fitCenter" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbarid"
