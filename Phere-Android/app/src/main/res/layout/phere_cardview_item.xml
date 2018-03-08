@@ -35,7 +35,6 @@
                 android:text="Phere Name"
                 android:width="2dip"
                 android:shadowRadius="10"
-                android:textAllCaps="false"
                 android:textSize="24sp"
                 />
 

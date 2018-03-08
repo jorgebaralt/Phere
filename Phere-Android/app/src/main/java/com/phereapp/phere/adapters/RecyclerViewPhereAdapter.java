@@ -4,12 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -31,7 +29,6 @@ public class RecyclerViewPhereAdapter extends RecyclerView.Adapter<RecyclerViewP
     Context mContext;
     List<Phere> mPheres;
     FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageReference = storage.getReference();
     private static String TAG = "RecyclerViewPhereAdapter";
 
     //Constructor
@@ -58,12 +55,13 @@ public class RecyclerViewPhereAdapter extends RecyclerView.Adapter<RecyclerViewP
         //TODO: deal with image (Still not working)
         holder.phereName.setText(mPheres.get(position).getDisplayPhereName());
         holder.phereLocation.setText(mPheres.get(position).getPhereLocation());
+        //Set image of each
+        StorageReference storageReference = storage.getReference();
         storageReference = storageReference.child("phereProfileImage/" + mPheres.get(position).getPhereName() + "_profileImage");
-        Log.d(TAG, "onBindViewHolder: PHERE NAME = " +  mPheres.get(position).getPhereName());
         //set background image
-        Glide.with(this.mContext).using(new FirebaseImageLoader()).load(storageReference).into(holder.phereImg);
+        Glide.with(holder.phereImg.getContext()).using(new FirebaseImageLoader()).load(storageReference).into(holder.phereImg);
 
-        //set click listener
+        //clicking the specific card view
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,9 +84,7 @@ public class RecyclerViewPhereAdapter extends RecyclerView.Adapter<RecyclerViewP
         private TextView phereName;
         private ImageView phereImg;
         private TextView phereLocation;
-        private TextView phereMemberSize;
         private CardView cardView;
-        private RelativeLayout relativeLayout;
 
 
         public MyViewHolder(View itemView){
@@ -98,8 +94,6 @@ public class RecyclerViewPhereAdapter extends RecyclerView.Adapter<RecyclerViewP
             phereLocation = itemView.findViewById(R.id.txt_location_cardview);
             cardView = itemView.findViewById(R.id.cardview);
             phereImg = itemView.findViewById(R.id.img_profileImg_cardview);
-            relativeLayout = itemView.findViewById(R.id.rl_cardview);
-            //phereMemberSize = itemView.findViewById(R.id.txt_memberSize_cardview);
 
         }
     }
