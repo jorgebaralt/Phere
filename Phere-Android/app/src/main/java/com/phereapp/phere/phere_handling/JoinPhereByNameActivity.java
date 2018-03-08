@@ -74,7 +74,7 @@ public class JoinPhereByNameActivity extends AppCompatActivity {
         mJoinPhereByName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                phereName = mPhereNameEditText.getText().toString();
+                phereName = mPhereNameEditText.getText().toString().replaceAll("\\s","_");
                 Log.d(TAG, "onClick: Phere Name = " + phereName);
                 //look for the specific Phere name
                 db.collection(phereCollection).document(phereName).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -84,8 +84,6 @@ public class JoinPhereByNameActivity extends AppCompatActivity {
                         if(documentSnapshot.exists()) {
                             //assign the object
                             Phere phere = documentSnapshot.toObject(Phere.class);
-                            //Member Sub-Collection
-                            //addMemberToPhere(phere);
                             addMemberToPhere(phere);
                         }else {
                             Toast.makeText(JoinPhereByNameActivity.this, "Phere does not Exist!.", Toast.LENGTH_SHORT).show();

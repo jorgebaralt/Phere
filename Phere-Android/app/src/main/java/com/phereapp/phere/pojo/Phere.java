@@ -15,12 +15,13 @@ public class Phere implements Serializable{
     private String host;
     private List<String> members =  new ArrayList<>();
     private String phereDescription;
-    public Phere(){}
 
+
+    public Phere(){}
 
     // Constructor
     public Phere(String phereName, String phereLocation, String privacy, String host){
-        this.phereName = phereName.toLowerCase();
+        this.phereName = phereName;
         this.phereLocation = phereLocation;
         this.privacy = privacy;
         this.host = host;
@@ -38,6 +39,9 @@ public class Phere implements Serializable{
     public List<String> getMembers() {
         return members;
     }
+    public String getDisplayPhereName(){
+        return this.phereName.replaceAll("_"," ");
+    }
 
     public void setMembers(List<String> members) {
         this.members = members;
@@ -53,4 +57,5 @@ public class Phere implements Serializable{
     public void setPhereDescription(String phereDescription) {
         this.phereDescription = phereDescription;
     }
+
 }

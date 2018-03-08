@@ -17,18 +17,31 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txt_phereName_cardview"
+        <RelativeLayout
+            android:id="@+id/rl_cardview"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:background="@drawable/materialdesignblue"
-            android:shadowColor="#000000"
-            android:text="Phere Name"
-            android:width="2dip"
-            android:shadowRadius="10"
-            android:textAllCaps="false"
-            android:textSize="24sp"
-            />
+            android:layout_height="135dp">
+            <ImageView
+                android:id="@+id/img_profileImg_cardview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/materialdesignblue"
+               />
+            <TextView
+                android:id="@+id/txt_phereName_cardview"
+                android:layout_width="match_parent"
+                android:layout_height="135dp"
+                android:shadowColor="#000000"
+                android:text="Phere Name"
+                android:width="2dip"
+                android:shadowRadius="10"
+                android:textAllCaps="false"
+                android:textSize="24sp"
+                />
+
+
+        </RelativeLayout>
+
 
         <TextView
             android:id="@+id/txt_location_cardview"

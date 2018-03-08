@@ -74,7 +74,7 @@ public class CreateNewPhereActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // getting all the information of the Phere being created
-                phereName = mPhereName.getText().toString();
+                phereName = mPhereName.getText().toString().replaceAll("\\s","_");
                 phereLocation = mPhereLocation.getText().toString().toLowerCase();
                 int selectedId = mPrivacy.getCheckedRadioButtonId();
 

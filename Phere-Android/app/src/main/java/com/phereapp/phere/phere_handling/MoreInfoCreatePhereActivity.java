@@ -46,11 +46,13 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
     private Uri filePath;
     private Phere newPhere;
     private String phereDescription, mCurrentPhotoPath, trimmedPhereName;
+    private String imagePath;
     //Firebase
     private FirebaseStorage storage;
     private StorageReference storageReference;
     private FirebaseFirestore db;
     private String pheresCollection = "pheres";
+    private StorageReference ref;
 
 
     @Override
@@ -80,7 +82,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
         mPhereDescription = (EditText) findViewById(R.id.editTxt_phere_descriptionInput);
 
         trimmedPhereName = newPhere.getPhereName();
-        trimmedPhereName = trimmedPhereName.replaceAll("\\s", "-").toLowerCase();
+        trimmedPhereName = trimmedPhereName.replaceAll("\\s", "-");
 
 
         // On click of the upload picture Button
@@ -94,6 +96,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             }
         });
 
+        //On click to take picture with camera
         mUploadFromCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +104,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             }
         });
 
+        //continue button
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +115,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             }
         });
 
+        //go back to previous activity
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,7 +125,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
         });
     }
 
-
+    //handles result of whether opening camera or taking picture
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -146,6 +151,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
 
     }
 
+    //creates the new Phere and adds it to the database.
     private void addPhereReference() {
         Log.d(TAG, "addUserReference: Creating Phere" + newPhere.getPhereName() + " for = " + newPhere.getHost());
         // Getting the phere description from the user
@@ -158,9 +164,6 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             public void onSuccess(Void aVoid) {
                 Log.d(TAG, "onSuccess: Phere Created");
                 Toast.makeText(MoreInfoCreatePhereActivity.this, "New Phere Created", Toast.LENGTH_SHORT).show();
-                //go back to main intent.
-                //TODO: Take host to main Phere Activity so they can modify its description, Picture, Etc...
-
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -171,7 +174,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
         });
     }
 
-
+    //Saves image into FIREBASE Storage
     private void UploadImage() {
         Log.d(TAG, "UploadImage: Initializing UploadImage");
         if (filePath != null) {
@@ -183,7 +186,8 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             progressDialog.show();
 
             // Creates the reference in the fireface Storage to be able to access the uploaded image
-            StorageReference ref = storageReference.child("phereProfileImage/" + trimmedPhereName + "-profileImage");
+            imagePath = "phereProfileImage/" + newPhere.getPhereName() + "_profileImage";
+            ref = storageReference.child(imagePath);
             ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -207,7 +211,6 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
 
     private File createImageFile() throws IOException {

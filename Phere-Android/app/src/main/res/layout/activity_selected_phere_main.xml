@@ -20,12 +20,17 @@
             app:title="Phere Name"
             app:expandedTitleMarginStart="8dp"
             app:expandedTitleMarginEnd="64dp"
-            android:background="@drawable/materialdesignblue">
+            >
 
             <ImageView
-                android:id="@+id/img_phere_profilePicture_selectedPhere"
+                android:id="@+id/img_profilePicture_selectedPhere"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></ImageView>
+                android:layout_height="match_parent"
+                android:background="@drawable/materialdesignblue"
+
+                >
+
+            </ImageView>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbarid"
