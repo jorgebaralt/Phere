@@ -59,7 +59,7 @@ public class RecyclerViewPhereAdapter extends RecyclerView.Adapter<RecyclerViewP
         StorageReference storageReference = storage.getReference();
         storageReference = storageReference.child("phereProfileImage/" + mPheres.get(position).getPhereName() + "_profileImage");
         //set background image
-        Glide.with(holder.phereImg.getContext()).using(new FirebaseImageLoader()).load(storageReference).into(holder.phereImg);
+        Glide.with(holder.phereImg.getContext()).using(new FirebaseImageLoader()).load(storageReference).centerCrop().into(holder.phereImg);
 
         //clicking the specific card view
         holder.cardView.setOnClickListener(new View.OnClickListener() {
