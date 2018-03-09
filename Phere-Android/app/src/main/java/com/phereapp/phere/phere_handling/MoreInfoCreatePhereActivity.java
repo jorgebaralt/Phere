@@ -93,8 +93,8 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
                 //Choose picture from Library (sends the user to their gallery)
                 Intent picFromGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(picFromGallery, REQUEST_CODE_EXTERNAL_IMAGE);
-                // Gotta test more
-                // CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).setAspectRatio(120, 60).start(MoreInfoCreatePhereActivity.this);
+                 //Gotta test more
+//                 CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).setMinCropResultSize(200,200).setMaxCropResultSize(800, 200).start(MoreInfoCreatePhereActivity.this);
             }
         });
 
@@ -173,15 +173,15 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
         }
 
         // Gotta test more
-//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-//            if (resultCode == RESULT_OK) {
-//                filePath = result.getUri();
-//                mUploadedProfilePic.setImageURI(filePath);
-//            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-//                Exception error = result.getError();
-//            }
-//        }
+    //        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+    //            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+    //            if (resultCode == RESULT_OK) {
+    //                filePath = result.getUri();
+    //                mUploadedProfilePic.setImageURI(filePath);
+    //            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+    //                Exception error = result.getError();
+    //            }
+    //        }
     }
 
 
