@@ -51,6 +51,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
     private String phereDescription, mCurrentPhotoPath;
     private String imagePath, phereDate;
     private Calendar myCalendar = Calendar.getInstance();
+    private long time = myCalendar.getTimeInMillis();
     //Firebase
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -120,8 +121,10 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
         mPhereDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(MoreInfoCreatePhereActivity.this, date, myCalendar
-                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                DatePickerDialog dpdialog = new DatePickerDialog (MoreInfoCreatePhereActivity.this, date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+                dpdialog.show();
+                dpdialog.getDatePicker().setMinDate(time);
             }
         });
 

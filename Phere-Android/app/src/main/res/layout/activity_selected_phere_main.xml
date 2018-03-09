@@ -26,7 +26,7 @@
                 android:id="@+id/img_profilePicture_selectedPhere"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitCenter" />
+                android:scaleType="centerCrop" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbarid"
