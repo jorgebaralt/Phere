@@ -18,6 +18,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.phereapp.phere.helper.BottomNavigationViewHelper;
 import com.phereapp.phere.home_navigation.CreateJoinPheresFragment;
 import com.phereapp.phere.home_navigation.HomeNewsFragment;
 import com.phereapp.phere.home_navigation.NotificationsFragment;
@@ -109,11 +110,15 @@ public class MainActivityUser extends AppCompatActivity {
         //get rid of notifications
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_main_user);
-        //move instantly to fragment
+
+        //user helper class to make bottom navigation static
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+
+        //move instantly to Home Fragment
         HomeNewsFragment homeNewsFragment = new HomeNewsFragment();
         FragmentTransaction fragmentTransactionHome = getSupportFragmentManager().beginTransaction();
         fragmentTransactionHome.replace(R.id.frame_fragment_home,homeNewsFragment,"Home news Fragment").commit();

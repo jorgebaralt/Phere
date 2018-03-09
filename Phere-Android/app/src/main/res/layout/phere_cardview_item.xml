@@ -51,14 +51,16 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="2dp"
             android:gravity="bottom"
-            android:text="Location" />
+            android:text="Location"
+            android:textSize="15dp" />
 
         <TextView
             android:id="@+id/txt_when_cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="When" />
+            android:text="When"
+            android:textSize="15dp" />
 
 
     </LinearLayout>
