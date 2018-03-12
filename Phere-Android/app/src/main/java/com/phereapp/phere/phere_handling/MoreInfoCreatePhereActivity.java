@@ -27,6 +27,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.isseiaoki.simplecropview.CropImageView;
 import com.phereapp.phere.MainActivityUser;
 import com.phereapp.phere.R;
 import com.phereapp.phere.pojo.Phere;
@@ -42,6 +43,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
     private Button mUploadFromGallery, mUploadFromCamera;
     private Button btnOk, btnCancel;
     private ImageView mUploadedProfilePic;
+    private CropImageView mCropView;
     private EditText mPhereDescription, mPhereDate;
     private final int REQUEST_CODE_EXTERNAL_IMAGE = 2000;
     private static final int CAMERA_REQUEST_CODE = 1;
@@ -85,6 +87,8 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
         btnOk = (Button) findViewById(R.id.btn_ok_moreInfoPhere);
         btnCancel = (Button) findViewById(R.id.btn_cancel_moreInfoPhere);
         mPhereDescription = (EditText) findViewById(R.id.editTxt_phere_descriptionInput);
+        mCropView = (CropImageView) findViewById(R.id.cropImageView);
+
 
         // On click of the upload picture Button
         mUploadFromGallery.setOnClickListener(new View.OnClickListener() {
@@ -93,8 +97,6 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
                 //Choose picture from Library (sends the user to their gallery)
                 Intent picFromGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(picFromGallery, REQUEST_CODE_EXTERNAL_IMAGE);
-                 //Gotta test more
-//                 CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).setMinCropResultSize(200,200).setMaxCropResultSize(800, 200).start(MoreInfoCreatePhereActivity.this);
             }
         });
 
@@ -171,17 +173,6 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             Log.d(TAG, "onActivityResult: ImageURI = " + filePath);
             mUploadedProfilePic.setImageURI(filePath);
         }
-
-        // Gotta test more
-    //        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-    //            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-    //            if (resultCode == RESULT_OK) {
-    //                filePath = result.getUri();
-    //                mUploadedProfilePic.setImageURI(filePath);
-    //            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-    //                Exception error = result.getError();
-    //            }
-    //        }
     }
 
 

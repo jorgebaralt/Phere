@@ -24,6 +24,7 @@
 
             <com.phereapp.phere.DynamicImageView.DynamicImageView
                 android:id="@+id/img_profilePicture_selectedPhere"
+                android:adjustViewBounds="true"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop" />

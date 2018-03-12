@@ -74,8 +74,6 @@
             android:name=".selected_phere.SelectedPhereMainActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.android.fileprovider"

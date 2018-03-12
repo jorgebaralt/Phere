@@ -45,7 +45,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         storageReference = storage.getReference();
         storageReference = storageReference.child("phereProfileImage/" + selectedPhere.getPhereName() + "_profileImage");
         //get profile image from DB and put into image
-        Glide.with(this).using(new FirebaseImageLoader()).load(storageReference).into(mPhereProfilePicture);
+        Glide.with(this).using(new FirebaseImageLoader()).load(storageReference).centerCrop().into(mPhereProfilePicture);
 
 
 
