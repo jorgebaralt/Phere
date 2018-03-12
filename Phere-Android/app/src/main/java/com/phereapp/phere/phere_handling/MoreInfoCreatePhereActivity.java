@@ -27,7 +27,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.isseiaoki.simplecropview.CropImageView;
 import com.phereapp.phere.MainActivityUser;
 import com.phereapp.phere.R;
 import com.phereapp.phere.pojo.Phere;
@@ -43,7 +42,6 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
     private Button mUploadFromGallery, mUploadFromCamera;
     private Button btnOk, btnCancel;
     private ImageView mUploadedProfilePic;
-    private CropImageView mCropView;
     private EditText mPhereDescription, mPhereDate;
     private final int REQUEST_CODE_EXTERNAL_IMAGE = 2000;
     private static final int CAMERA_REQUEST_CODE = 1;
@@ -87,7 +85,6 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
         btnOk = (Button) findViewById(R.id.btn_ok_moreInfoPhere);
         btnCancel = (Button) findViewById(R.id.btn_cancel_moreInfoPhere);
         mPhereDescription = (EditText) findViewById(R.id.editTxt_phere_descriptionInput);
-        mCropView = (CropImageView) findViewById(R.id.cropImageView);
 
 
         // On click of the upload picture Button
