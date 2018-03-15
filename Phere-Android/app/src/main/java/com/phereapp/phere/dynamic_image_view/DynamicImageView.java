@@ -1,4 +1,4 @@
-package com.phereapp.phere.DynamicImageView;
+package com.phereapp.phere.dynamic_image_view;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

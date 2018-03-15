@@ -22,7 +22,7 @@
             app:expandedTitleMarginEnd="64dp"
             >
 
-            <com.phereapp.phere.DynamicImageView.DynamicImageView
+            <com.phereapp.phere.dynamic_image_view.DynamicImageView
                 android:id="@+id/img_profilePicture_selectedPhere"
                 android:adjustViewBounds="true"
                 android:layout_width="fill_parent"
