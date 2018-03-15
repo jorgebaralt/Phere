@@ -3,7 +3,6 @@ package com.phereapp.phere.phere_handling;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -156,14 +155,15 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_EXTERNAL_IMAGE && resultCode == RESULT_OK && data.getData() != null) {
             // Getting the Data in URI format to resolve the bitmap
             filePath = data.getData();
+            mUploadedProfilePic.setImageURI(filePath);
 
-            try {
-                // Mapping the bitmap from its domain.
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                mUploadedProfilePic.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                // Mapping the bitmap from its domain.
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+//                mUploadedProfilePic.setImageBitmap(bitmap);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
 
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
