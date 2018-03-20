@@ -20,9 +20,8 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
     private TextView mPhereDescription;
     private DynamicImageView mPhereProfilePicture;
     CollapsingToolbarLayout mTitle;
-    //Firebase
-    private FirebaseStorage storage;
-    private StorageReference storageReference;
+    private String mPhereImageUrl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +37,11 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         mTitle = findViewById(R.id.toolbar_selectedPhere);
         mTitle.setTitle(selectedPhere.getDisplayPhereName());
         mPhereProfilePicture = (DynamicImageView) findViewById(R.id.img_profilePicture_selectedPhere);
+        mPhereImageUrl = selectedPhere.getImageURL();
 
 
-        //Firebase Storage
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
-        storageReference = storageReference.child("phereProfileImage/" + selectedPhere.getPhereName() + "_profileImage");
-        //get profile image from DB and put into image
-        Glide.with(this).using(new FirebaseImageLoader()).load(storageReference).centerCrop().into(mPhereProfilePicture);
+        //Sets the profile image from the Download URL
+        Glide.with(this).load(mPhereImageUrl).centerCrop().into(mPhereProfilePicture);
 
 
 

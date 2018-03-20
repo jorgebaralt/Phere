@@ -36,6 +36,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
+import java.util.UUID;
 
 public class MoreInfoCreatePhereActivity extends AppCompatActivity {
     private Button mUploadFromGallery, mUploadFromCamera;
@@ -45,10 +47,10 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
     private final int REQUEST_CODE_EXTERNAL_IMAGE = 2000;
     private static final int CAMERA_REQUEST_CODE = 1;
     private static String TAG = "MoreInfoCreatePhereActivity";
-    private Uri filePath;
+    private Uri filePath, imageURL;
     private Phere newPhere;
     private String phereDescription, mCurrentPhotoPath;
-    private String imagePath, phereDate;
+    private String imagePath, phereDate, uniqueId, phereImageUrl;
     private Calendar myCalendar = Calendar.getInstance();
     private long time = myCalendar.getTimeInMillis();
     //Firebase
@@ -131,7 +133,6 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 UploadImage();
-                addPhereReference();
                 Intent mainActivityIntent = new Intent(MoreInfoCreatePhereActivity.this, MainActivityUser.class);
                 startActivity(mainActivityIntent);
             }
@@ -179,8 +180,10 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
         // Getting the phere description from the user
         phereDescription = mPhereDescription.getText().toString();
         phereDate = mPhereDate.getText().toString();
+        phereImageUrl = imageURL.toString();
         newPhere.setPhereDescription(phereDescription);
         newPhere.setPhereDate(phereDate);
+        newPhere.setImageURL(phereImageUrl);
 
         // adds the extra information to the document in the database
         db.collection(pheresCollection).document(newPhere.getPhereName()).set(newPhere).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -200,6 +203,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
 
     //Saves image into FIREBASE Storage
     private void UploadImage() {
+        uniqueId = UUID.randomUUID().toString();
         Log.d(TAG, "UploadImage: Initializing UploadImage");
         if (filePath != null) {
             Log.d(TAG, "UploadImage: Image from gallery is being Uploaded");
@@ -210,7 +214,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             progressDialog.show();
 
             // Creates the reference in the fireface Storage to be able to access the uploaded image
-            imagePath = "phereProfileImage/" + newPhere.getPhereName() + "_profileImage";
+            imagePath = "phereProfileImage/" + uniqueId + "_" + newPhere.getPhereName();
             ref = storageReference.child(imagePath);
             ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -218,6 +222,8 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
                     // Shows a message to the user if the image got Uploaded
                     progressDialog.dismiss();
                     Toast.makeText(MoreInfoCreatePhereActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                    imageURL = taskSnapshot.getDownloadUrl();
+                    addPhereReference();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
