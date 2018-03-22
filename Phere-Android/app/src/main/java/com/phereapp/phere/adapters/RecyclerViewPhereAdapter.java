@@ -55,6 +55,7 @@ public class RecyclerViewPhereAdapter extends RecyclerView.Adapter<RecyclerViewP
         //TODO: deal with image (Still not working)
         holder.phereName.setText(mPheres.get(position).getDisplayPhereName());
         holder.phereLocation.setText(mPheres.get(position).getPhereLocation());
+        holder.phereDate.setText(mPheres.get(position).getPhereDate());
         //Set image of each
         String mPhereImageUrl = mPheres.get(position).getImageURL();
         //set background image
@@ -84,6 +85,7 @@ public class RecyclerViewPhereAdapter extends RecyclerView.Adapter<RecyclerViewP
         private ImageView phereImg;
         private TextView phereLocation;
         private CardView cardView;
+        private TextView phereDate;
 
 
         public MyViewHolder(View itemView){
@@ -93,6 +95,7 @@ public class RecyclerViewPhereAdapter extends RecyclerView.Adapter<RecyclerViewP
             phereLocation = itemView.findViewById(R.id.txt_location_cardview);
             cardView = itemView.findViewById(R.id.cardview);
             phereImg = itemView.findViewById(R.id.img_profileImg_cardview);
+            phereDate = itemView.findViewById(R.id.txt_date_cardview);
 
         }
     }

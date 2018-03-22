@@ -55,7 +55,7 @@
             android:textSize="15dp" />
 
         <TextView
-            android:id="@+id/txt_when_cardview"
+            android:id="@+id/txt_date_cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"

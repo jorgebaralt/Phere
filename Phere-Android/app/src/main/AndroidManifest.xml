@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -49,7 +50,6 @@
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -68,9 +68,7 @@
         <activity
             android:name=".login.PasswordRecoveryActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".phere_handling.MoreInfoCreatePhereActivity"
-            />
-
+        <activity android:name=".phere_handling.MoreInfoCreatePhereActivity" />
         <activity
             android:name=".selected_phere.SelectedPhereMainActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
@@ -82,9 +80,10 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths">
-            </meta-data>
+                android:resource="@xml/file_paths"></meta-data>
         </provider>
+
+        <activity android:name=".MapView"></activity>
     </application>
 
 </manifest>
