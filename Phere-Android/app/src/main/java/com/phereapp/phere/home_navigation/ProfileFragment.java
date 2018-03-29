@@ -25,10 +25,10 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.phereapp.phere.MapView;
 import com.phereapp.phere.R;
 import com.phereapp.phere.login.StartLoginActivity;
+import com.phereapp.phere.spotify_handler.SpotifyLoginActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,17 +36,14 @@ import com.phereapp.phere.login.StartLoginActivity;
 public class ProfileFragment extends Fragment {
 
     private Button logoutBtn;
+    private Button spotifyBtn;
     // Testing the map
     private Button mapTest;
     private String TAG = "ProfileFragment";
-
     //Facebook
     private CallbackManager mCallbackManager;
-    private AccessToken token;
-
     //Firebase
     private FirebaseAuth mAuth;
-    private FirebaseFirestore db;
 
 
     public ProfileFragment() {
@@ -60,7 +57,12 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        //initialize
         logoutBtn = rootView.findViewById(R.id.btn_logout_profile);
+        mAuth = FirebaseAuth.getInstance();
+        spotifyBtn = rootView.findViewById(R.id.btn_spotify_profile);
+
+        //Logout Button
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,8 +78,17 @@ public class ProfileFragment extends Fragment {
         });
 
 
+        //login to spotify
+        spotifyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent spotifyIntent = new Intent(getActivity(), SpotifyLoginActivity.class);
+                startActivity(spotifyIntent);
+            }
+        });
+
          //Initialize Facebook button
-        mAuth = FirebaseAuth.getInstance();
+
         mCallbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = rootView.findViewById(R.id.btn_facebook_link_accounts);
         loginButton.setFragment(this);
@@ -116,7 +127,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
 
     }
@@ -139,5 +149,4 @@ public class ProfileFragment extends Fragment {
                     }
                 });
     }
-
 }
