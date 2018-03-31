@@ -85,7 +85,6 @@
         </provider>
 
         <activity android:name=".MapView" />
-        <activity android:name=".spotify_handler.SpotifyLoginActivity" />
     </application>
 
 </manifest>

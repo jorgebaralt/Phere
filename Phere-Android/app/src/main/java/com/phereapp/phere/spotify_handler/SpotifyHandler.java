@@ -16,16 +16,16 @@ import com.spotify.sdk.android.player.PlayerEvent;
 import com.spotify.sdk.android.player.Spotify;
 import com.spotify.sdk.android.player.SpotifyPlayer;
 
-public class SpotifyLogin  implements SpotifyPlayer.NotificationCallback,ConnectionStateCallback,ActivityResultHandler {
+public class SpotifyHandler implements SpotifyPlayer.NotificationCallback,ConnectionStateCallback,ActivityResultHandler {
     private static final String CLIENT_ID = "c8258d2a53aa40738210728a55a3d001";
     private static final String REDIRECT_URI = "http://phere.com/callback/";
     private Player mPlayer;
     private static final int REQUEST_CODE = 1337;
-    private String TAG = "SpotifyLogin";
+    private String TAG = "SpotifyHandler";
     private Activity activity;
     private String scopes[] = {"user-read-email","user-read-private","streaming","playlist-read-private","user-library-read","playlist-modify-private","user-read-currently-playing","user-read-recently-played","user-modify-playback-state","user-read-playback-state","user-library-modify","playlist-read-collaborative"};
 
-    public SpotifyLogin(Activity activity){
+    public SpotifyHandler(Activity activity){
         this.activity = activity;
     }
     public void performLogin(){
@@ -41,16 +41,27 @@ public class SpotifyLogin  implements SpotifyPlayer.NotificationCallback,Connect
 
         AuthenticationClient.openLoginActivity(activity,REQUEST_CODE,request);
     }
+    public void performLogout(){
+        AuthenticationRequest.Builder builder =
+                new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
+
+        builder.setScopes(scopes);
+        builder.setShowDialog(true);
+        AuthenticationRequest request = builder.build();
+
+        AuthenticationClient.openLoginInBrowser(activity, request);
+    }
 
     @Override
     public void onLoggedIn() {
         Log.d(TAG, "onLoggedIn: User has logged in ");
+        //TODO : display who logged in ( email ) on the logs.
         mPlayer.playUri(null,"spotify:track:2TpxZ7JUBn3uw46aR7qd6V", 0, 0);
     }
 
     @Override
     public void onLoggedOut() {
-        Log.d(TAG, "onLoggedOut: uyer logged out");
+        Log.d(TAG, "onLoggedOut: user logged out");
     }
 
     @Override
@@ -84,6 +95,7 @@ public class SpotifyLogin  implements SpotifyPlayer.NotificationCallback,Connect
     }
 
 
+
     @Override
     public void activityResultHandler(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_CODE){
@@ -95,8 +107,8 @@ public class SpotifyLogin  implements SpotifyPlayer.NotificationCallback,Connect
                     public void onInitialized(SpotifyPlayer spotifyPlayer) {
                         Log.d(TAG, "onInitialized: Initializing PLayer...");
                         mPlayer = spotifyPlayer;
-                        mPlayer.addConnectionStateCallback(SpotifyLogin.this);
-                        mPlayer.addNotificationCallback(SpotifyLogin.this);
+                        mPlayer.addConnectionStateCallback(SpotifyHandler.this);
+                        mPlayer.addNotificationCallback(SpotifyHandler.this);
                     }
 
                     @Override
@@ -106,7 +118,5 @@ public class SpotifyLogin  implements SpotifyPlayer.NotificationCallback,Connect
                 });
             }
         }
-
-
     }
 }

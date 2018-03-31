@@ -28,7 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.phereapp.phere.MapView;
 import com.phereapp.phere.R;
 import com.phereapp.phere.login.StartLoginActivity;
-import com.phereapp.phere.spotify_handler.SpotifyLogin;
+import com.phereapp.phere.spotify_handler.SpotifyHandler;
 import com.spotify.sdk.android.player.Player;
 
 /**
@@ -50,7 +50,7 @@ public class ProfileFragment extends Fragment {
     private static final String REDIRECT_URI = "http://phere.com/callback/";
     private Player mPlayer;
     private static final int REQUEST_CODE = 1337;
-    SpotifyLogin spotifyLogin;
+    SpotifyHandler spotifyHandler;
 
 
     public ProfileFragment() {
@@ -67,7 +67,7 @@ public class ProfileFragment extends Fragment {
         logoutBtn = rootView.findViewById(R.id.btn_logout_profile);
         mAuth = FirebaseAuth.getInstance();
         spotifyBtn = rootView.findViewById(R.id.btn_spotify_profile);
-        spotifyLogin = new SpotifyLogin(getActivity());
+        spotifyHandler = new SpotifyHandler(getActivity());
 
         //Logout Button
         logoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -84,13 +84,15 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        //TODO: make an api call to check if user is still logged it: https://api.spotify.com/v1/me
+        //TODO: to decide which button to show (login or logout)
 
         //login to spotify
         spotifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Start Spotify Login, result delivered to onActivityResult =>
-                spotifyLogin.performLogin();
+                spotifyHandler.performLogin();
 
             }
         });
@@ -154,7 +156,7 @@ public class ProfileFragment extends Fragment {
         //FACEBOOK
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
         //SPOTIFY
-        spotifyLogin.activityResultHandler(requestCode,resultCode,data);
+        spotifyHandler.activityResultHandler(requestCode,resultCode,data);
 
 
     }
