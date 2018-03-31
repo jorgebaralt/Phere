@@ -28,7 +28,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.phereapp.phere.MapView;
 import com.phereapp.phere.R;
 import com.phereapp.phere.login.StartLoginActivity;
-import com.phereapp.phere.spotify_handler.SpotifyLoginActivity;
+import com.phereapp.phere.spotify_handler.SpotifyLogin;
+import com.spotify.sdk.android.player.Player;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +45,12 @@ public class ProfileFragment extends Fragment {
     private CallbackManager mCallbackManager;
     //Firebase
     private FirebaseAuth mAuth;
+    //Spotify
+    private static final String CLIENT_ID = "c8258d2a53aa40738210728a55a3d001";
+    private static final String REDIRECT_URI = "http://phere.com/callback/";
+    private Player mPlayer;
+    private static final int REQUEST_CODE = 1337;
+    SpotifyLogin spotifyLogin;
 
 
     public ProfileFragment() {
@@ -60,6 +67,7 @@ public class ProfileFragment extends Fragment {
         logoutBtn = rootView.findViewById(R.id.btn_logout_profile);
         mAuth = FirebaseAuth.getInstance();
         spotifyBtn = rootView.findViewById(R.id.btn_spotify_profile);
+        spotifyLogin = new SpotifyLogin(getActivity());
 
         //Logout Button
         logoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -81,13 +89,13 @@ public class ProfileFragment extends Fragment {
         spotifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent spotifyIntent = new Intent(getActivity(), SpotifyLoginActivity.class);
-                startActivity(spotifyIntent);
+                //Start Spotify Login, result delivered to onActivityResult =>
+                spotifyLogin.performLogin();
+
             }
         });
 
          //Initialize Facebook button
-
         mCallbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = rootView.findViewById(R.id.btn_facebook_link_accounts);
         loginButton.setFragment(this);
@@ -119,20 +127,11 @@ public class ProfileFragment extends Fragment {
                 startActivity(mapTestIntent);
             }
         });
-
         return rootView;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        mCallbackManager.onActivityResult(requestCode, resultCode, data);
-
     }
 
     private void linkAccountWithCredentials(AccessToken token){
         Log.d(TAG, "handleFacebookAccessToken:" + token);
-
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.getCurrentUser().linkWithCredential(credential)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
@@ -148,4 +147,18 @@ public class ProfileFragment extends Fragment {
                     }
                 });
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //FACEBOOK
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+        //SPOTIFY
+        spotifyLogin.activityResultHandler(requestCode,resultCode,data);
+
+
+    }
+
+
+
 }
