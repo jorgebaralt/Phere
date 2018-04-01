@@ -23,7 +23,7 @@ public class SpotifyHandler implements SpotifyPlayer.NotificationCallback,Connec
     private static final int REQUEST_CODE = 1337;
     private String TAG = "SpotifyHandler";
     private Activity activity;
-    private String scopes[] = {"user-read-email","user-read-private","streaming","playlist-read-private","user-library-read","playlist-modify-private","user-read-currently-playing","user-read-recently-played","user-modify-playback-state","user-read-playback-state","user-library-modify","playlist-read-collaborative"};
+    private String scopes[] = new String[]{"user-read-email","user-read-private","streaming","playlist-read-private","user-library-read","playlist-modify-private","user-read-currently-playing","user-read-recently-played","user-modify-playback-state","user-read-playback-state","user-library-modify","playlist-read-collaborative"};
 
     public SpotifyHandler(Activity activity){
         this.activity = activity;
@@ -42,21 +42,14 @@ public class SpotifyHandler implements SpotifyPlayer.NotificationCallback,Connec
         AuthenticationClient.openLoginActivity(activity,REQUEST_CODE,request);
     }
     public void performLogout(){
-        AuthenticationRequest.Builder builder =
-                new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
-
-        builder.setScopes(scopes);
-        builder.setShowDialog(true);
-        AuthenticationRequest request = builder.build();
-
-        AuthenticationClient.openLoginInBrowser(activity, request);
+        AuthenticationClient.stopLoginActivity(activity,123);
     }
 
     @Override
     public void onLoggedIn() {
         Log.d(TAG, "onLoggedIn: User has logged in ");
         //TODO : display who logged in ( email ) on the logs.
-        mPlayer.playUri(null,"spotify:track:2TpxZ7JUBn3uw46aR7qd6V", 0, 0);
+        //mPlayer.playUri(null,"spotify:track:2TpxZ7JUBn3uw46aR7qd6V", 0, 0);
     }
 
     @Override
@@ -93,7 +86,6 @@ public class SpotifyHandler implements SpotifyPlayer.NotificationCallback,Connec
         Log.d(TAG, "onPlaybackError: ");
 
     }
-
 
 
     @Override

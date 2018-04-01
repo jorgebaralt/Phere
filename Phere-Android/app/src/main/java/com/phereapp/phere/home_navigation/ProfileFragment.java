@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -38,6 +39,7 @@ public class ProfileFragment extends Fragment {
 
     private Button logoutBtn;
     private Button spotifyBtn;
+    private TextView spotifyLogout;
     // Testing the map
     private Button mapTest;
     private String TAG = "ProfileFragment";
@@ -68,6 +70,7 @@ public class ProfileFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         spotifyBtn = rootView.findViewById(R.id.btn_spotify_profile);
         spotifyHandler = new SpotifyHandler(getActivity());
+        spotifyLogout = rootView.findViewById(R.id.logout_spotify_profile);
 
         //Logout Button
         logoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -91,9 +94,14 @@ public class ProfileFragment extends Fragment {
         spotifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Start Spotify Login, result delivered to onActivityResult =>
                 spotifyHandler.performLogin();
 
+            }
+        });
+        spotifyLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spotifyHandler.performLogout();
             }
         });
 
@@ -101,6 +109,7 @@ public class ProfileFragment extends Fragment {
         mCallbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = rootView.findViewById(R.id.btn_facebook_link_accounts);
         loginButton.setFragment(this);
+        loginButton.setText("Link With Facebook");
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -129,6 +138,7 @@ public class ProfileFragment extends Fragment {
                 startActivity(mapTestIntent);
             }
         });
+
         return rootView;
     }
 
