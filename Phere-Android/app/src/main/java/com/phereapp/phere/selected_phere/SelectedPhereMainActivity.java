@@ -57,7 +57,6 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         mPhereDate.setText(selectedPhere.getPhereDate());
         //Sets the location of the phere
         mPhereLocation.setText(selectedPhere.getPhereLocation());
-
         //Makes the description text appear
         mToggleDescription.setOnClickListener(new View.OnClickListener() {
             @Override
