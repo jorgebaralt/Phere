@@ -57,8 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:drawableBottom="@android:drawable/arrow_down_float"
-                android:textSize="14dp" />
+                android:drawableBottom="@drawable/arrow_down_float" />
 
             <TextView
                 android:id="@+id/txt_phere_description_selectedPhere"

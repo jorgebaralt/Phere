@@ -62,24 +62,31 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         mToggleDescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Getting the current visibility of the TextView
-                int visibility = mPhereDescription.getVisibility();
-                //Getting the LayoutParameters to change the Height
-                ViewGroup.LayoutParams params = mPhereDescription.getLayoutParams();
-                if (visibility == View.INVISIBLE) {
-                    //Setting the Height of the TextView to Wrap_Content and showing the text
-                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                    mPhereDescription.setLayoutParams(params);
-                    mPhereDescription.setVisibility(View.VISIBLE);
-                } else {
-                    //Setting the Height of the TextView to 0dp and hiding the text
-                    params.height = 0;
-                    mPhereDescription.setLayoutParams(params);
-                    mPhereDescription.setVisibility(View.INVISIBLE);
-                }
-
+                showDescription();
             }
         });
 
+    }
+
+    public void showDescription() {
+        //Getting the current visibility of the TextView
+        int visibility = mPhereDescription.getVisibility();
+        //Getting the LayoutParameters to change the Height
+        ViewGroup.LayoutParams params = mPhereDescription.getLayoutParams();
+        if (visibility == View.INVISIBLE) {
+            //Changes the arrow drawable to be UP
+            mToggleDescription.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.arrow_up_float, 0, 0);
+            //Setting the Height of the TextView to Wrap_Content and showing the text
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            mPhereDescription.setLayoutParams(params);
+            mPhereDescription.setVisibility(View.VISIBLE);
+        } else {
+            //Changes the arrow drawable to be DOWN
+            mToggleDescription.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.arrow_down_float);
+            //Setting the Height of the TextView to 0dp and hiding the text
+            params.height = 0;
+            mPhereDescription.setLayoutParams(params);
+            mPhereDescription.setVisibility(View.INVISIBLE);
+        }
     }
 }
