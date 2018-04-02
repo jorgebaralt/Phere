@@ -33,9 +33,10 @@ public class RegisterPersonalActivity extends AppCompatActivity {
     private EditText mEmail;
     private EditText mUsername;
     private EditText mPassword;
+    private EditText mFirstName, mLastName;
     private Button mCreateAccountBtn;
     private FirebaseAuth mAuth;
-    private String email,password,username;
+    private String email,password,username, firstName, lastName, fullName;
     private String usersCollection = "users";
     private FirebaseFirestore db;
     private FirebaseUser userCreated;
@@ -47,10 +48,12 @@ public class RegisterPersonalActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_register_personal);
 
-        mEmail = (EditText) findViewById(R.id.editTxt_email_personal);
-        mUsername = (EditText) findViewById(R.id.editTxt_username_personal);
-        mPassword = (EditText) findViewById(R.id.editTxt_password_personal);
-        mCreateAccountBtn = (Button) findViewById(R.id.btn_createAccount_personal);
+        mEmail = findViewById(R.id.editTxt_email_personal);
+        mUsername = findViewById(R.id.editTxt_username_personal);
+        mPassword = findViewById(R.id.editTxt_password_personal);
+        mCreateAccountBtn = findViewById(R.id.btn_createAccount_personal);
+        mFirstName = findViewById(R.id.editTxt_firstName_personal);
+        mLastName = findViewById(R.id.editTxt_lastName_personal);
 
         //initialize firebase instances
         mAuth = FirebaseAuth.getInstance();
@@ -66,10 +69,17 @@ public class RegisterPersonalActivity extends AppCompatActivity {
                 email = mEmail.getText().toString();
                 password = mPassword.getText().toString();
                 username = mUsername.getText().toString();
+                firstName = mFirstName.getText().toString();
+                lastName = mLastName.getText().toString();
+
+                //first name and last name together
+                fullName = firstName + " " + lastName;
 
                 Log.d(TAG, "onClick:    " +
                         " email: " + mEmail +
-                        " username: "+ mUsername
+                        " username: " + mUsername +
+                        " First Name: " + mFirstName +
+                        " Last Name: " + mLastName
                     );
 
 
@@ -101,7 +111,7 @@ public class RegisterPersonalActivity extends AppCompatActivity {
 
     private void addUserReference(){
         //create new user object to sent to db
-        User newUser = new User(email,username,accountType);
+        User newUser = new User(email,username,accountType, fullName);
         // create a document entry into the database, with the name of the email of the user.
         db.collection(usersCollection).document(email).set(newUser).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

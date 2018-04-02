@@ -3,6 +3,7 @@ package com.phereapp.phere.phere_handling;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -19,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.phereapp.phere.MainActivityUser;
 import com.phereapp.phere.R;
 import com.phereapp.phere.pojo.Phere;
+import com.phereapp.phere.pojo.User;
 
 import java.lang.reflect.Array;
 
@@ -66,7 +68,6 @@ public class CreateNewPhereActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         host = currentUser.getEmail();
-
 
         // On click of the OK button
         mCreatePhereButton.setOnClickListener(new OnClickListener() {

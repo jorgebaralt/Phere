@@ -177,7 +177,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
     //creates the new Phere and adds it to the database.
     private void addPhereReference() {
         Log.d(TAG, "addUserReference: Creating Phere" + newPhere.getPhereName() + " for = " + newPhere.getHost());
-        // Getting the phere description from the user
+        // Getting the phere info from the user
         phereDescription = mPhereDescription.getText().toString();
         phereDate = mPhereDate.getText().toString();
         phereImageUrl = imageURL.toString();
