@@ -20,6 +20,8 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -138,6 +140,9 @@ public class ProfileFragment extends Fragment {
                 startActivity(mapTestIntent);
             }
         });
+
+        //Handle FAB
+
 
         return rootView;
     }

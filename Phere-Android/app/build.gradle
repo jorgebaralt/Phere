@@ -50,7 +50,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:12.0.1'
     implementation 'com.google.firebase:firebase-messaging:12.0.1'
     implementation 'com.google.firebase:firebase-firestore:12.0.1'
-    implementation 'com.facebook.android:facebook-login:4.31.0'
+    implementation 'com.facebook.android:facebook-login:4.31.0' 
     implementation 'com.firebaseui:firebase-ui-storage:0.6.0'
     //Spotify
     // This library handles authentication and authorization
@@ -58,6 +58,9 @@ dependencies {
 
     // This library handles music playback
     implementation 'com.spotify.sdk:spotify-player-24-noconnect-2.20b@aar'
+
+    //fab
+    implementation 'com.getbase:floatingactionbutton:1.10.1'
 
 
 }
