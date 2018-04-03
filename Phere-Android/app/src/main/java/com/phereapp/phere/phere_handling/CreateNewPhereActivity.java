@@ -2,6 +2,7 @@ package com.phereapp.phere.phere_handling;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,9 +15,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.phereapp.phere.MainActivityUser;
 import com.phereapp.phere.R;
 import com.phereapp.phere.pojo.Phere;
@@ -32,7 +37,7 @@ public class CreateNewPhereActivity extends AppCompatActivity {
     private RadioButton mPrivacyChosen;
     private String choosenPrivacy;
     private Button mCreatePhereButton;
-    private String phereName, phereLocation;
+    private String phereName, phereLocation, userFullName;
     private String pheresCollection = "pheres";
     private static String TAG = "CreateNewPhereActivity: ";
     private Button mCancelButton;
@@ -67,7 +72,7 @@ public class CreateNewPhereActivity extends AppCompatActivity {
         //firebase
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        host = currentUser.getEmail();
+        host = currentUser.getDisplayName();
 
         // On click of the OK button
         mCreatePhereButton.setOnClickListener(new OnClickListener() {

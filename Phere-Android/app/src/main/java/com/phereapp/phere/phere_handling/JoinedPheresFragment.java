@@ -66,7 +66,7 @@ public class JoinedPheresFragment extends Fragment {
                        for(int i = 0; i<queryPhere.size(); i++){
                            Phere currentPhereQuery = queryPhere.get(i);
 
-                           if(currentPhereQuery.getMembers().contains(currentUser.getEmail())){
+                           if(currentPhereQuery.getMembers().contains(currentUser.getDisplayName())){
                                Log.d(TAG, "onComplete: Joined Phere => " + currentPhereQuery.getPhereName());
                                joinedPheres.add(queryPhere.get(i));
                            }

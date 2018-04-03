@@ -58,7 +58,7 @@ public class HostingPheresFragment extends Fragment {
     public void getHostingPheres() {
 
         db.collection(phereCollection)
-                .whereEqualTo("host",currentUser.getEmail())
+                .whereEqualTo("host",currentUser.getDisplayName())
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
