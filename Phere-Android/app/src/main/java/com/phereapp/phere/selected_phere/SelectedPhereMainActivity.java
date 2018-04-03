@@ -1,14 +1,18 @@
 package com.phereapp.phere.selected_phere;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.phereapp.phere.R;
@@ -23,6 +27,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
     private ImageButton mToggleDescription;
     CollapsingToolbarLayout mTitle;
     private String mPhereImageUrl;
+    private android.support.v7.widget.Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         //Initialize the Views
         mPhereDescription = findViewById(R.id.txt_phere_description_selectedPhere);
         mTitle = findViewById(R.id.toolbar_selectedPhere);
+        mToolbar = findViewById(R.id.toolbarid);
         mPhereProfilePicture = findViewById(R.id.img_profilePicture_selectedPhere);
         mPhereDate = findViewById(R.id.txt_btn_date_selectedPhere);
         mPhereLocation = findViewById(R.id.txt_btn_location_selectedPhere);
@@ -59,7 +65,27 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
                 showDescription();
             }
         });
+        //Menu for the toolbar
+        setSupportActionBar(mToolbar);
 
+        mPherePlaylist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent playlistIntent = new Intent(SelectedPhereMainActivity.this, SelectedPherePlaylistActivity.class);
+                startActivity(playlistIntent);
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.selected_phere, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 
     //Show description of specific phere.

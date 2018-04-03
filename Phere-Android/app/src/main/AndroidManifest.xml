@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-
     package="com.phereapp.phere">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -88,6 +87,7 @@
         </provider>
 
         <activity android:name=".MapView" />
+        <activity android:name=".selected_phere.SelectedPherePlaylistActivity"></activity>
     </application>
 
 </manifest>
