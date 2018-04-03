@@ -8,34 +8,32 @@
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
-        android:layout_height="200dp"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_selectedPhere"
-            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            app:layout_scrollFlags="exitUntilCollapsed|scroll"
+            android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
-            app:title="Phere Name"
-            app:expandedTitleMarginStart="8dp"
             app:expandedTitleMarginEnd="64dp"
-            >
+            app:expandedTitleMarginStart="8dp"
+            app:layout_scrollFlags="exitUntilCollapsed|scroll"
+            app:title="Phere Name">
 
             <com.phereapp.phere.dynamic_image_view.DynamicImageView
                 android:id="@+id/img_profilePicture_selectedPhere"
-                android:adjustViewBounds="true"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
+                android:adjustViewBounds="true"
                 android:scaleType="centerCrop" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbarid"
-                app:popupTheme="@style/ThemeOverlay.AppCompat"
-                app:layout_collapseMode="pin"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                />
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -55,7 +53,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="8dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="3">
@@ -63,42 +60,51 @@
                 <TextView
                     android:id="@+id/txt_btn_members_selectedPhere"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
+                    android:layout_height="32dp"
                     android:layout_gravity="center"
-                    android:layout_margin="16dp"
                     android:layout_weight="1"
                     android:background="@color/lightBlue"
-                    android:drawableRight="@drawable/ic_perm_identity_black_24dp"
                     android:gravity="center"
                     android:text="Members"
                     android:textAllCaps="false"
+                    android:textColor="@color/black_semi_transparent"
                     android:textStyle="bold" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="fill_parent"
+                    android:background="@color/black_semi_transparent" />
 
                 <TextView
                     android:id="@+id/txt_btn_location_selectedPhere"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
+                    android:layout_height="32dp"
                     android:layout_gravity="center"
-                    android:layout_margin="16dp"
                     android:layout_weight="1"
                     android:background="@color/lightBlue"
-                    android:drawableRight="@android:drawable/ic_menu_mylocation"
                     android:gravity="center"
                     android:text="Location"
                     android:textAllCaps="false"
+                    android:textColor="@color/black_semi_transparent"
                     android:textStyle="bold" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="fill_parent"
+                    android:background="@color/black_semi_transparent" />
 
                 <TextView
                     android:id="@+id/txt_btn_date_selectedPhere"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
+                    android:layout_height="32dp"
                     android:layout_gravity="center"
-                    android:layout_margin="16dp"
                     android:layout_weight="1"
                     android:background="@color/lightBlue"
                     android:gravity="center"
                     android:text="Date"
-                    android:textAllCaps="true"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black_semi_transparent"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -108,6 +114,7 @@
                 android:layout_width="36dp"
                 android:layout_height="31dp"
                 android:layout_gravity="center"
+                android:layout_margin="8dp"
                 android:background="@drawable/round_button"
                 app:srcCompat="@drawable/arrow_down_float" />
 
@@ -120,28 +127,31 @@
                 android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever sinc"
                 android:visibility="invisible" />
 
-            <LinearLayout
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#ffffff" />
+
+            <TextView
+                android:id="@+id/txt_btn_playlist_selectedPhere"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="8dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/spotify_48dp"
+                android:gravity="left|center"
+                android:text="Playlist"
+                android:textAllCaps="false"
+                android:textSize="24sp" />
 
-                <TextView
-                    android:id="@+id/txt_btn_playlist_selectedPhere"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="16dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Playlist"
-                    android:textAllCaps="true"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#ffffff" />
 
 
         </LinearLayout>
