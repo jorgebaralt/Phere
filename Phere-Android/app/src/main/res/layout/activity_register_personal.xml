@@ -6,18 +6,37 @@
     android:layout_height="match_parent"
     tools:context="com.phereapp.phere.login.RegisterPersonalActivity">
 
-    <TextView
-        android:id="@+id/txt_email_personal"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/editTxt_firstName_personal"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Enter Your Email"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Jhon"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/editTxt_lastName_personal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTxt_firstName_personal" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_firstName_personal" />
+
+    <EditText
+        android:id="@+id/editTxt_lastName_personal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Doe"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editTxt_firstName_personal"
+        app:layout_constraintTop_toBottomOf="@+id/txt_lastName_personal" />
 
     <EditText
         android:id="@+id/editTxt_email_personal"
@@ -33,45 +52,6 @@
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_email_personal" />
-
-    <TextView
-        android:id="@+id/txt_password_personal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Enter a Password"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTxt_username_personal" />
-
-    <EditText
-        android:id="@+id/editTxt_password_personal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_password_personal" />
-
-    <TextView
-        android:id="@+id/txt_username_personal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Username"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTxt_email_personal" />
 
     <EditText
         android:id="@+id/editTxt_username_personal"
@@ -89,20 +69,55 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_username_personal" />
 
-    <Button
-        android:id="@+id/btn_createAccount_personal"
+    <EditText
+        android:id="@+id/editTxt_password_personal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:text="Create Account"
-        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTxt_password_personal" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_password_personal" />
+
+    <TextView
+        android:id="@+id/txt_email_personal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Enter Your Email"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTxt_firstName_personal" />
+
+    <TextView
+        android:id="@+id/txt_firstName_personal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="First Name"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_register_personal" />
+
+    <TextView
+        android:id="@+id/txt_lastName_personal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Last Name"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/editTxt_lastName_personal"
+        app:layout_constraintTop_toBottomOf="@+id/txt_register_personal" />
 
     <TextView
         android:id="@+id/txt_register_personal"
@@ -119,58 +134,43 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txt_firstName_personal"
+        android:id="@+id/txt_username_personal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="First Name"
+        android:text="Username"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_register_personal" />
-
-    <EditText
-        android:id="@+id/editTxt_firstName_personal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="Jhon"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/editTxt_lastName_personal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_firstName_personal" />
+        app:layout_constraintTop_toBottomOf="@+id/editTxt_email_personal" />
 
     <TextView
-        android:id="@+id/txt_lastName_personal"
+        android:id="@+id/txt_password_personal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Last Name"
+        android:text="Enter a Password"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/editTxt_lastName_personal"
-        app:layout_constraintTop_toBottomOf="@+id/txt_register_personal" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTxt_username_personal" />
 
-    <EditText
-        android:id="@+id/editTxt_lastName_personal"
+    <Button
+        android:id="@+id/btn_createAccount_personal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="Doe"
-        android:inputType="textPersonName"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Create Account"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editTxt_firstName_personal"
-        app:layout_constraintTop_toBottomOf="@+id/txt_lastName_personal" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTxt_password_personal" />
 </android.support.constraint.ConstraintLayout>
