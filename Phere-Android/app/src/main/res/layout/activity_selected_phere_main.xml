@@ -51,20 +51,72 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btn_toggleDescription_selectedPhere"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="74dp"
-                android:layout_height="26dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:drawableBottom="@drawable/arrow_down_float" />
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/txt_btn_members_selectedPhere"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:background="@color/lightBlue"
+                    android:drawableRight="@drawable/ic_perm_identity_black_24dp"
+                    android:gravity="center"
+                    android:text="Members"
+                    android:textAllCaps="false"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_btn_location_selectedPhere"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:background="@color/lightBlue"
+                    android:drawableRight="@android:drawable/ic_menu_mylocation"
+                    android:gravity="center"
+                    android:text="Location"
+                    android:textAllCaps="false"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_btn_date_selectedPhere"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:background="@color/lightBlue"
+                    android:gravity="center"
+                    android:text="Date"
+                    android:textAllCaps="true"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btn_toggleDescription_selectedPhere"
+                android:layout_width="36dp"
+                android:layout_height="31dp"
+                android:layout_gravity="center"
+                android:background="@drawable/round_button"
+                app:srcCompat="@drawable/arrow_down_float" />
 
             <TextView
                 android:id="@+id/txt_phere_description_selectedPhere"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
                 android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever sinc"
                 android:visibility="invisible" />
 
@@ -76,53 +128,6 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
-
-                <TextView
-                    android:id="@+id/txt_btn_members_selectedPhere"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="16dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Members"
-                    android:textAllCaps="true"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/txt_btn_location_selectedPhere"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="16dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Location"
-                    android:textAllCaps="true"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="8dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <TextView
-                    android:id="@+id/txt_btn_date_selectedPhere"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="16dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Date"
-                    android:textAllCaps="true"
-                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txt_btn_playlist_selectedPhere"

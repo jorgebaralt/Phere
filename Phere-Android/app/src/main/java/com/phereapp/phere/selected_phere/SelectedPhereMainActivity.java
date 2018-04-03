@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -19,7 +20,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
     private static String TAG = "SelectedPhereMainActivity";
     private TextView mPhereDescription, mPhereDate, mPhereLocation, mPhereMembers, mPherePlaylist;
     private DynamicImageView mPhereProfilePicture;
-    private Button mToggleDescription;
+    private ImageButton mToggleDescription;
     CollapsingToolbarLayout mTitle;
     private String mPhereImageUrl;
 
@@ -51,8 +52,6 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         Glide.with(this).load(mPhereImageUrl).centerCrop().into(mPhereProfilePicture);
         //Sets the date of the Phere
         mPhereDate.setText(selectedPhere.getPhereDate());
-        //Sets the location of the phere
-        mPhereLocation.setText(selectedPhere.getPhereLocation());
         //Makes the description text appear
         mToggleDescription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,14 +70,14 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         ViewGroup.LayoutParams params = mPhereDescription.getLayoutParams();
         if (visibility == View.INVISIBLE) {
             //Changes the arrow drawable to be UP
-            mToggleDescription.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.arrow_up_float, 0, 0);
+            mToggleDescription.setImageResource(R.drawable.arrow_up_float);
             //Setting the Height of the TextView to Wrap_Content and showing the text
             params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
             mPhereDescription.setLayoutParams(params);
             mPhereDescription.setVisibility(View.VISIBLE);
         } else {
             //Changes the arrow drawable to be DOWN
-            mToggleDescription.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.arrow_down_float);
+            mToggleDescription.setImageResource(R.drawable.arrow_down_float);
             //Setting the Height of the TextView to 0dp and hiding the text
             params.height = 0;
             mPhereDescription.setLayoutParams(params);
