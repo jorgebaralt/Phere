@@ -122,9 +122,11 @@
                 android:id="@+id/txt_phere_description_selectedPhere"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
                 android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever sinc"
+                android:textSize="18sp"
                 android:visibility="invisible" />
 
             <View
@@ -142,7 +144,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="4dp"
                 android:layout_weight="1"
-                android:drawableRight="@drawable/spotify_48dp"
+                android:drawableRight="@drawable/spotify_24dp"
                 android:gravity="left|center"
                 android:text="Playlist"
                 android:textAllCaps="false"
@@ -151,6 +153,47 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:background="#ffffff" />
+
+            <TextView
+                android:id="@+id/txt_btn_dressCode_selectedPhere"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/shirt_semi_formal"
+                android:text="Dress Code"
+                android:textSize="24sp" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1"
+                android:background="#ffffff" />
+
+            <TextView
+                android:id="@+id/txt_btn_rules_selectedPhere"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="4dp"
+                android:text="Rules"
+                android:textSize="24sp" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1"
                 android:background="#ffffff" />
 
 
