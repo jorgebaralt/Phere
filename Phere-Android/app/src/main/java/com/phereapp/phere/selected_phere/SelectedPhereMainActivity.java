@@ -7,15 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.phereapp.phere.dynamic_image_view.DynamicImageView;
 import com.phereapp.phere.R;
+import com.phereapp.phere.dynamic_image_view.DynamicImageView;
 import com.phereapp.phere.pojo.Phere;
 
 public class SelectedPhereMainActivity extends AppCompatActivity {
@@ -67,6 +63,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
 
     }
 
+    //Show description of specific phere.
     public void showDescription() {
         //Getting the current visibility of the TextView
         int visibility = mPhereDescription.getVisibility();

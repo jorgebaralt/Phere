@@ -133,8 +133,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 UploadImage();
-                Intent mainActivityIntent = new Intent(MoreInfoCreatePhereActivity.this, MainActivityUser.class);
-                startActivity(mainActivityIntent);
+
             }
         });
 
@@ -158,13 +157,6 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             filePath = data.getData();
             mUploadedProfilePic.setImageURI(filePath);
 
-//            try {
-//                // Mapping the bitmap from its domain.
-//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-//                mUploadedProfilePic.setImageBitmap(bitmap);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
         }
 
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
@@ -173,33 +165,6 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
         }
     }
 
-
-    //creates the new Phere and adds it to the database.
-    private void addPhereReference() {
-        Log.d(TAG, "addUserReference: Creating Phere" + newPhere.getPhereName() + " for = " + newPhere.getHost());
-        // Getting the phere info from the user
-        phereDescription = mPhereDescription.getText().toString();
-        phereDate = mPhereDate.getText().toString();
-        phereImageUrl = imageURL.toString();
-        newPhere.setPhereDescription(phereDescription);
-        newPhere.setPhereDate(phereDate);
-        newPhere.setImageURL(phereImageUrl);
-
-        // adds the extra information to the document in the database
-        db.collection(pheresCollection).document(newPhere.getPhereName()).set(newPhere).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d(TAG, "onSuccess: Phere Created");
-                Toast.makeText(MoreInfoCreatePhereActivity.this, "New Phere Created", Toast.LENGTH_SHORT).show();
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.e(TAG, "onFailure: Error creating Phere...");
-            }
-        });
-    }
 
     //Saves image into FIREBASE Storage
     private void UploadImage() {
@@ -221,7 +186,6 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // Shows a message to the user if the image got Uploaded
                     progressDialog.dismiss();
-                    Toast.makeText(MoreInfoCreatePhereActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
                     imageURL = taskSnapshot.getDownloadUrl();
                     addPhereReference();
                 }
@@ -241,6 +205,37 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    //creates the new Phere and adds it to the database.
+    private void addPhereReference() {
+        Log.d(TAG, "addUserReference: Creating Phere" + newPhere.getPhereName() + " for = " + newPhere.getHost());
+        // Getting the phere info from the user
+        phereDescription = mPhereDescription.getText().toString();
+        phereDate = mPhereDate.getText().toString();
+        phereImageUrl = imageURL.toString();
+        newPhere.setPhereDescription(phereDescription);
+        newPhere.setPhereDate(phereDate);
+        newPhere.setImageURL(phereImageUrl);
+
+        // adds the extra information to the document in the database
+        db.collection(pheresCollection).document(newPhere.getPhereName()).set(newPhere).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "onSuccess: Phere Created");
+                Toast.makeText(MoreInfoCreatePhereActivity.this, "New Phere Created", Toast.LENGTH_SHORT).show();
+                //move to next intent and destroy
+                Intent mainActivityIntent = new Intent(MoreInfoCreatePhereActivity.this, MainActivityUser.class);
+                startActivity(mainActivityIntent);
+                CreateNewPhereActivity.mCreateNewPhereActivity.finish();
+                finish();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, "onFailure: Error creating Phere...");
+            }
+        });
     }
 
     private File createImageFile() throws IOException {
