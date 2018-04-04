@@ -7,9 +7,6 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,21 +19,16 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.phereapp.phere.R;
-import com.phereapp.phere.adapters.RecyclerViewMembersAdapter;
 import com.phereapp.phere.dynamic_image_view.DynamicImageView;
 import com.phereapp.phere.helper.MembersDialogFragment;
 import com.phereapp.phere.pojo.Phere;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SelectedPhereMainActivity extends AppCompatActivity {
 
     private static String TAG = "SelectedPhereMainActivity";
     private TextView mPhereDescription, mPhereDate, mPhereLocation, mPhereMembers, mPherePlaylist, mPhereSingleLineDesc;
+    private TextView mPhereLocationPopup;
     private DynamicImageView mPhereProfilePicture;
     private ImageButton mToggleDescription;
     CollapsingToolbarLayout mTitle;
@@ -177,7 +169,9 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         Dialog dialog = new Dialog(this);
         dialog.setTitle("Phere Location");
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.activity_selected_phere_location_popup);
+        dialog.setContentView(R.layout.activity_location_dialog);
+        mPhereLocationPopup = dialog.findViewById(R.id.txt_location_popUp);
+        mPhereLocationPopup.setText(selectedPhere.getPhereLocation());
         dialog.setCanceledOnTouchOutside(true);
 
         dialog.show();
