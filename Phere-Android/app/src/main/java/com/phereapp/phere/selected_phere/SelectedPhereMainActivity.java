@@ -36,7 +36,7 @@ import java.util.List;
 public class SelectedPhereMainActivity extends AppCompatActivity {
 
     private static String TAG = "SelectedPhereMainActivity";
-    private TextView mPhereDescription, mPhereDate, mPhereLocation, mPhereMembers, mPherePlaylist;
+    private TextView mPhereDescription, mPhereDate, mPhereLocation, mPhereMembers, mPherePlaylist, mPhereSingleLineDesc;
     private DynamicImageView mPhereProfilePicture;
     private ImageButton mToggleDescription;
     CollapsingToolbarLayout mTitle;
@@ -59,6 +59,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         }
         //Initialize the Views
         mPhereDescription = findViewById(R.id.txt_phere_description_selectedPhere);
+        mPhereSingleLineDesc = findViewById(R.id.txt_singleLine_description_selectedPhere);
         mTitle = findViewById(R.id.toolbar_selectedPhere);
         mToolbar = findViewById(R.id.toolbarid);
         mPhereProfilePicture = findViewById(R.id.img_profilePicture_selectedPhere);
@@ -74,6 +75,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         final FragmentManager fm = getFragmentManager();
         final MembersDialogFragment mdf = new MembersDialogFragment();
 
+        mPhereSingleLineDesc.setText(selectedPhere.getPhereDescription());
         mPhereDescription.setText(selectedPhere.getPhereDescription());
         mPhereDate.setText(selectedPhere.getPhereDate());
 
@@ -84,6 +86,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showDescription();
+
             }
         });
 
@@ -139,6 +142,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         int visibility = mPhereDescription.getVisibility();
         //Getting the LayoutParameters to change the Height
         ViewGroup.LayoutParams params = mPhereDescription.getLayoutParams();
+        ViewGroup.LayoutParams singleLineParams = mPhereSingleLineDesc.getLayoutParams();
         if (visibility == View.INVISIBLE) {
             //Changes the arrow drawable to be UP
             mToggleDescription.setImageResource(R.drawable.arrow_up_float);
@@ -146,6 +150,9 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
             params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
             mPhereDescription.setLayoutParams(params);
             mPhereDescription.setVisibility(View.VISIBLE);
+            singleLineParams.height = 0;
+            mPhereSingleLineDesc.setLayoutParams(singleLineParams);
+            mPhereSingleLineDesc.setVisibility(View.INVISIBLE);
         } else {
             //Changes the arrow drawable to be DOWN
             mToggleDescription.setImageResource(R.drawable.arrow_down_float);
@@ -153,6 +160,10 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
             params.height = 0;
             mPhereDescription.setLayoutParams(params);
             mPhereDescription.setVisibility(View.INVISIBLE);
+            singleLineParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            mPhereSingleLineDesc.setLayoutParams(singleLineParams);
+            mPhereSingleLineDesc.setVisibility(View.VISIBLE);
+
         }
     }
 
