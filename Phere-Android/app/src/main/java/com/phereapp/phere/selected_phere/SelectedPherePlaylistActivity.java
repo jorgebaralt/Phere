@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.phereapp.phere.R;
 import com.phereapp.phere.pojo.SpotifyUser;
+import com.phereapp.phere.spotify_handler.SpotifyHandler;
 import com.phereapp.phere.spotify_handler.SpotifyWebApiClient;
 import com.phereapp.phere.spotify_handler.SpotifyWebApiInterface;
 
@@ -25,7 +26,7 @@ public class SelectedPherePlaylistActivity extends AppCompatActivity {
         setContentView(R.layout.activity_selected_phere_playlist);
 
         spotifyInterface = SpotifyWebApiClient.getApiClient().create(SpotifyWebApiInterface.class);
-        Call<SpotifyUser> call = spotifyInterface.getSpotifyUser();
+        Call<SpotifyUser> call = spotifyInterface.getSpotifyUser("Bearer " + SpotifyHandler.token);
         call.enqueue(new Callback<SpotifyUser>() {
             @Override
             public void onResponse(Call<SpotifyUser> call, Response<SpotifyUser> response) {
@@ -34,7 +35,7 @@ public class SelectedPherePlaylistActivity extends AppCompatActivity {
                     spotifyUser = response.body();
                     Log.d(TAG, "onResponse: SpotifyUser = " + spotifyUser.getDisplayName());
                 }else{
-                    Log.e(TAG, "onResponse: Called made but was not successful, response = " + response.body());
+                    Log.e(TAG, "onResponse: Spotify Called but was not successful, response = " + response.errorBody());
                 }
 
             }

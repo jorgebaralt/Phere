@@ -8,24 +8,21 @@ import com.phereapp.phere.helper.ActivityResultHandler;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
-import com.spotify.sdk.android.player.Config;
 import com.spotify.sdk.android.player.ConnectionStateCallback;
 import com.spotify.sdk.android.player.Error;
-import com.spotify.sdk.android.player.Player;
 import com.spotify.sdk.android.player.PlayerEvent;
-import com.spotify.sdk.android.player.Spotify;
 import com.spotify.sdk.android.player.SpotifyPlayer;
 
 public class SpotifyHandler implements SpotifyPlayer.NotificationCallback,ConnectionStateCallback,ActivityResultHandler {
 
     public static String CLIENT_ID = "c8258d2a53aa40738210728a55a3d001";
     public static String REDIRECT_URI = "http://phere.com/callback/";
-    private Player mPlayer;
+    public static String token;
+
     private static final int REQUEST_CODE = 1337;
     private String TAG = "SpotifyHandler";
     private Activity activity;
-    private String scopes[] = new String[]{"user-read-email","user-read-private","streaming","playlist-read-private","user-library-read","playlist-modify-private","user-read-currently-playing","user-read-recently-played","user-modify-playback-state","user-read-playback-state","user-library-modify","playlist-read-collaborative"};
-
+    private String scopes[] = new String[]{"streaming"};
     public SpotifyHandler(Activity activity){
         this.activity = activity;
     }
@@ -94,21 +91,9 @@ public class SpotifyHandler implements SpotifyPlayer.NotificationCallback,Connec
         if(requestCode == REQUEST_CODE){
             AuthenticationResponse response = AuthenticationClient.getResponse(resultCode,data);
             if(response.getType() == AuthenticationResponse.Type.TOKEN){
-                Config playerConfig = new Config(activity,response.getAccessToken(),CLIENT_ID);
-                Spotify.getPlayer(playerConfig, this, new SpotifyPlayer.InitializationObserver() {
-                    @Override
-                    public void onInitialized(SpotifyPlayer spotifyPlayer) {
-                        Log.d(TAG, "onInitialized: Initializing PLayer...");
-                        mPlayer = spotifyPlayer;
-                        mPlayer.addConnectionStateCallback(SpotifyHandler.this);
-                        mPlayer.addNotificationCallback(SpotifyHandler.this);
-                    }
-
-                    @Override
-                    public void onError(Throwable throwable) {
-                        Log.e(TAG, "onError: " + "Could not initialize player" + throwable.getMessage());
-                    }
-                });
+                //we got access token,
+                Log.d(TAG, "activityResultHandler: token  =  " + response.getAccessToken() + " type = " + response.getType());
+                token = response.getAccessToken();
             }
         }
     }
