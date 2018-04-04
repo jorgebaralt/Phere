@@ -11,9 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.phereapp.phere.R;
 import com.phereapp.phere.pojo.Phere;
 import com.phereapp.phere.selected_phere.SelectedPhereMainActivity;
@@ -31,7 +29,7 @@ public class RecyclerViewPhereAdapter extends RecyclerView.Adapter<RecyclerViewP
     FirebaseStorage storage = FirebaseStorage.getInstance();
     private static String TAG = "RecyclerViewPhereAdapter";
 
-    //Constructor
+    //Constructor get the list and context
     public RecyclerViewPhereAdapter(Context mContext, List<Phere> mPheres) {
         this.mContext = mContext;
         this.mPheres = mPheres;
@@ -41,7 +39,7 @@ public class RecyclerViewPhereAdapter extends RecyclerView.Adapter<RecyclerViewP
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
-
+        //MyViewholder is defined bellow. to hold the values that I want.
         view = LayoutInflater.from(mContext).inflate(R.layout.phere_cardview_item,parent,false);
         MyViewHolder viewHolder = new MyViewHolder(view);
         return viewHolder;

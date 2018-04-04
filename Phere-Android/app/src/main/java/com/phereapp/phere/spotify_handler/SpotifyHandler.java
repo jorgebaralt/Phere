@@ -17,8 +17,9 @@ import com.spotify.sdk.android.player.Spotify;
 import com.spotify.sdk.android.player.SpotifyPlayer;
 
 public class SpotifyHandler implements SpotifyPlayer.NotificationCallback,ConnectionStateCallback,ActivityResultHandler {
-    private static final String CLIENT_ID = "c8258d2a53aa40738210728a55a3d001";
-    private static final String REDIRECT_URI = "http://phere.com/callback/";
+
+    public static String CLIENT_ID = "c8258d2a53aa40738210728a55a3d001";
+    public static String REDIRECT_URI = "http://phere.com/callback/";
     private Player mPlayer;
     private static final int REQUEST_CODE = 1337;
     private String TAG = "SpotifyHandler";
