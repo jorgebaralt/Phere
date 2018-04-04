@@ -32,6 +32,7 @@ public class MembersDialogFragment extends DialogFragment {
         mSelectedPhere = (Phere) bundle.getSerializable("SelectedPhere");
         members = mSelectedPhere.getMembers();
 
+
         //Recycler
         mRecyclerView = rootView.findViewById(R.id.recycler_view_members_popup);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
@@ -41,6 +42,7 @@ public class MembersDialogFragment extends DialogFragment {
         mAdapter = new RecyclerViewMembersAdapter(this.getActivity(), members);
         mRecyclerView.setAdapter(mAdapter);
 
+        this.getDialog().setCanceledOnTouchOutside(true);
         this.getDialog().setTitle("Phere Members");
 
         return rootView;
