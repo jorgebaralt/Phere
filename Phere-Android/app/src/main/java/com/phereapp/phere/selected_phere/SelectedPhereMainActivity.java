@@ -77,7 +77,6 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
 
         mPhereSingleLineDesc.setText(selectedPhere.getPhereDescription());
         mPhereDescription.setText(selectedPhere.getPhereDescription());
-        mPhereDate.setText(selectedPhere.getPhereDate());
 
         mPhereImageUrl = selectedPhere.getImageURL();
         Glide.with(this).load(mPhereImageUrl).centerCrop().into(mPhereProfilePicture);
@@ -113,6 +112,13 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
                 bundle.putSerializable("SelectedPhere", selectedPhere);
                 mdf.setArguments(bundle);
                 mdf.show(fm, "Members_tag");
+            }
+        });
+
+        mPhereLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlertBox();
             }
         });
     }
@@ -167,16 +173,14 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         }
     }
 
-//    public void showAlertBox() {
-//        Dialog dialog = new Dialog(this);
-//        dialog.setTitle("Phere Members");
-//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        dialog.setContentView(R.layout.activity_selected_phere_member_popup);
-//        dialog.setCanceledOnTouchOutside(true);
-//        RecyclerView recyclerView = dialog.findViewById(R.id.recycler_view_members_popup);
-//
-//
-//        dialog.show();
-//    }
+    public void showAlertBox() {
+        Dialog dialog = new Dialog(this);
+        dialog.setTitle("Phere Location");
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_selected_phere_location_popup);
+        dialog.setCanceledOnTouchOutside(true);
+
+        dialog.show();
+    }
 
 }

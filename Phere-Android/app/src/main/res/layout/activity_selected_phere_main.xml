@@ -101,7 +101,7 @@
                     android:layout_weight="1"
                     android:background="@color/lightBlue"
                     android:gravity="center"
-                    android:text="Date"
+                    android:text="Date/Time"
                     android:textAllCaps="false"
                     android:textColor="@color/black_semi_transparent"
                     android:textSize="14sp"

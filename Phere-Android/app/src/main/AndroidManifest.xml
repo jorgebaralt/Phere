@@ -90,7 +90,8 @@
         <activity android:name=".selected_phere.SelectedPherePlaylistActivity" />
         <activity
             android:name=".selected_phere.SelectedPhereSettingsActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
