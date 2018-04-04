@@ -7,8 +7,8 @@ import android.util.Log;
 import com.phereapp.phere.R;
 import com.phereapp.phere.pojo.SpotifyUser;
 import com.phereapp.phere.spotify_handler.SpotifyHandler;
-import com.phereapp.phere.spotify_handler.SpotifyWebApiClient;
-import com.phereapp.phere.spotify_handler.SpotifyWebApiInterface;
+import com.phereapp.phere.api.SpotifyWebApiClient;
+import com.phereapp.phere.api.ApiInterface;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,7 +17,7 @@ import retrofit2.Response;
 public class SelectedPherePlaylistActivity extends AppCompatActivity {
     private String TAG = "SelectedPherePlaylistActivity";
     private SpotifyUser spotifyUser;
-    private SpotifyWebApiInterface spotifyInterface;
+    private ApiInterface spotifyInterface;
 
 
     @Override
@@ -25,7 +25,7 @@ public class SelectedPherePlaylistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_phere_playlist);
 
-        spotifyInterface = SpotifyWebApiClient.getApiClient().create(SpotifyWebApiInterface.class);
+        spotifyInterface = SpotifyWebApiClient.getApiClient().create(ApiInterface.class);
         Call<SpotifyUser> call = spotifyInterface.getSpotifyUser("Bearer " + SpotifyHandler.token);
         call.enqueue(new Callback<SpotifyUser>() {
             @Override
