@@ -87,7 +87,10 @@
         </provider>
 
         <activity android:name=".MapView" />
-        <activity android:name=".selected_phere.SelectedPherePlaylistActivity"></activity>
+        <activity android:name=".selected_phere.SelectedPherePlaylistActivity" />
+        <activity
+            android:name=".selected_phere.SelectedPhereSettingsActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
     </application>
 
 </manifest>

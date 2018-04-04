@@ -178,7 +178,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            // Creates the reference in the fireface Storage to be able to access the uploaded image
+            // Creates the reference in the firebase Storage to be able to access the uploaded image
             imagePath = "phereProfileImage/" + uniqueId + "_" + newPhere.getPhereName();
             ref = storageReference.child(imagePath);
             ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -204,6 +204,8 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
                     progressDialog.setMessage("Uploaded " + (int) progress + "%");
                 }
             });
+        } else {
+            addPhereReference();
         }
     }
 
@@ -213,10 +215,13 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
         // Getting the phere info from the user
         phereDescription = mPhereDescription.getText().toString();
         phereDate = mPhereDate.getText().toString();
-        phereImageUrl = imageURL.toString();
         newPhere.setPhereDescription(phereDescription);
         newPhere.setPhereDate(phereDate);
-        newPhere.setImageURL(phereImageUrl);
+        if (filePath != null) {
+            phereImageUrl = imageURL.toString();
+            newPhere.setImageURL(phereImageUrl);
+        }
+
 
         // adds the extra information to the document in the database
         db.collection(pheresCollection).document(newPhere.getPhereName()).set(newPhere).addOnSuccessListener(new OnSuccessListener<Void>() {

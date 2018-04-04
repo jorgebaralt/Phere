@@ -1,23 +1,34 @@
 package com.phereapp.phere.selected_phere;
 
+import android.app.Dialog;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.phereapp.phere.R;
+import com.phereapp.phere.adapters.RecyclerViewMembersAdapter;
 import com.phereapp.phere.dynamic_image_view.DynamicImageView;
+import com.phereapp.phere.helper.MembersDialogFragment;
 import com.phereapp.phere.pojo.Phere;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SelectedPhereMainActivity extends AppCompatActivity {
 
@@ -28,13 +39,15 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
     CollapsingToolbarLayout mTitle;
     private String mPhereImageUrl;
     private android.support.v7.widget.Toolbar mToolbar;
+    private Phere selectedPhere;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_phere_main);
 
-        Phere selectedPhere = (Phere) SelectedPhereMainActivity.this.getIntent().getSerializableExtra("SelectedPhere");
+        selectedPhere = (Phere) SelectedPhereMainActivity.this.getIntent().getSerializableExtra("SelectedPhere");
         if(selectedPhere != null){
             Log.d(TAG, "onCreate: WE GOT THE PHERE ************" + selectedPhere.getPhereName());
         }
@@ -49,30 +62,44 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         mPherePlaylist = findViewById(R.id.txt_btn_playlist_selectedPhere);
         mToggleDescription = findViewById(R.id.btn_toggleDescription_selectedPhere);
 
-        //Sets the title of the Phere
         mTitle.setTitle(selectedPhere.getDisplayPhereName());
-        //Sets the description of the Phere
+
+        //Custom Dialog for members
+        final FragmentManager fm = getFragmentManager();
+        final MembersDialogFragment mdf = new MembersDialogFragment();
+
         mPhereDescription.setText(selectedPhere.getPhereDescription());
-        //Sets the profile image from the Download URL
+        mPhereDate.setText(selectedPhere.getPhereDate());
+
         mPhereImageUrl = selectedPhere.getImageURL();
         Glide.with(this).load(mPhereImageUrl).centerCrop().into(mPhereProfilePicture);
-        //Sets the date of the Phere
-        mPhereDate.setText(selectedPhere.getPhereDate());
-        //Makes the description text appear
+
         mToggleDescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDescription();
             }
         });
+
         //Menu for the toolbar
         setSupportActionBar(mToolbar);
+        mToolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.cogwheel_48dp));
 
         mPherePlaylist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent playlistIntent = new Intent(SelectedPhereMainActivity.this, SelectedPherePlaylistActivity.class);
                 startActivity(playlistIntent);
+            }
+        });
+
+        mPhereMembers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("SelectedPhere", selectedPhere);
+                mdf.setArguments(bundle);
+                mdf.show(fm, "Members_tag");
             }
         });
     }
@@ -85,11 +112,19 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+
+            case R.id.settings_selected_phere:
+                Intent settingsIntent = new Intent(SelectedPhereMainActivity.this, SelectedPhereSettingsActivity.class);
+                settingsIntent.putExtra("SelectedPhere",  selectedPhere);
+                startActivity(settingsIntent);
+                break;
+        }
+        return true;
     }
 
     //Show description of specific phere.
-    public void showDescription() {
+    private void showDescription() {
         //Getting the current visibility of the TextView
         int visibility = mPhereDescription.getVisibility();
         //Getting the LayoutParameters to change the Height
@@ -110,4 +145,17 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
             mPhereDescription.setVisibility(View.INVISIBLE);
         }
     }
+
+//    public void showAlertBox() {
+//        Dialog dialog = new Dialog(this);
+//        dialog.setTitle("Phere Members");
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.setContentView(R.layout.activity_selected_phere_member_popup);
+//        dialog.setCanceledOnTouchOutside(true);
+//        RecyclerView recyclerView = dialog.findViewById(R.id.recycler_view_members_popup);
+//
+//
+//        dialog.show();
+//    }
+
 }

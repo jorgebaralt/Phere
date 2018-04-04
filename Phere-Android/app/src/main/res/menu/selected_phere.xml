@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Item" />
+
     <item
-        android:id="@+id/settings"
+        android:id="@+id/still_figuring_out_2"
+        android:title="Item" />
+    <item
+        android:id="@+id/settings_selected_phere"
         android:title="Settings" />
     <item
-        android:id="@+id/delete_phere"
+        android:id="@+id/still_figuring_out"
         android:title="Delete Phere" />
 </menu>
