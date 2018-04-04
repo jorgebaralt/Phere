@@ -20,6 +20,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.phereapp.phere.R;
 import com.phereapp.phere.adapters.RecyclerViewMembersAdapter;
 import com.phereapp.phere.dynamic_image_view.DynamicImageView;
@@ -37,9 +40,11 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
     private DynamicImageView mPhereProfilePicture;
     private ImageButton mToggleDescription;
     CollapsingToolbarLayout mTitle;
-    private String mPhereImageUrl;
+    private String mPhereImageUrl, mHost, mCurrentUser;
     private android.support.v7.widget.Toolbar mToolbar;
     private Phere selectedPhere;
+    //Firebase
+    FirebaseUser mUser;
 
 
     @Override
@@ -47,6 +52,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_phere_main);
 
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
         selectedPhere = (Phere) SelectedPhereMainActivity.this.getIntent().getSerializableExtra("SelectedPhere");
         if(selectedPhere != null){
             Log.d(TAG, "onCreate: WE GOT THE PHERE ************" + selectedPhere.getPhereName());
@@ -82,8 +88,12 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         });
 
         //Menu for the toolbar
-        setSupportActionBar(mToolbar);
-        mToolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.cogwheel_48dp));
+        mHost = selectedPhere.getHost();
+        mCurrentUser = mUser.getDisplayName();
+        if (mHost.equals(mCurrentUser)) {
+            setSupportActionBar(mToolbar);
+            mToolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.cogwheel_48dp));
+        }
 
         mPherePlaylist.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.phereapp.phere.MainActivityUser;
 import com.phereapp.phere.R;
 import com.phereapp.phere.pojo.Phere;
 
@@ -34,7 +35,7 @@ public class JoinPhereByNameActivity extends AppCompatActivity {
     private String phereName;
     private final String phereCollection = "pheres";
     private final String memberCollection = "members";
-    private String currentUserEmail;
+    private String currentUserName;
 
     // firebase
     private FirebaseFirestore db;
@@ -59,7 +60,7 @@ public class JoinPhereByNameActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         assert currentUser != null;
-        currentUserEmail = currentUser.getEmail();
+        currentUserName= currentUser.getDisplayName();
 
         mFindPublicPhere.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +86,8 @@ public class JoinPhereByNameActivity extends AppCompatActivity {
                             //assign the object
                             Phere phere = documentSnapshot.toObject(Phere.class);
                             addMemberToPhere(phere);
+                            Intent phereJoined = new Intent(JoinPhereByNameActivity.this, MainActivityUser.class);
+                            startActivity(phereJoined);
                         }else {
                             Toast.makeText(JoinPhereByNameActivity.this, "Phere does not Exist!.", Toast.LENGTH_SHORT).show();
                         }
@@ -98,7 +101,7 @@ public class JoinPhereByNameActivity extends AppCompatActivity {
 
     private void addMemberToPhere(Phere phere) {
         //Add new member to the Phere
-        boolean memberAdded = phere.addMembers(currentUserEmail);
+        boolean memberAdded = phere.addMembers(currentUserName);
         Log.d(TAG, "addUserToPhere: " + phere.getMembers().get(phere.getMembers().size() - 1));
         //Update array in Phere Document
         //make sure there is a change to update data.
