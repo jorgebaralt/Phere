@@ -126,7 +126,7 @@
                 android:layout_marginRight="24dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/txt_phere_description_selectedPhere"
@@ -136,7 +136,7 @@
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
                 android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever sinc"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:visibility="invisible" />
 
             <View
