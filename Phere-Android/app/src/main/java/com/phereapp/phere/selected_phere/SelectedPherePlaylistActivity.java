@@ -35,7 +35,7 @@ public class SelectedPherePlaylistActivity extends AppCompatActivity {
                     spotifyUser = response.body();
                     Log.d(TAG, "onResponse: SpotifyUser = " + spotifyUser.getDisplayName());
                 }else{
-                    Log.e(TAG, "onResponse: Spotify Called but was not successful, response = " + response.errorBody());
+                    Log.e(TAG, "onResponse: Spotify Called but was not successful, response = " + response.body());
                 }
 
             }
