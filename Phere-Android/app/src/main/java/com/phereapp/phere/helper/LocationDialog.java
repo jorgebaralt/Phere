@@ -2,7 +2,6 @@ package com.phereapp.phere.helper;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import com.phereapp.phere.R;
 

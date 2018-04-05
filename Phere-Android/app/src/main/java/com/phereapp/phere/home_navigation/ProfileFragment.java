@@ -20,15 +20,12 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.getbase.floatingactionbutton.FloatingActionButton;
-import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.phereapp.phere.MapView;
 import com.phereapp.phere.R;
 import com.phereapp.phere.login.StartLoginActivity;
 import com.phereapp.phere.spotify_handler.SpotifyHandler;
@@ -42,8 +39,6 @@ public class ProfileFragment extends Fragment {
     private Button logoutBtn;
     private Button spotifyBtn;
     private TextView spotifyLogout;
-    // Testing the map
-    private Button mapTest;
     private String TAG = "ProfileFragment";
     //Facebook
     private CallbackManager mCallbackManager;
@@ -130,19 +125,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        // Testing the Map
-        mapTest = rootView.findViewById(R.id.btn_mapTest);
-        mapTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: trying map");
-                Intent mapTestIntent = new Intent (getActivity(), MapView.class);
-                startActivity(mapTestIntent);
-            }
-        });
-
         //Handle FAB
-
 
         return rootView;
     }

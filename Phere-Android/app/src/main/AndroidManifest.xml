@@ -86,7 +86,6 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".MapView" />
         <activity android:name=".selected_phere.SelectedPherePlaylistActivity" />
         <activity
             android:name=".selected_phere.SelectedPhereSettingsActivity"
