@@ -26,7 +26,7 @@ public class SelectedPherePlaylistActivity extends AppCompatActivity {
         setContentView(R.layout.activity_selected_phere_playlist);
 
         spotifyInterface = SpotifyWebApiClient.getApiClient().create(ApiInterface.class);
-        Call<SpotifyUser> call = spotifyInterface.getSpotifyUser("Bearer " + SpotifyHandler.token);
+        Call<SpotifyUser> call = spotifyInterface.getSpotifyUser("Bearer " + SpotifyHandler.spotifyToken.getAccessToken());
         call.enqueue(new Callback<SpotifyUser>() {
             @Override
             public void onResponse(Call<SpotifyUser> call, Response<SpotifyUser> response) {

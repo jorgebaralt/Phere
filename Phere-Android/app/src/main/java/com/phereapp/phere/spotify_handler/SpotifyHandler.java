@@ -22,10 +22,12 @@ import retrofit2.Response;
 
 public class SpotifyHandler implements SpotifyPlayer.NotificationCallback,ConnectionStateCallback,ActivityResultHandler {
 
+
     public static String CLIENT_ID = "c8258d2a53aa40738210728a55a3d001";
     public static String CLIENT_SECRET = "2b252c0e6c8c4217a8dcf3b0cee29f3b";
+    //TODO : fix uri
+    public static String REDIRECT_URI = "http://phere.com/callback";
 
-    public static String REDIRECT_URI = "http://phere.com/callback/";
     public final String GRANT_TYPE = "authorization_code";
     private static final int REQUEST_CODE = 1337;
     private String TAG = "SpotifyHandler";
@@ -35,6 +37,7 @@ public class SpotifyHandler implements SpotifyPlayer.NotificationCallback,Connec
     private Activity activity;
     private String scopes[] = new String[]{"streaming"};
     private ApiInterface spotifyInterface;
+    public static SpotifyToken spotifyToken;
 
     public SpotifyHandler(Activity activity){
         this.activity = activity;
@@ -47,7 +50,6 @@ public class SpotifyHandler implements SpotifyPlayer.NotificationCallback,Connec
                         AuthenticationResponse.Type.CODE,
                         REDIRECT_URI
                 );
-
         builder.setScopes(scopes);
         AuthenticationRequest request = builder.build();
 
@@ -104,6 +106,8 @@ public class SpotifyHandler implements SpotifyPlayer.NotificationCallback,Connec
     public void activityResultHandler(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_CODE){
             AuthenticationResponse response = AuthenticationClient.getResponse(resultCode,data);
+
+            //TODO: this must be done on our own api (BUILT ON NODE.JS)
             if(response.getType() == AuthenticationResponse.Type.CODE){
                 Log.d(TAG, " Spotify code = " + response.getCode());
                 code = response.getCode();
@@ -114,14 +118,13 @@ public class SpotifyHandler implements SpotifyPlayer.NotificationCallback,Connec
                     @Override
                     public void onResponse(Call<SpotifyToken> call, Response<SpotifyToken> response) {
                         if(response.isSuccessful()){
-                            SpotifyToken spotifyToken = response.body();
-                            Log.d(TAG, "onResponse: spotify token = " + spotifyToken.getAccessToken());
+                            spotifyToken = response.body();
+                            Log.d(TAG, "onResponse: spotify token = " + spotifyToken.getAccessToken() + " refresh token = " + spotifyToken.getRefreshToken() + "") ;
                         }
                         else{
                             Log.d(TAG, "onResponse: response = " + response.body());
                         }
                     }
-
                     @Override
                     public void onFailure(Call<SpotifyToken> call, Throwable t) {
                         Log.d(TAG, "onFailure: Error getting spotify token" + t.getMessage());
