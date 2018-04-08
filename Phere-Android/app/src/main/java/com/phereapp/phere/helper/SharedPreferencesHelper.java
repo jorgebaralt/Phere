@@ -14,7 +14,7 @@ public class SharedPreferencesHelper {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(key,value);
         Log.d(TAG, "setDefaults: KEY =  " + key +  " VALUE = " +value);
-        editor.commit();
+        editor.apply();
     }
 
     public static String getDefaults(String key, Context context){

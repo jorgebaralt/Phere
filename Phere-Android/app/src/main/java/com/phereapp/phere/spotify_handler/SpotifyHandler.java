@@ -7,6 +7,7 @@ import android.util.Log;
 import com.phereapp.phere.api.ApiInterface;
 import com.phereapp.phere.api.SpotifyTokenApiClient;
 import com.phereapp.phere.helper.ActivityResultHandler;
+import com.phereapp.phere.helper.SharedPreferencesHelper;
 import com.phereapp.phere.pojo.SpotifyToken;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
@@ -119,7 +120,8 @@ public class SpotifyHandler implements SpotifyPlayer.NotificationCallback,Connec
                     public void onResponse(Call<SpotifyToken> call, Response<SpotifyToken> response) {
                         if(response.isSuccessful()){
                             spotifyToken = response.body();
-                            Log.d(TAG, "onResponse: spotify token = " + spotifyToken.getAccessToken() + " refresh token = " + spotifyToken.getRefreshToken() + "") ;
+                            Log.d(TAG, "onResponse: spotify token = " + spotifyToken.getAccessToken() + " refresh token = " + spotifyToken.getRefreshToken() + "");
+                            SharedPreferencesHelper.setDefaults("spotifyToken",spotifyToken.getAccessToken(),activity);
                         }
                         else{
                             Log.d(TAG, "onResponse: response = " + response.body());
