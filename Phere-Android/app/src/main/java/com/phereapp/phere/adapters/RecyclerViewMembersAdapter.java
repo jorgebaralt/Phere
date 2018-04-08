@@ -14,7 +14,7 @@ import java.util.List;
 public class RecyclerViewMembersAdapter extends RecyclerView.Adapter<RecyclerViewMembersAdapter.MyViewHolder> {
 
     private List<String> membersList;
-    private Context c;
+    private Context mContext;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView member;
@@ -25,8 +25,8 @@ public class RecyclerViewMembersAdapter extends RecyclerView.Adapter<RecyclerVie
         }
     }
 
-    public RecyclerViewMembersAdapter(Context c, List<String> membersList) {
-        this.c = c;
+    public RecyclerViewMembersAdapter(Context context, List<String> membersList) {
+        this.mContext = context;
         this.membersList = membersList;
     }
 

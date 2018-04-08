@@ -15,6 +15,7 @@ public interface ApiInterface {
     @GET("/v1/me")
     Call<SpotifyUser> getSpotifyUser(@Header("Authorization")String token);
 
+    //get token at login
     @FormUrlEncoded
     @POST("/api/token")
     Call<SpotifyToken> getSpotifyToken(
@@ -25,6 +26,14 @@ public interface ApiInterface {
             @Field("client_secret") String clientSecret
     );
 
+    //request token refresh
+    @FormUrlEncoded
+    @POST("/api/token")
+    Call<SpotifyToken> refreshSpotifyToken(
+            @Field("grant_type") String grantType,
+            @Field("refresh_token") String refreshToken,
+            @Field("client_id") String clientId,
+            @Field("client_secret") String clientSecret
 
-
+    );
 }
