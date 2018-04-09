@@ -86,7 +86,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         mCurrentUser = mUser.getDisplayName();
         if (mHost.equals(mCurrentUser)) {
             setSupportActionBar(mToolbar);
-            mToolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.cogwheel_48dp));
+            mToolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.cogwheel_48dp_brighter));
         }
 
         mPherePlaylist.setOnClickListener(new View.OnClickListener() {
