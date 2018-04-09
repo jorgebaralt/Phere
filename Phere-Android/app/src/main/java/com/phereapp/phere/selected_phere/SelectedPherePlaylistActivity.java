@@ -29,7 +29,8 @@ public class SelectedPherePlaylistActivity extends AppCompatActivity {
         setContentView(R.layout.activity_selected_phere_playlist);
         spotifyToken = SharedPreferencesHelper.getDefaults("spotifyToken",SelectedPherePlaylistActivity.this);
         SpotifyHandler spotifyHandler = new SpotifyHandler(SelectedPherePlaylistActivity.this);
-        spotifyHandler.refreshToken();
+        //spotifyHandler.refreshToken();
+        getSpotifyUser();
 
     }
 
