@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.phereapp.phere.login.StartLoginActivity"
-    >
+    tools:context="com.phereapp.phere.login.StartLoginActivity">
 
     <TextView
         android:id="@+id/txt_title_start"
@@ -21,60 +20,172 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
+    <EditText
+        android:id="@+id/editTxt_userEmail_loginScreen"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="88dp"
+        android:background="@drawable/rounded_edittext"
+        android:drawableLeft="@drawable/user_email"
+        android:drawablePadding="10dp"
+        android:hint="Email"
+        android:paddingBottom="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="4dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark_grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_title_start" />
+
+    <EditText
+        android:id="@+id/editTxt_userPassword_loginScreen"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_edittext"
+        android:drawableLeft="@drawable/user_password2"
+        android:drawablePadding="10dp"
+        android:hint="Password"
+        android:inputType="textWebPassword"
+        android:paddingBottom="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="4dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark_grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTxt_userEmail_loginScreen" />
+
+
+    <TextView
+        android:id="@+id/txt_forgotPassword_loginScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="192dp" />
+        android:layout_marginTop="8dp"
+        android:text="Forgot Password?"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="@+id/editTxt_userPassword_loginScreen"
+        app:layout_constraintTop_toBottomOf="@+id/editTxt_userPassword_loginScreen" />
 
     <Button
-        android:id="@+id/btn_email_start"
+        android:id="@+id/btn_logIn_loginScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:text="Sign up with Email"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_signin_start"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rounded_button"
+        android:paddingLeft="48dp"
+        android:paddingRight="48dp"
+        android:text="Log In"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_forgotPassword_loginScreen" />
+
+
+    <TextView
+        android:id="@+id/txt_dontHaveAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginStart="8dp"
+        android:text="Don't have an account?"
+        app:layout_constraintBaseline_toBaselineOf="@+id/txt_btn_createAccount_loginScreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/btn_signin_start"
+        android:id="@+id/txt_btn_createAccount_loginScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:text="Sign in Here!"
-        android:textSize="18sp"
+        android:text="Create One"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txt_dontHaveAccount" />
+
+    <View
+        android:id="@+id/LeftDividerStart"
+        android:layout_width="50dp"
+        android:layout_height="1dp"
+        android:layout_below="@id/txt_orConnectWith_loginScreen"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_orConnectWith_loginScreen"
+        app:layout_constraintEnd_toStartOf="@+id/txt_orConnectWith_loginScreen"
+        app:layout_constraintTop_toTopOf="@+id/txt_orConnectWith_loginScreen"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txt_orConnectWith_loginScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="OR"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_logIn_loginScreen" />
+
+    <View
+        android:id="@+id/RightDividerStart"
+        android:layout_width="50dp"
+        android:layout_height="1dp"
+        android:layout_below="@id/txt_orConnectWith_loginScreen"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_orConnectWith_loginScreen"
+        app:layout_constraintStart_toEndOf="@+id/txt_orConnectWith_loginScreen"
+        app:layout_constraintTop_toTopOf="@+id/txt_orConnectWith_loginScreen" />
+
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/btn_facebookLogin_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="24dp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/txt_or"
-        app:layout_constraintHorizontal_bias="0.497"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
+        android:textSize="14sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_orConnectWith_loginScreen" />
 
-    <TextView
-        android:id="@+id/txt_or"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="OR"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_email_start"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

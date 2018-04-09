@@ -33,9 +33,6 @@
             android:name=".login.RegisterPersonalActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".login.SigninActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
             android:name=".phere_handling.CreateNewPhereActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 

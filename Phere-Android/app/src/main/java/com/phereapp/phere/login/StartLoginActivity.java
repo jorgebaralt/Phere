@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,12 +33,15 @@ import com.phereapp.phere.R;
 
 //choose whether to sign in or sign up.
 public class StartLoginActivity extends AppCompatActivity {
-    private Button mSignupBtn;
-    private TextView mSigninBtn;
-    private FirebaseAuth mAuth;
+    private Button mSignInBtn;
+    private TextView mForgotPassword, mCreateAccount;
+    private EditText mEmail, mPassword;
+    private String userEmail, userPassword;
     private CallbackManager mCallbackManager;
     private static final String EMAIL = "email";
     final private static String TAG = "StartLoginActivity";
+    //Firebase
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +52,59 @@ public class StartLoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        mSignupBtn = (Button) findViewById(R.id.btn_email_start);
-        mSigninBtn = (TextView) findViewById(R.id.btn_signin_start);
+        mForgotPassword = findViewById(R.id.txt_forgotPassword_loginScreen);
+        mSignInBtn = findViewById(R.id.btn_logIn_loginScreen);
+        mEmail = findViewById(R.id.editTxt_userEmail_loginScreen);
+        mPassword = findViewById(R.id.editTxt_userPassword_loginScreen);
+        mCreateAccount = findViewById(R.id.txt_btn_createAccount_loginScreen);
+
+        mSignInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //get the email and password when we click.
+                userEmail = mEmail.getText().toString();
+                userPassword = mPassword.getText().toString();
+
+                //firebase Auth instance from mainActivity
+                if (userEmail.isEmpty() && userPassword.isEmpty()) {
+                    Toast.makeText(StartLoginActivity.this, "Please Enter Email and Password", Toast.LENGTH_SHORT).show();
+                } else if (userPassword.isEmpty()){
+                    Toast.makeText(StartLoginActivity.this, "Please Enter a Password", Toast.LENGTH_SHORT).show();
+                } else if (userEmail.isEmpty()) {
+                    Toast.makeText(StartLoginActivity.this, "Please Enter an Email", Toast.LENGTH_SHORT).show();
+                } else {
+                    mAuth.signInWithEmailAndPassword(userEmail, userPassword)
+                            .addOnCompleteListener(StartLoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d(TAG, "createUserWithEmail: Success ");
+                                        //move to main activity (it handles the update UI)
+                                        Intent mainIntent = new Intent(StartLoginActivity.this, MainActivityUser.class);
+                                        startActivity(mainIntent);
+                                        finish();
+                                    } else {
+                                        Log.w(TAG, "createUserWithEmail: Failure ", task.getException());
+                                        Toast.makeText(StartLoginActivity.this, "Authentication Failed, try again", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }
+            }
+        });
+
+
+
+        mForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent passwordRecoveryIntent = new Intent(StartLoginActivity.this, PasswordRecoveryActivity.class);
+                startActivity(passwordRecoveryIntent);
+            }
+        });
 
         //if we are signing up, we have to go to select activity to pick (business or personal account)
-        mSignupBtn.setOnClickListener(new View.OnClickListener() {
+        mCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: Register Personal Account clicked");
@@ -61,15 +113,6 @@ public class StartLoginActivity extends AppCompatActivity {
             }
         });
 
-        //Regular Sign in (enter credentials)
-        mSigninBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: Sign in clicked");
-                Intent signinIntent = new Intent(StartLoginActivity.this, SigninActivity.class);
-                startActivity(signinIntent);
-            }
-        });
 
         // Initialize Facebook Login button
         mCallbackManager = CallbackManager.Factory.create();
