@@ -47,11 +47,6 @@ public class JoinedPheresFragment extends Fragment {
 
         getJoinedPheres();
 
-        RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView_pheres);
-        RecyclerViewPhereAdapter recyclerViewPhereAdapter = new RecyclerViewPhereAdapter(getContext(), joinedPheres);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(recyclerViewPhereAdapter);
-
 
         return rootView;
     }
