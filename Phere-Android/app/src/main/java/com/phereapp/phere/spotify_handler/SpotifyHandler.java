@@ -38,7 +38,7 @@ public class SpotifyHandler implements SpotifyPlayer.NotificationCallback,Connec
 
     public static String code;
     private Activity activity;
-    private String scopes[] = new String[]{"streaming"};
+    private String scopes[] = new String[]{"streaming","playlist-read-private"};
     public static SpotifyToken spotifyToken;
 
     public SpotifyHandler(Activity activity){

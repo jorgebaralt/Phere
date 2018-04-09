@@ -81,39 +81,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_location_createPhere" />
 
-    <RadioGroup
-        android:id="@+id/radio_create_playlist_pick"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.166"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_choosePlaylist_createPhere">
-
-        <RadioButton
-            android:id="@+id/radio_importPlaylist_createPhere"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Import Playlist"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <RadioButton
-            android:id="@+id/radio_createPlaylist_createPhere"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Create Playlist"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </RadioGroup>
-
     <TextView
         android:id="@+id/txt_choosePlaylist_createPhere"
         android:layout_width="wrap_content"
@@ -131,14 +98,14 @@
         android:id="@+id/txt_privacy_createPhere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="Privacy"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radio_create_playlist_pick"
-        android:layout_marginLeft="16dp" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_importPlaylist_createPhere" />
 
     <RadioGroup
         android:id="@+id/radio_choose_createPhere"
@@ -188,5 +155,27 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_cancel_create_phere"
         app:layout_constraintEnd_toStartOf="@+id/btn_cancel_create_phere"
         android:layout_marginRight="16dp" />
+
+    <Button
+        android:id="@+id/btn_importPlaylist_createPhere"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Import playlist"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_choosePlaylist_createPhere" />
+
+    <TextView
+        android:id="@+id/txt_selectedPlaylist_createPhere"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_importPlaylist_createPhere"
+        app:layout_constraintStart_toEndOf="@+id/btn_importPlaylist_createPhere" />
 
 </android.support.constraint.ConstraintLayout>

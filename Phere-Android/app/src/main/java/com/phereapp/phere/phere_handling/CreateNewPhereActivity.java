@@ -1,9 +1,12 @@
 package com.phereapp.phere.phere_handling;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -19,9 +22,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.phereapp.phere.MainActivityUser;
 import com.phereapp.phere.R;
+import com.phereapp.phere.api.ApiInterface;
+import com.phereapp.phere.api.SpotifyWebApiClient;
+import com.phereapp.phere.dialog_fragments.PlaylistDialogFragment;
+import com.phereapp.phere.helper.SharedPreferencesHelper;
 import com.phereapp.phere.pojo.Phere;
+import com.phereapp.phere.pojo.SpotifyPlaylistList;
 
 import java.lang.reflect.Array;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreateNewPhereActivity extends AppCompatActivity {
 
@@ -39,7 +51,8 @@ public class CreateNewPhereActivity extends AppCompatActivity {
     private Array trying;
     private Phere newPhere;
     public static Activity mCreateNewPhereActivity;
-
+    private Button mImportPlaylist;
+    private PlaylistDialogFragment playlistDialogFragment;
     //firebase
     private FirebaseFirestore db;
     private FirebaseUser currentUser;
@@ -63,11 +76,43 @@ public class CreateNewPhereActivity extends AppCompatActivity {
         mCreatePhereButton = (Button) findViewById(R.id.btn_ok_create_phere);
         mPrivacy = (RadioGroup) findViewById(R.id.radio_choose_createPhere);
         mCancelButton = (Button) findViewById(R.id.btn_cancel_create_phere);
+        mImportPlaylist = findViewById(R.id.btn_importPlaylist_createPhere);
+        playlistDialogFragment = new PlaylistDialogFragment();
+        final FragmentManager fragmentManager = getFragmentManager();
 
         //firebase
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         host = currentUser.getDisplayName();
+        
+        mImportPlaylist.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String spotifyToken = "Bearer "+SharedPreferencesHelper.getDefaults("spotifyToken",CreateNewPhereActivity.this);
+                Log.d(TAG, "onClick: Importing Playlist");
+                ApiInterface spotifyInterface = SpotifyWebApiClient.getApiClient().create(ApiInterface.class);
+                Call<SpotifyPlaylistList> call = spotifyInterface.getSpotifyPlaylists(spotifyToken);
+                call.enqueue(new Callback<SpotifyPlaylistList>() {
+                    @Override
+                    public void onResponse(@NonNull Call<SpotifyPlaylistList> call, @NonNull Response<SpotifyPlaylistList> response) {
+                        if(response.isSuccessful()){
+                            Log.d(TAG, "onResponse: Response is successful " + response.body());
+                            playlistDialogFragment.show(fragmentManager,"Playlist_tag");
+                        }
+                        else{
+                            Log.d(TAG, "onResponse: Error getting response " + response.body());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<SpotifyPlaylistList> call, @NonNull Throwable t) {
+                        Log.d(TAG, "onFailure: Error connecting to api, getting playlists " + t.getMessage());
+                    }
+                });
+
+
+            }
+        });
 
         // On click of the OK button
         mCreatePhereButton.setOnClickListener(new OnClickListener() {

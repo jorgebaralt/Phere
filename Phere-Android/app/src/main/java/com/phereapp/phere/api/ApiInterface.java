@@ -1,5 +1,6 @@
 package com.phereapp.phere.api;
 
+import com.phereapp.phere.pojo.SpotifyPlaylistList;
 import com.phereapp.phere.pojo.SpotifyToken;
 import com.phereapp.phere.pojo.SpotifyUser;
 
@@ -36,4 +37,8 @@ public interface ApiInterface {
             @Field("client_secret") String clientSecret
 
     );
+
+    //getCurrentUserPlaylists
+    @GET("/v1/me/playlists")
+    Call<SpotifyPlaylistList> getSpotifyPlaylists(@Header("Authorization")String token);
 }
