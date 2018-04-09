@@ -27,6 +27,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.phereapp.phere.R;
+import com.phereapp.phere.google_map.GoogleMapsActivity;
 import com.phereapp.phere.login.StartLoginActivity;
 import com.phereapp.phere.spotify_handler.SpotifyHandler;
 import com.spotify.sdk.android.player.Player;
@@ -37,7 +38,7 @@ import com.spotify.sdk.android.player.Player;
 public class ProfileFragment extends Fragment {
 
     private Button logoutBtn;
-    private Button spotifyBtn;
+    private Button spotifyBtn, mapTest;
     private TextView spotifyLogout;
     private String TAG = "ProfileFragment";
     //Facebook
@@ -68,6 +69,7 @@ public class ProfileFragment extends Fragment {
         spotifyBtn = rootView.findViewById(R.id.btn_spotify_profile);
         spotifyHandler = new SpotifyHandler(getActivity());
         spotifyLogout = rootView.findViewById(R.id.logout_spotify_profile);
+        mapTest = rootView.findViewById(R.id.btn_map_test);
 
         //Logout Button
         logoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +83,15 @@ public class ProfileFragment extends Fragment {
                 Intent startIntent = new Intent(getActivity(),StartLoginActivity.class);
                 startActivity(startIntent);
                 getActivity().finish();
+            }
+        });
+
+        //Map test button
+        mapTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mapView = new Intent(getContext(), GoogleMapsActivity.class);
+                startActivity(mapView);
             }
         });
 
