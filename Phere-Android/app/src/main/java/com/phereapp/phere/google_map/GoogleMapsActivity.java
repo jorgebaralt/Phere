@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMyLocationClickListener {
+public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private static final String TAG = "GoogleMapsActivity";
     private CameraPosition mCameraPosition;
@@ -53,27 +53,11 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
-    // The entry points to the Places API.
-    private GeoDataClient mGeoDataClient;
-    private PlaceDetectionClient mPlaceDetectionClient;
-
-    // Used for selecting the current place.
-    private static final int M_MAX_ENTRIES = 5;
-    private String[] mLikelyPlaceNames;
-    private String[] mLikelyPlaceAddresses;
-    private String[] mLikelyPlaceAttributions;
-    private LatLng[] mLikelyPlaceLatLngs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_maps);
-
-        // Construct a GeoDataClient
-        mGeoDataClient = Places.getGeoDataClient(this, null);
-
-        // Construct a PlaceDetectionClient
-        mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null);
 
         //Construct a FusedLocationProviderClient
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -99,8 +83,6 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         mMap = googleMap;
         boolean success = googleMap.setMapStyle(new MapStyleOptions(getResources()
                 .getString(R.string.style_json)));
-
-        mMap.setOnMyLocationClickListener(this);
 
         if (!success) {
             Log.d(TAG, "onMapReady: Style parsing failed");
@@ -199,29 +181,5 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         } catch (SecurityException e)  {
             Log.e("Exception: %s", e.getMessage());
         }
-    }
-
-    @Override
-    public void onMyLocationClick(@NonNull Location location) {
-        Geocoder geocoder = new Geocoder(this, Locale.ENGLISH);
-
-        try {
-            List<Address> addresses = geocoder.getFromLocation(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude(), 1);
-
-            if (addresses != null) {
-                Address returnedAddress = addresses.get(0);
-                StringBuilder strReturnedAddress = new StringBuilder("Address:\n");
-                for (int i=0 ; i < returnedAddress.getMaxAddressLineIndex(); i++) {
-                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
-                }
-                stringLocation = strReturnedAddress.toString();
-            } else {
-                stringLocation = ("No Address returned!");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            stringLocation = ("Cannot get address!");
-        }
-        Toast.makeText(this, "Current location:\n" + stringLocation, Toast.LENGTH_LONG).show();
     }
 }

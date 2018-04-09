@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -65,6 +66,7 @@ public class StartLoginActivity extends AppCompatActivity {
                 userEmail = mEmail.getText().toString();
                 userPassword = mPassword.getText().toString();
 
+
                 //firebase Auth instance from mainActivity
                 if (userEmail.isEmpty() && userPassword.isEmpty()) {
                     Toast.makeText(StartLoginActivity.this, "Please Enter Email and Password", Toast.LENGTH_SHORT).show();
@@ -93,7 +95,6 @@ public class StartLoginActivity extends AppCompatActivity {
                 }
             }
         });
-
 
 
         mForgotPassword.setOnClickListener(new View.OnClickListener() {
