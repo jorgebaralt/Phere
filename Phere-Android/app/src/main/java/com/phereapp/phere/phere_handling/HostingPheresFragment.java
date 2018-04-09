@@ -48,7 +48,6 @@ public class HostingPheresFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-
         //get Pheres from firebase database
         getHostingPheres();
 
