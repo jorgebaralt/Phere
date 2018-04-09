@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.phereapp.phere.R;
 import com.phereapp.phere.dynamic_image_view.DynamicImageView;
-import com.phereapp.phere.helper.MembersDialogFragment;
+import com.phereapp.phere.dialog_fragments.MembersDialogFragment;
 import com.phereapp.phere.pojo.Phere;
 
 public class SelectedPhereMainActivity extends AppCompatActivity {

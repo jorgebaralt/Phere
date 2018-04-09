@@ -1,4 +1,4 @@
-package com.phereapp.phere.helper;
+package com.phereapp.phere.dialog_fragments;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
@@ -27,7 +27,7 @@ public class MembersDialogFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.activity_selected_phere_member_popup, container);
+        View rootView = inflater.inflate(R.layout.dialog_fragment_member_popup, container);
         Bundle bundle = getArguments();
         mSelectedPhere = (Phere) bundle.getSerializable("SelectedPhere");
         members = mSelectedPhere.getMembers();

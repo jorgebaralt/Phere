@@ -77,23 +77,20 @@ public class CreateNewPhereActivity extends AppCompatActivity {
                 // getting all the information of the Phere being created
                 phereName = mPhereName.getText().toString().replaceAll("\\s","_");
                 phereLocation = mPhereLocation.getText().toString().toLowerCase();
-                int selectedId = mPrivacy.getCheckedRadioButtonId();
+                int privacyId = mPrivacy.getCheckedRadioButtonId();
 
-                if (phereName != null && phereLocation != null && selectedId != -1) {
+                if (phereName != null && phereLocation != null && privacyId != -1) {
 
                     //Get Privacy
-                    mPrivacyChosen = (RadioButton) findViewById(selectedId);
+                    mPrivacyChosen = (RadioButton) findViewById(privacyId);
                     choosenPrivacy = mPrivacyChosen.getText().toString().toLowerCase();
 
                     newPhere = new Phere(phereName, phereLocation, choosenPrivacy, host);
 
-                    //TODO: Import or create Playlist
                     Intent moreInfoIntent = new Intent(CreateNewPhereActivity.this,MoreInfoCreatePhereActivity.class);
                     //pass newPhere info to next activity so we can put it into DB
                     moreInfoIntent.putExtra("NewPhere",newPhere);
                     startActivity(moreInfoIntent);
-
-
 
                     //TODO: next screen depends on import or create playlist.
 
