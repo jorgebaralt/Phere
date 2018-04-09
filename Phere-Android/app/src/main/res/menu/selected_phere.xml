@@ -4,7 +4,7 @@
     <item
         android:id="@+id/add_friends"
         android:title="Add Friends"
-        android:icon="@drawable/add_users_48dp"
+        android:icon="@drawable/add_friends_try2"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:showAsAction="always"/>
 
