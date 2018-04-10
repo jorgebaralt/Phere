@@ -27,7 +27,7 @@ public class PlaylistDialogFragment extends DialogFragment {
         this.getDialog().setCanceledOnTouchOutside(true);
 
         Bundle bundle = getArguments();
-        //spotifyPlaylists = (List<SpotifyPlaylist>) bundle.getSerializable("spotifyPlaylists");
+        spotifyPlaylists =(List<SpotifyPlaylist>) bundle.getSerializable("spotifyPlaylists");
 
 //        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view_playlist);
 //        RecyclerViewPlaylistAdapter adapter = new RecyclerViewPlaylistAdapter(spotifyPlaylists,this.getActivity());

@@ -27,9 +27,12 @@ import com.phereapp.phere.api.SpotifyWebApiClient;
 import com.phereapp.phere.dialog_fragments.PlaylistDialogFragment;
 import com.phereapp.phere.helper.SharedPreferencesHelper;
 import com.phereapp.phere.pojo.Phere;
+import com.phereapp.phere.pojo.SpotifyPlaylist;
 import com.phereapp.phere.pojo.SpotifyPlaylistList;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -88,7 +91,7 @@ public class CreateNewPhereActivity extends AppCompatActivity {
         mImportPlaylist.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                String spotifyToken = "Bearer "+SharedPreferencesHelper.getDefaults("spotifyToken",CreateNewPhereActivity.this);
+                final String spotifyToken = "Bearer "+SharedPreferencesHelper.getDefaults("spotifyToken",CreateNewPhereActivity.this);
                 Log.d(TAG, "onClick: Importing Playlist");
                 ApiInterface spotifyInterface = SpotifyWebApiClient.getApiClient().create(ApiInterface.class);
                 Call<SpotifyPlaylistList> call = spotifyInterface.getSpotifyPlaylists(spotifyToken);
@@ -96,11 +99,15 @@ public class CreateNewPhereActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(@NonNull Call<SpotifyPlaylistList> call, @NonNull Response<SpotifyPlaylistList> response) {
                         if(response.isSuccessful()){
-                            Log.d(TAG, "onResponse: Response is successful " + response.body());
+                            SpotifyPlaylistList spotifyPlaylist = response.body();
+                            List<SpotifyPlaylist> playlists = spotifyPlaylist.getSpotifyPlaylists();
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("spotifyPlaylists", (Serializable) playlists);
+                            playlistDialogFragment.setArguments(bundle);
                             playlistDialogFragment.show(fragmentManager,"Playlist_tag");
                         }
                         else{
-                            Log.d(TAG, "onResponse: Error getting response " + response.body());
+                            Log.d(TAG, "onResponse: Error getting response, check on token " + response.body());
                         }
                     }
 

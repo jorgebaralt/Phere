@@ -22,11 +22,10 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.phereapp.phere.R;
-import com.phereapp.phere.dynamic_image_view.DynamicImageView;
 import com.phereapp.phere.dialog_fragments.MembersDialogFragment;
+import com.phereapp.phere.dynamic_image_view.DynamicImageView;
 import com.phereapp.phere.pojo.Phere;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -58,8 +57,8 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         selectedPhere = (Phere) SelectedPhereMainActivity.this.getIntent().getSerializableExtra("SelectedPhere");
-        if(selectedPhere != null){
-            Log.d(TAG, "onCreate: WE GOT THE PHERE ************" + selectedPhere.getPhereName());
+        if(selectedPhere == null){
+            Log.e(TAG, "onCreate: Error passing phere to this activity");
         }
         //Initialize the Views
         mPhereDescription = findViewById(R.id.txt_phere_description_selectedPhere);
