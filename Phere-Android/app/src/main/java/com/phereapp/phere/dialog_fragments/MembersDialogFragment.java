@@ -27,9 +27,10 @@ public class MembersDialogFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.dialog_fragment_member_popup, container);
+        View rootView = inflater.inflate(R.layout.member_list, container);
         Bundle bundle = getArguments();
         mSelectedPhere = (Phere) bundle.getSerializable("SelectedPhere");
+        assert mSelectedPhere != null;
         members = mSelectedPhere.getMembers();
 
 

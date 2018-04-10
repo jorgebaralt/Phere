@@ -155,6 +155,7 @@ public class SpotifyHandler implements SpotifyPlayer.NotificationCallback,Connec
                     Log.d(TAG, "onResponse: Token has been refreshed");
                     spotifyToken = response.body();
                     SharedPreferencesHelper.setDefaults("spotifyToken",spotifyToken.getAccessToken(),activity);
+                    SharedPreferencesHelper.setDefaults("authorization", spotifyToken.getTokenType() + " " +spotifyToken.getAccessToken(),activity);
                 }
                 else {
                     Log.d(TAG, "onResponse: response = " + response.body());

@@ -55,7 +55,6 @@ public class CreateNewPhereActivity extends AppCompatActivity {
     private Phere newPhere;
     public static Activity mCreateNewPhereActivity;
     private Button mImportPlaylist;
-    private PlaylistDialogFragment playlistDialogFragment;
     //firebase
     private FirebaseFirestore db;
     private FirebaseUser currentUser;
@@ -80,7 +79,8 @@ public class CreateNewPhereActivity extends AppCompatActivity {
         mPrivacy = (RadioGroup) findViewById(R.id.radio_choose_createPhere);
         mCancelButton = (Button) findViewById(R.id.btn_cancel_create_phere);
         mImportPlaylist = findViewById(R.id.btn_importPlaylist_createPhere);
-        playlistDialogFragment = new PlaylistDialogFragment();
+
+        final PlaylistDialogFragment playlistDialogFragment = new PlaylistDialogFragment();
         final FragmentManager fragmentManager = getFragmentManager();
 
         //firebase
@@ -101,6 +101,7 @@ public class CreateNewPhereActivity extends AppCompatActivity {
                         if(response.isSuccessful()){
                             SpotifyPlaylistList spotifyPlaylist = response.body();
                             List<SpotifyPlaylist> playlists = spotifyPlaylist.getSpotifyPlaylists();
+
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("spotifyPlaylists", (Serializable) playlists);
                             playlistDialogFragment.setArguments(bundle);
