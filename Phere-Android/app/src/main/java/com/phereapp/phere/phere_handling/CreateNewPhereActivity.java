@@ -91,7 +91,7 @@ public class CreateNewPhereActivity extends AppCompatActivity {
         mImportPlaylist.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String spotifyToken = "Bearer "+SharedPreferencesHelper.getDefaults("spotifyToken",CreateNewPhereActivity.this);
+                final String spotifyToken = SharedPreferencesHelper.getDefaults("authorization",CreateNewPhereActivity.this);
                 Log.d(TAG, "onClick: Importing Playlist");
                 ApiInterface spotifyInterface = SpotifyWebApiClient.getApiClient().create(ApiInterface.class);
                 Call<SpotifyPlaylistList> call = spotifyInterface.getSpotifyPlaylists(spotifyToken);

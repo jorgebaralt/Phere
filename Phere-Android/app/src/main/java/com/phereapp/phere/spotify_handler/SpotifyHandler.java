@@ -121,9 +121,11 @@ public class SpotifyHandler implements SpotifyPlayer.NotificationCallback,Connec
                     public void onResponse(Call<SpotifyToken> call, Response<SpotifyToken> response) {
                         if(response.isSuccessful()){
                             spotifyToken = response.body();
-                            Log.d(TAG, "onResponse: spotify token = " + spotifyToken.getAccessToken() + " refresh token = " + spotifyToken.getRefreshToken() + "");
+                            Log.d(TAG, " onResponse: spotify token = " + spotifyToken.getAccessToken() + " refresh token = " + spotifyToken.getRefreshToken() + "");
                             SharedPreferencesHelper.setDefaults("spotifyToken",spotifyToken.getAccessToken(),activity);
                             SharedPreferencesHelper.setDefaults("refreshToken",spotifyToken.getRefreshToken(),activity);
+                            SharedPreferencesHelper.setDefaults("tokenType",spotifyToken.getTokenType(),activity);
+                            SharedPreferencesHelper.setDefaults("authorization", spotifyToken.getTokenType() + " " +spotifyToken.getAccessToken(),activity);
                         }
                         else{
                             Log.d(TAG, "onResponse: response = " + response.body());

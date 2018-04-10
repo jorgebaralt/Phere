@@ -27,7 +27,7 @@ public class SelectedPherePlaylistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_phere_playlist);
-        spotifyToken = SharedPreferencesHelper.getDefaults("spotifyToken",SelectedPherePlaylistActivity.this);
+        spotifyToken = SharedPreferencesHelper.getDefaults("authorization",SelectedPherePlaylistActivity.this);
         SpotifyHandler spotifyHandler = new SpotifyHandler(SelectedPherePlaylistActivity.this);
         //spotifyHandler.refreshToken();
         getSpotifyUser();
@@ -36,7 +36,7 @@ public class SelectedPherePlaylistActivity extends AppCompatActivity {
 
     public void getSpotifyUser(){
         spotifyInterface = SpotifyWebApiClient.getApiClient().create(ApiInterface.class);
-        Call<SpotifyUser> call = spotifyInterface.getSpotifyUser("Bearer " + spotifyToken);
+        Call<SpotifyUser> call = spotifyInterface.getSpotifyUser(spotifyToken);
         call.enqueue(new Callback<SpotifyUser>() {
             @Override
             public void onResponse(@NonNull Call<SpotifyUser> call, @NonNull Response<SpotifyUser> response) {
