@@ -18,6 +18,7 @@ public class Phere implements Serializable{
     private String phereDate;
     private String imageURL;
     private PherePlaylist pherePlaylist;
+    private String time;
 
     public Phere(){}
 
@@ -54,6 +55,10 @@ public class Phere implements Serializable{
         return pherePlaylist;
     }
 
+    public String getTime() {
+        return time;
+    }
+
     //setters
     public void setPhereDescription(String phereDescription) {
         this.phereDescription = phereDescription;
@@ -69,6 +74,10 @@ public class Phere implements Serializable{
     }
     public void setPherePlaylist(PherePlaylist pherePlaylist) {
         this.pherePlaylist = pherePlaylist;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     //methods
