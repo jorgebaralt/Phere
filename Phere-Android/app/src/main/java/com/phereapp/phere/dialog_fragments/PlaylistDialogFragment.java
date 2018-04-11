@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.phereapp.phere.R;
 import com.phereapp.phere.adapters.RecyclerViewPlaylistAdapter;
 import com.phereapp.phere.pojo.SpotifyPlaylist;
+import com.phereapp.phere.pojo.SpotifyPlaylistOwner;
 
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class PlaylistDialogFragment extends DialogFragment {
 
     //interface for callback
     public interface PlaylistFromDialogFragment {
-        void playlistFromDialogFragment(SpotifyPlaylist spotifyPlaylist);
+        void playlistFromDialogFragment(SpotifyPlaylist spotifyPlaylist, SpotifyPlaylistOwner spotifyPlaylistOwner);
     }
 
 }

@@ -17,7 +17,7 @@ public class Phere implements Serializable{
     private String phereDescription;
     private String phereDate;
     private String imageURL;
-
+    private PherePlaylist pherePlaylist;
 
     public Phere(){}
 
@@ -47,15 +47,31 @@ public class Phere implements Serializable{
     public String getPhereDate() {
         return phereDate;
     }
-
     public String getImageURL() {
         return imageURL;
     }
+    public PherePlaylist getPherePlaylist() {
+        return pherePlaylist;
+    }
 
+    //setters
+    public void setPhereDescription(String phereDescription) {
+        this.phereDescription = phereDescription;
+    }
+    public void setPhereDate(String phereDate) {
+        this.phereDate = phereDate;
+    }
     public void setMembers(List<String> members) {
         this.members = members;
     }
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+    public void setPherePlaylist(PherePlaylist pherePlaylist) {
+        this.pherePlaylist = pherePlaylist;
+    }
 
+    //methods
     public boolean addMembers(String newMember){
         if(!this.members.contains(newMember)){
             this.members.add(newMember);
@@ -63,15 +79,5 @@ public class Phere implements Serializable{
         }
         return false;
     }
-    public void setPhereDescription(String phereDescription) {
-        this.phereDescription = phereDescription;
-    }
 
-    public void setPhereDate(String phereDate) {
-        this.phereDate = phereDate;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
-    }
 }

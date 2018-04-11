@@ -1,6 +1,5 @@
 package com.phereapp.phere.phere_handling;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
@@ -33,8 +32,7 @@ import com.google.firebase.storage.UploadTask;
 import com.phereapp.phere.MainActivityUser;
 import com.phereapp.phere.R;
 import com.phereapp.phere.pojo.Phere;
-
-import net.steamcrafted.lineartimepicker.dialog.LinearDatePickerDialog;
+import com.phereapp.phere.pojo.PherePlaylist;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,7 +40,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
 import java.util.UUID;
 
 public class MoreInfoCreatePhereActivity extends AppCompatActivity {
@@ -52,7 +49,6 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
     private EditText mPhereDescription, mPhereDate;
     private final int REQUEST_CODE_EXTERNAL_IMAGE = 2000;
     private static final int CAMERA_REQUEST_CODE = 1;
-    private static String TAG = "MoreInfoCreatePhereActivity";
     private Uri filePath, imageURL;
     private Phere newPhere;
     private String phereDescription, mCurrentPhotoPath;
@@ -61,6 +57,8 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
     private long time = myCalendar.getTimeInMillis();
     final Calendar currentDate = Calendar.getInstance();
     private Context mContext;
+    private PherePlaylist pherePlaylist;
+
     //Firebase
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -68,7 +66,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
     private String pheresCollection = "pheres";
     private StorageReference ref;
 
-
+    private static final String TAG = "MoreInfoCreatePhereActi";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +76,9 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         newPhere = (Phere) MoreInfoCreatePhereActivity.this.getIntent().getSerializableExtra("NewPhere");
+        pherePlaylist = (PherePlaylist) MoreInfoCreatePhereActivity.this.getIntent().getSerializableExtra("pherePlaylist");
+        assert newPhere != null;
+        assert pherePlaylist != null;
 
         //Firebase Storage
         storage = FirebaseStorage.getInstance();
@@ -232,11 +233,12 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
         phereDate = mPhereDate.getText().toString();
         newPhere.setPhereDescription(phereDescription);
         newPhere.setPhereDate(phereDate);
+        //todo : add phereplaylist to pojo
+        newPhere.setPherePlaylist(pherePlaylist);
         if (filePath != null) {
             phereImageUrl = imageURL.toString();
             newPhere.setImageURL(phereImageUrl);
         }
-
 
         // adds the extra information to the document in the database
         db.collection(pheresCollection).document(newPhere.getPhereName()).set(newPhere).addOnSuccessListener(new OnSuccessListener<Void>() {
