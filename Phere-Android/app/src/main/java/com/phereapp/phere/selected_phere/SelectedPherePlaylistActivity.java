@@ -9,6 +9,7 @@ import com.phereapp.phere.R;
 import com.phereapp.phere.api.ApiInterface;
 import com.phereapp.phere.api.SpotifyWebApiClient;
 import com.phereapp.phere.helper.SharedPreferencesHelper;
+import com.phereapp.phere.pojo.PherePlaylist;
 import com.phereapp.phere.pojo.SpotifyUser;
 import com.phereapp.phere.spotify_handler.SpotifyHandler;
 
@@ -21,6 +22,7 @@ public class SelectedPherePlaylistActivity extends AppCompatActivity {
     private SpotifyUser spotifyUser;
     private ApiInterface spotifyInterface;
     private String spotifyToken;
+    private PherePlaylist currentPlaylist;
 
 
     @Override
@@ -30,7 +32,11 @@ public class SelectedPherePlaylistActivity extends AppCompatActivity {
         spotifyToken = SharedPreferencesHelper.getDefaults("authorization",SelectedPherePlaylistActivity.this);
         SpotifyHandler spotifyHandler = new SpotifyHandler(SelectedPherePlaylistActivity.this);
         //spotifyHandler.refreshToken();
-        getSpotifyUser();
+        //getSpotifyUser();
+        currentPlaylist = (PherePlaylist) SelectedPherePlaylistActivity.this.getIntent().getSerializableExtra("playlist");
+        assert currentPlaylist != null;
+
+
 
     }
 

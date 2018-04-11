@@ -28,8 +28,10 @@ import com.phereapp.phere.api.SpotifyWebApiClient;
 import com.phereapp.phere.dialog_fragments.PlaylistDialogFragment;
 import com.phereapp.phere.helper.SharedPreferencesHelper;
 import com.phereapp.phere.pojo.Phere;
+import com.phereapp.phere.pojo.PherePlaylist;
 import com.phereapp.phere.pojo.SpotifyPlaylist;
 import com.phereapp.phere.pojo.SpotifyPlaylistList;
+import com.phereapp.phere.pojo.SpotifyPlaylistOwner;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
@@ -57,7 +59,11 @@ public class CreateNewPhereActivity extends AppCompatActivity implements Playlis
     public static Activity mCreateNewPhereActivity;
     private Button mImportPlaylist;
     private SpotifyPlaylist selectedPlaylist;
+    private SpotifyPlaylistOwner selectedSpotifyPlaylistOwner;
     private TextView selectedPlaylistText;
+
+    Intent moreInfoIntent;
+
     //firebase
     private FirebaseFirestore db;
     private FirebaseUser currentUser;
@@ -90,6 +96,9 @@ public class CreateNewPhereActivity extends AppCompatActivity implements Playlis
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         host = currentUser.getDisplayName();
+
+        //intent
+        moreInfoIntent = new Intent(CreateNewPhereActivity.this,MoreInfoCreatePhereActivity.class);
         
         mImportPlaylist.setOnClickListener(new OnClickListener() {
             @Override
@@ -143,7 +152,7 @@ public class CreateNewPhereActivity extends AppCompatActivity implements Playlis
 
                     newPhere = new Phere(phereName, phereLocation, choosenPrivacy, host);
 
-                    Intent moreInfoIntent = new Intent(CreateNewPhereActivity.this,MoreInfoCreatePhereActivity.class);
+
                     //pass newPhere info to next activity so we can put it into DB
                     moreInfoIntent.putExtra("NewPhere",newPhere);
                     startActivity(moreInfoIntent);
@@ -170,9 +179,13 @@ public class CreateNewPhereActivity extends AppCompatActivity implements Playlis
 
 
     @Override
-    public void playlistFromDialogFragment(SpotifyPlaylist spotifyPlaylist) {
+    public void playlistFromDialogFragment(SpotifyPlaylist spotifyPlaylist, SpotifyPlaylistOwner spotifyPlaylistOwner) {
         selectedPlaylist = spotifyPlaylist;
         selectedPlaylistText.setText(spotifyPlaylist.getName());
+        selectedSpotifyPlaylistOwner = spotifyPlaylistOwner;
+        PherePlaylist pherePlaylist = new PherePlaylist(selectedPlaylist.getPlaylistId(),selectedSpotifyPlaylistOwner.getId(),selectedPlaylist.getName());
+        moreInfoIntent.putExtra("pherePlaylist", pherePlaylist);
+        Log.d(TAG, "playlistFromDialogFragment: playlist id  = " + selectedPlaylist.getPlaylistId() + "and owner id = " + selectedSpotifyPlaylistOwner.getId());
 
     }
 }

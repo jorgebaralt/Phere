@@ -12,6 +12,7 @@ public class SpotifyPlaylist implements Serializable {
     private boolean isPublic;
     @SerializedName("id")
     private String playlistId;
+    private SpotifyPlaylistOwner owner;
 
     public String getName() {
         return name;
@@ -27,5 +28,9 @@ public class SpotifyPlaylist implements Serializable {
 
     public String getPlaylistId() {
         return playlistId;
+    }
+
+    public SpotifyPlaylistOwner getOwner() {
+        return owner;
     }
 }

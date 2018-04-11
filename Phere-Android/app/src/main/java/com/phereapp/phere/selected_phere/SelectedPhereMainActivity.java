@@ -107,6 +107,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent playlistIntent = new Intent(SelectedPhereMainActivity.this, SelectedPherePlaylistActivity.class);
+                playlistIntent.putExtra("playlist",selectedPhere.getPherePlaylist());
                 startActivity(playlistIntent);
             }
         });

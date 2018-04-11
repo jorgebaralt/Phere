@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.phereapp.phere.R;
 import com.phereapp.phere.dialog_fragments.PlaylistDialogFragment;
 import com.phereapp.phere.pojo.SpotifyPlaylist;
+import com.phereapp.phere.pojo.SpotifyPlaylistOwner;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class RecyclerViewPlaylistAdapter extends RecyclerView.Adapter<RecyclerVi
     private Context context;
     private static String TAG = "RecyclerViewPlaylistAdapter";
     private SpotifyPlaylist selectedPlaylist;
+    private SpotifyPlaylistOwner spotifyOwner;
     private PlaylistDialogFragment.PlaylistFromDialogFragment callback;
     private Dialog dialogFragment;
 
@@ -47,8 +49,10 @@ public class RecyclerViewPlaylistAdapter extends RecyclerView.Adapter<RecyclerVi
             @Override
             public void onClick(View v) {
                 selectedPlaylist = spotifyPlaylists.get(position);
+                spotifyOwner = selectedPlaylist.getOwner();
+
                 Log.d(TAG, "onClick: Selected Playlist" + selectedPlaylist.getName() + " Selected !");
-                callback.playlistFromDialogFragment(selectedPlaylist);
+                callback.playlistFromDialogFragment(selectedPlaylist,spotifyOwner);
                 dialogFragment.dismiss();
 
             }
