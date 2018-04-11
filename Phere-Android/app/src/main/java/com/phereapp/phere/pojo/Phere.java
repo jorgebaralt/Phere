@@ -17,6 +17,7 @@ public class Phere implements Serializable{
     private String phereDescription;
     private String phereDate;
     private String imageURL;
+    private String time;
 
 
     public Phere(){}
@@ -48,6 +49,10 @@ public class Phere implements Serializable{
         return phereDate;
     }
 
+    public String getTime() {
+        return time;
+    }
+
     public String getImageURL() {
         return imageURL;
     }
@@ -73,5 +78,9 @@ public class Phere implements Serializable{
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

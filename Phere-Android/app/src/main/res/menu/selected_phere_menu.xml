@@ -9,12 +9,6 @@
         app:showAsAction="always"/>
 
     <item
-        android:id="@+id/still_figuring_out_2"
-        android:title="Item" />
-    <item
         android:id="@+id/settings_selected_phere"
         android:title="Settings" />
-    <item
-        android:id="@+id/still_figuring_out"
-        android:title="Delete Phere" />
 </menu>

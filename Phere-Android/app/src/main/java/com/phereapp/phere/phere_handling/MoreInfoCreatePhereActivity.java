@@ -121,13 +121,6 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, month);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                new TimePickerDialog(MoreInfoCreatePhereActivity.this , new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                        myCalendar.set(Calendar.MINUTE, minute);
-                    }
-                }, currentDate.get(Calendar.HOUR_OF_DAY),currentDate.get(Calendar.MINUTE), false).show();
                 updateLabel();
             }
         };
@@ -295,7 +288,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
     }
 
     private void updateLabel() {
-        String myFormat = "MM/dd/yyyy h:mm a";
+        String myFormat = "MM/dd/yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(myFormat, Locale.US);
 
         mPhereDate.setText(simpleDateFormat.format(myCalendar.getTime()));

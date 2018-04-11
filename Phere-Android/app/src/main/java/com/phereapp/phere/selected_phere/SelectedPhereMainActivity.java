@@ -1,13 +1,8 @@
 package com.phereapp.phere.selected_phere;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.FragmentManager;
-import android.app.SearchManager;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -38,7 +33,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.zip.Inflater;
 
 public class SelectedPhereMainActivity extends AppCompatActivity {
 
@@ -165,7 +159,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.selected_phere, menu);
+        getMenuInflater().inflate(R.menu.selected_phere_menu, menu);
         return true;
     }
 
