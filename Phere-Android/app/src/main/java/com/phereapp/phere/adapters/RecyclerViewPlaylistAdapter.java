@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.phereapp.phere.R;
-import com.phereapp.phere.helper.PlaylistFromDialogFragment;
+import com.phereapp.phere.dialog_fragments.PlaylistDialogFragment;
 import com.phereapp.phere.pojo.SpotifyPlaylist;
 
 import java.util.List;
@@ -20,10 +20,10 @@ public class RecyclerViewPlaylistAdapter extends RecyclerView.Adapter<RecyclerVi
     private Context context;
     private static String TAG = "RecyclerViewPlaylistAdapter";
     private SpotifyPlaylist selectedPlaylist;
-    private PlaylistFromDialogFragment callback;
+    private PlaylistDialogFragment.PlaylistFromDialogFragment callback;
     private Dialog dialogFragment;
 
-    public RecyclerViewPlaylistAdapter(List<SpotifyPlaylist> spotifyPlaylists, Context context, PlaylistFromDialogFragment callback, Dialog dialogFragment){
+    public RecyclerViewPlaylistAdapter(List<SpotifyPlaylist> spotifyPlaylists, Context context, PlaylistDialogFragment.PlaylistFromDialogFragment callback, Dialog dialogFragment){
         this.spotifyPlaylists = spotifyPlaylists;
         this.context = context;
         this.callback = callback;

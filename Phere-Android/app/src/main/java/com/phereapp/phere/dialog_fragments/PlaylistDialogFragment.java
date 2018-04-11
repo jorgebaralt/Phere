@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 
 import com.phereapp.phere.R;
 import com.phereapp.phere.adapters.RecyclerViewPlaylistAdapter;
-import com.phereapp.phere.helper.PlaylistFromDialogFragment;
 import com.phereapp.phere.pojo.SpotifyPlaylist;
 
 import java.util.List;
@@ -59,6 +58,9 @@ public class PlaylistDialogFragment extends DialogFragment {
 
 
         return rootView;
+    }
+    public interface PlaylistFromDialogFragment {
+        void playlistFromDialogFragment(SpotifyPlaylist spotifyPlaylist);
     }
 
 }

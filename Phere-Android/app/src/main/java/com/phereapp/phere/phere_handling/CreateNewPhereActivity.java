@@ -26,7 +26,6 @@ import com.phereapp.phere.R;
 import com.phereapp.phere.api.ApiInterface;
 import com.phereapp.phere.api.SpotifyWebApiClient;
 import com.phereapp.phere.dialog_fragments.PlaylistDialogFragment;
-import com.phereapp.phere.helper.PlaylistFromDialogFragment;
 import com.phereapp.phere.helper.SharedPreferencesHelper;
 import com.phereapp.phere.pojo.Phere;
 import com.phereapp.phere.pojo.SpotifyPlaylist;
@@ -40,7 +39,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CreateNewPhereActivity extends AppCompatActivity implements PlaylistFromDialogFragment {
+public class CreateNewPhereActivity extends AppCompatActivity implements PlaylistDialogFragment.PlaylistFromDialogFragment {
 
     private EditText mPhereName;
     private EditText mPhereLocation;
