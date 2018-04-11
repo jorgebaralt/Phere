@@ -1,8 +1,10 @@
 package com.phereapp.phere.phere_handling;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +34,8 @@ import com.phereapp.phere.MainActivityUser;
 import com.phereapp.phere.R;
 import com.phereapp.phere.pojo.Phere;
 
+import net.steamcrafted.lineartimepicker.dialog.LinearDatePickerDialog;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -56,6 +60,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
     private Calendar myCalendar = Calendar.getInstance();
     private long time = myCalendar.getTimeInMillis();
     final Calendar currentDate = Calendar.getInstance();
+    private Context mContext;
     //Firebase
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -109,7 +114,7 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             }
         });
 
-        // Listener for when the user picks the date
+         //Listener for when the user picks the date
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {

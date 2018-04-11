@@ -25,9 +25,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:layout_marginRight="8dp"
         android:text="Phere Name"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -55,10 +55,10 @@
         android:id="@+id/txt_location_createPhere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="16dp"
         android:text="Location"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -70,10 +70,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="16dp"
         android:ems="10"
         android:hint="10 NE 40th Street..."
         android:inputType="textPersonName"
@@ -85,14 +85,14 @@
         android:id="@+id/txt_choosePlaylist_createPhere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:text="Choose a Playlist"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTxt_location_createPhere"
-        android:layout_marginLeft="16dp" />
+        app:layout_constraintTop_toBottomOf="@+id/editTxt_location_createPhere" />
 
     <TextView
         android:id="@+id/txt_privacy_createPhere"
@@ -111,11 +111,11 @@
         android:id="@+id/radio_choose_createPhere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_privacy_createPhere"
-        android:layout_marginLeft="16dp">
+        app:layout_constraintTop_toBottomOf="@+id/txt_privacy_createPhere">
 
         <RadioButton
             android:id="@+id/radio_public_createPhere"
@@ -140,7 +140,7 @@
         android:id="@+id/btn_cancel_create_phere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginRight="16dp"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -151,10 +151,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:text="OK"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_cancel_create_phere"
-        app:layout_constraintEnd_toStartOf="@+id/btn_cancel_create_phere"
-        android:layout_marginRight="16dp" />
+        app:layout_constraintEnd_toStartOf="@+id/btn_cancel_create_phere" />
 
     <Button
         android:id="@+id/btn_importPlaylist_createPhere"
