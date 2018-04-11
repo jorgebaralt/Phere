@@ -25,6 +25,7 @@ public class PlaylistDialogFragment extends DialogFragment {
     RecyclerViewPlaylistAdapter mAdapter;
     private PlaylistFromDialogFragment mCallback;
 
+    // The Fragment captures the interface implementation during its onAttach()
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -59,6 +60,8 @@ public class PlaylistDialogFragment extends DialogFragment {
 
         return rootView;
     }
+
+    //interface for callback
     public interface PlaylistFromDialogFragment {
         void playlistFromDialogFragment(SpotifyPlaylist spotifyPlaylist);
     }
