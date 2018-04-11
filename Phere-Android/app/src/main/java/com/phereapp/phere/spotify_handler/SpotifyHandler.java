@@ -103,13 +103,39 @@ public class SpotifyHandler implements SpotifyPlayer.NotificationCallback,Connec
 
     }
 
+    public void refreshToken(){
+
+        String refreshToken = SharedPreferencesHelper.getDefaults("refreshToken",activity);
+
+        ApiInterface spotifyInterface = SpotifyTokenApiClient.getApiClient().create(ApiInterface.class);
+        Call<SpotifyToken> call = spotifyInterface.refreshSpotifyToken(REFRESH_TYPE,refreshToken,CLIENT_ID,CLIENT_SECRET);
+        call.enqueue(new Callback<SpotifyToken>() {
+            @Override
+            public void onResponse(Call<SpotifyToken> call, Response<SpotifyToken> response) {
+                if(response.isSuccessful()){
+                    Log.d(TAG, "onResponse: Token has been refreshed");
+                    spotifyToken = response.body();
+                    SharedPreferencesHelper.setDefaults("spotifyToken",spotifyToken.getAccessToken(),activity);
+
+                }
+                else {
+                    Log.d(TAG, "onResponse: response = " + response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SpotifyToken> call, Throwable t) {
+
+            }
+        });
+    }
 
     @Override
     public void activityResultHandler(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_CODE){
             AuthenticationResponse response = AuthenticationClient.getResponse(resultCode,data);
 
-            //TODO: this must be done on our own api (BUILT ON NODE.JS)
+            //TODO: this must be done on our own api (BUILT ON NODE.JS) BECAUSE OF CLIENT SECRET
             if(response.getType() == AuthenticationResponse.Type.CODE){
                 Log.d(TAG, " Spotify code = " + response.getCode());
                 code = response.getCode();
@@ -140,32 +166,5 @@ public class SpotifyHandler implements SpotifyPlayer.NotificationCallback,Connec
                 token = response.getAccessToken();
             }
         }
-    }
-
-    public void refreshToken(){
-
-        String refreshToken = SharedPreferencesHelper.getDefaults("refreshToken",activity);
-
-        ApiInterface spotifyInterface = SpotifyTokenApiClient.getApiClient().create(ApiInterface.class);
-        Call<SpotifyToken> call = spotifyInterface.refreshSpotifyToken(REFRESH_TYPE,refreshToken,CLIENT_ID,CLIENT_SECRET);
-        call.enqueue(new Callback<SpotifyToken>() {
-            @Override
-            public void onResponse(Call<SpotifyToken> call, Response<SpotifyToken> response) {
-                if(response.isSuccessful()){
-                    Log.d(TAG, "onResponse: Token has been refreshed");
-                    spotifyToken = response.body();
-                    SharedPreferencesHelper.setDefaults("spotifyToken",spotifyToken.getAccessToken(),activity);
-                    SharedPreferencesHelper.setDefaults("authorization", spotifyToken.getTokenType() + " " +spotifyToken.getAccessToken(),activity);
-                }
-                else {
-                    Log.d(TAG, "onResponse: response = " + response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<SpotifyToken> call, Throwable t) {
-
-            }
-        });
     }
 }

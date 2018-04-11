@@ -1,6 +1,7 @@
 package com.phereapp.phere.dialog_fragments;
 
 import android.app.DialogFragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.phereapp.phere.R;
 import com.phereapp.phere.adapters.RecyclerViewPlaylistAdapter;
+import com.phereapp.phere.helper.PlaylistFromDialogFragment;
 import com.phereapp.phere.pojo.SpotifyPlaylist;
 
 import java.util.List;
@@ -22,8 +24,18 @@ public class PlaylistDialogFragment extends DialogFragment {
     List<SpotifyPlaylist> spotifyPlaylists;
     RecyclerView mRecyclerView;
     RecyclerViewPlaylistAdapter mAdapter;
+    private PlaylistFromDialogFragment mCallback;
 
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try{
+            mCallback = (PlaylistFromDialogFragment) context;
+        }
+        catch (ClassCastException e){
+            throw new ClassCastException(context.toString() + " must implement PlaylistFromDialogFragment");
+        }
+    }
 
     @Nullable
     @Override
@@ -35,16 +47,15 @@ public class PlaylistDialogFragment extends DialogFragment {
 
         if(spotifyPlaylists!= null){
             mRecyclerView = rootView.findViewById(R.id.recycler_view_playlist);
-
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-
             mRecyclerView.addItemDecoration(new DividerItemDecoration(this.getActivity(), LinearLayoutManager.VERTICAL));
-            mAdapter = new RecyclerViewPlaylistAdapter(spotifyPlaylists,this.getActivity());
+            mAdapter = new RecyclerViewPlaylistAdapter(spotifyPlaylists,this.getActivity(),mCallback,getDialog());
             mRecyclerView.setAdapter(mAdapter);
         }
 
         this.getDialog().setTitle("Select a PLaylist");
         this.getDialog().setCanceledOnTouchOutside(true);
+
 
 
         return rootView;

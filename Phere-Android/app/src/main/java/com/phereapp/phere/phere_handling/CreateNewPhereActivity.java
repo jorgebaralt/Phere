@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +26,7 @@ import com.phereapp.phere.R;
 import com.phereapp.phere.api.ApiInterface;
 import com.phereapp.phere.api.SpotifyWebApiClient;
 import com.phereapp.phere.dialog_fragments.PlaylistDialogFragment;
+import com.phereapp.phere.helper.PlaylistFromDialogFragment;
 import com.phereapp.phere.helper.SharedPreferencesHelper;
 import com.phereapp.phere.pojo.Phere;
 import com.phereapp.phere.pojo.SpotifyPlaylist;
@@ -38,7 +40,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CreateNewPhereActivity extends AppCompatActivity {
+public class CreateNewPhereActivity extends AppCompatActivity implements PlaylistFromDialogFragment {
 
     private EditText mPhereName;
     private EditText mPhereLocation;
@@ -55,10 +57,11 @@ public class CreateNewPhereActivity extends AppCompatActivity {
     private Phere newPhere;
     public static Activity mCreateNewPhereActivity;
     private Button mImportPlaylist;
+    private SpotifyPlaylist selectedPlaylist;
+    private TextView selectedPlaylistText;
     //firebase
     private FirebaseFirestore db;
     private FirebaseUser currentUser;
-
 
 
     @Override
@@ -79,6 +82,7 @@ public class CreateNewPhereActivity extends AppCompatActivity {
         mPrivacy = (RadioGroup) findViewById(R.id.radio_choose_createPhere);
         mCancelButton = (Button) findViewById(R.id.btn_cancel_create_phere);
         mImportPlaylist = findViewById(R.id.btn_importPlaylist_createPhere);
+        selectedPlaylistText = findViewById(R.id.txt_selectedPlaylist_createPhere);
 
         final PlaylistDialogFragment playlistDialogFragment = new PlaylistDialogFragment();
         final FragmentManager fragmentManager = getFragmentManager();
@@ -145,7 +149,7 @@ public class CreateNewPhereActivity extends AppCompatActivity {
                     moreInfoIntent.putExtra("NewPhere",newPhere);
                     startActivity(moreInfoIntent);
 
-                    //TODO: next screen depends on import or create playlist.
+
 
                 }
                 else{
@@ -165,6 +169,13 @@ public class CreateNewPhereActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public void playlistFromDialogFragment(SpotifyPlaylist spotifyPlaylist) {
+        selectedPlaylist = spotifyPlaylist;
+        selectedPlaylistText.setText(spotifyPlaylist.getName());
+
+    }
 }
 
 
