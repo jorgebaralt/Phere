@@ -3,9 +3,11 @@ package com.phereapp.phere.selected_phere;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -18,6 +20,7 @@ import android.view.Window;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +29,8 @@ import com.phereapp.phere.R;
 import com.phereapp.phere.dialog_fragments.MembersDialogFragment;
 import com.phereapp.phere.dynamic_image_view.DynamicImageView;
 import com.phereapp.phere.pojo.Phere;
+
+import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -42,7 +47,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
     private DynamicImageView mPhereProfilePicture;
     private ImageButton mToggleDescription;
     CollapsingToolbarLayout mTitle;
-    private String mPhereImageUrl, mHost, mCurrentUser;
+    private String mPhereImageUrl, mHost, mCurrentUser, mPhereDateString, mPhereDescriptionString;
     private android.support.v7.widget.Toolbar mToolbar;
     private Phere selectedPhere;
     private Calendar myCalendar = Calendar.getInstance();
@@ -81,8 +86,12 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         final FragmentManager fm = getFragmentManager();
         final MembersDialogFragment membersDialogFragment = new MembersDialogFragment();
 
-        mPhereSingleLineDesc.setText(selectedPhere.getPhereDescription());
-        mPhereDescription.setText(selectedPhere.getPhereDescription());
+        mPhereDescriptionString = selectedPhere.getPhereDescription();
+        if (mPhereDescriptionString.equalsIgnoreCase("No description...")) {
+            mToggleDescription.setVisibility(View.INVISIBLE);
+        }
+        mPhereSingleLineDesc.setText(mPhereDescriptionString);
+        mPhereDescription.setText(mPhereDescriptionString);
 
         mPhereImageUrl = selectedPhere.getImageURL();
         Glide.with(this).load(mPhereImageUrl).centerCrop().into(mPhereProfilePicture);
@@ -91,7 +100,6 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showDescription();
-
             }
         });
 
@@ -131,31 +139,41 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
 
 
         // Converting the current Date from String to Date type
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
-        try {
-            mDate = df.parse(selectedPhere.getPhereDate());
-        } catch (ParseException e) {
-            e.printStackTrace();
+        mPhereDateString = selectedPhere.getPhereDate();
+        if (mPhereDateString != null) {
+            DateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+            try {
+                mDate = df.parse(mPhereDateString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         // Setting the Date on Date type for the calendar
-        myCalendar.setTime(mDate);
+            mPhereDate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mDate != null) {
+                        myCalendar.setTime(mDate);
+                        // Inflating the custom alertDialog view
+                        LayoutInflater inflater = (LayoutInflater) getLayoutInflater();
+                        customView = inflater.inflate(R.layout.custom_date_show, null);
+                        final DatePicker dateShower = (DatePicker) customView.findViewById(R.id.datePicker_custom_dialog);
+                        final TextView timeShower = (TextView) customView.findViewById(R.id.txt_phereTime_custom_dialog);
+                        // Setting the current Phere selected Date
+                        dateShower.setMaxDate(myCalendar.getTimeInMillis());
+                        dateShower.setMinDate(myCalendar.getTimeInMillis());
+                        // Setting the current Phere selected Time
+                        timeShower.setText(selectedPhere.getTime());
+                        // Creating the Alert Dialog
+                        mBuilder = new AlertDialog.Builder(SelectedPhereMainActivity.this);
+                        mBuilder.setView(customView);
+                        mBuilder.create().show();
+                    } else {
+                        Toast.makeText(SelectedPhereMainActivity.this, "No date yet", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
-        mPhereDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Inflating the custom alertDialog view
-                LayoutInflater inflater = (LayoutInflater) getLayoutInflater();
-                customView = inflater.inflate(R.layout.custom_date_show, null);
-                final DatePicker datePicker = (DatePicker) customView.findViewById(R.id.datePicker_custom_dialog);
-                // Setting the current Phere selected Date
-                datePicker.setMaxDate(myCalendar.getTimeInMillis());
-                datePicker.setMinDate(myCalendar.getTimeInMillis());
-                // Creating the Alert Dialog
-                mBuilder = new AlertDialog.Builder(SelectedPhereMainActivity.this);
-                mBuilder.setView(customView);
-                mBuilder.create().show();
-            }
-        });
     }
 
     @Override

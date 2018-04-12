@@ -142,7 +142,6 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 UploadImage();
-
             }
         });
 
@@ -222,16 +221,23 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
     private void addPhereReference() {
         Log.d(TAG, "addUserReference: Creating Phere" + newPhere.getPhereName() + " for = " + newPhere.getHost());
         // Getting the phere info from the user
-        phereDescription = mPhereDescription.getText().toString();
         phereDate = mPhereDate.getText().toString();
-        newPhere.setPhereDescription(phereDescription);
-        newPhere.setPhereDate(phereDate);
+        phereDescription = mPhereDescription.getText().toString();
         //todo : add phereplaylist to pojo
-        newPhere.setPherePlaylist(pherePlaylist);
         if (filePath != null) {
             phereImageUrl = imageURL.toString();
             newPhere.setImageURL(phereImageUrl);
         }
+        if (phereDate.equals("")) {
+            phereDate = "No date yet";
+        }
+        if (phereDescription.equals("")) {
+            phereDescription = "No description...";
+        }
+
+        newPhere.setPhereDate(phereDate);
+        newPhere.setPhereDescription(phereDescription);
+        newPhere.setPherePlaylist(pherePlaylist);
 
         // adds the extra information to the document in the database
         db.collection(pheresCollection).document(newPhere.getPhereName()).set(newPhere).addOnSuccessListener(new OnSuccessListener<Void>() {

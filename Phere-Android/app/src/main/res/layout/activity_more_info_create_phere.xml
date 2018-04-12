@@ -141,14 +141,15 @@
         android:clickable="true"
         android:drawableRight="@android:drawable/ic_menu_my_calendar"
         android:focusable="false"
+        android:hint="Select a Date"
         android:inputType="date"
-        android:text="Select a Date"
         android:textAllCaps="true"
         android:textSize="18sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toStartOf="@+id/img_uploaded_fromGallery"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_upload_imgFromCamera" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_upload_imgFromCamera"
+        tools:text="Select a Date" />
 
 </android.support.constraint.ConstraintLayout>
 

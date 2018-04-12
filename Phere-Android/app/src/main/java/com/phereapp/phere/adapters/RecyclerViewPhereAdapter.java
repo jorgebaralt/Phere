@@ -49,7 +49,6 @@ public class RecyclerViewPhereAdapter extends RecyclerView.Adapter<RecyclerViewP
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-
         //TODO: deal with image (Still not working)
         holder.phereName.setText(mPheres.get(position).getDisplayPhereName());
         holder.phereLocation.setText(mPheres.get(position).getPhereLocation());

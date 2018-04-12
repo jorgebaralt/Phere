@@ -1,6 +1,6 @@
 package com.phereapp.phere.selected_phere;
 
-import android.content.DialogInterface;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,45 +8,39 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.phereapp.phere.MainActivityUser;
 import com.phereapp.phere.R;
+import com.phereapp.phere.dialog_fragments.TimePickerFragment;
 import com.phereapp.phere.pojo.Phere;
-
-import net.steamcrafted.lineartimepicker.dialog.LinearTimePickerDialog;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class SelectedPhereSettingsActivity extends AppCompatActivity {
+public class SelectedPhereSettingsActivity extends AppCompatActivity implements TimePickerFragment.TimeFromOnTimeSet {
     private static final String TAG = "SelectedPhereSettings";
     private Phere selectedPhere;
     private android.support.v7.widget.Toolbar mToolbar;
     private Button mDeletePhere, mSetTime;
     private String phereName, imageURL;
-    private String mHour, mMinutes, mFullTime;
     //Firebase
     private FirebaseFirestore db;
     private StorageReference mStorageReference;
-    private DatabaseReference rootRef;
     private String pheresCollection = "pheres";
-    private String phereTime = "time";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_phere_settings);
 
-         rootRef = FirebaseDatabase.getInstance().getReference();
         db = FirebaseFirestore.getInstance();
         selectedPhere = (Phere) SelectedPhereSettingsActivity.this.getIntent().getSerializableExtra("SelectedPhere");
         phereName = selectedPhere.getPhereName();
@@ -68,40 +62,8 @@ public class SelectedPhereSettingsActivity extends AppCompatActivity {
         mSetTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LinearTimePickerDialog dialog = LinearTimePickerDialog.Builder.with(SelectedPhereSettingsActivity.this)
-                        .setButtonCallback(new LinearTimePickerDialog.ButtonCallback() {
-                            @Override
-                            public void onPositive(DialogInterface dialog, int hour, int minutes) {
-                                String daytime = "";
-                                if (hour > 12) {
-                                    hour = hour - 12;
-                                    daytime = "PM";
-                                    mHour = Integer.toString(hour);
-                                } else {
-                                    daytime = "AM";
-                                    mHour = Integer.toString(hour);
-                                }
-                                mMinutes = Integer.toString(minutes);
-                                if (mMinutes.equals("0")) {
-                                    mMinutes = "00";
-                                }
-                                Toast.makeText(SelectedPhereSettingsActivity.this, hour + ":" + mMinutes + " " + daytime, Toast.LENGTH_SHORT).show();
-                                mFullTime = (hour + ":" + mMinutes + " " + daytime);
-                                Map<String, Object> data = new HashMap<>();
-                                data.put("time", mFullTime);
-                                db.collection(pheresCollection).document(selectedPhere.getPhereName()).set(data, SetOptions.merge());
-                            }
-
-                            @Override
-                            public void onNegative(DialogInterface dialog) {
-                                dialog.dismiss();
-                            }
-                        }).setPickerBackgroundColor(getResources().getColor(R.color.black))
-                        .setTextColor(getResources().getColor(R.color.lightBlue))
-                        .setButtonColor(getResources().getColor(R.color.lightBlue))
-                        .build();
-                dialog.show();
-
+                DialogFragment newFragment = new TimePickerFragment();
+                newFragment.show(getFragmentManager(), "timePicker");
             }
         });
     }
@@ -141,5 +103,13 @@ public class SelectedPhereSettingsActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    @Override
+    public void timeFromOnTimeSet(String time) {
+        Log.d(TAG, "timeFromOnTimeSet: time =" + time);
+        Map<String, Object> data = new HashMap<>();
+        data.put("time", time);
+        db.collection(pheresCollection).document(selectedPhere.getPhereName()).set(data, SetOptions.merge());
     }
 }
