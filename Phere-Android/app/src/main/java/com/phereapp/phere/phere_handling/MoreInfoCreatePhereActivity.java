@@ -2,7 +2,6 @@ package com.phereapp.phere.phere_handling;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -19,7 +18,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -78,7 +76,6 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
         newPhere = (Phere) MoreInfoCreatePhereActivity.this.getIntent().getSerializableExtra("NewPhere");
         pherePlaylist = (PherePlaylist) MoreInfoCreatePhereActivity.this.getIntent().getSerializableExtra("pherePlaylist");
         assert newPhere != null;
-        assert pherePlaylist != null;
 
         //Firebase Storage
         storage = FirebaseStorage.getInstance();
@@ -235,9 +232,16 @@ public class MoreInfoCreatePhereActivity extends AppCompatActivity {
             phereDescription = "No description...";
         }
 
-        newPhere.setPhereDate(phereDate);
-        newPhere.setPhereDescription(phereDescription);
-        newPhere.setPherePlaylist(pherePlaylist);
+        if(pherePlaylist != null) {
+            newPhere.setPherePlaylist(pherePlaylist);
+        }
+        if(phereDate != null) {
+            newPhere.setPhereDate(phereDate);
+        }
+        if(phereDescription != null) {
+            newPhere.setPhereDescription(phereDescription);
+        }
+
 
         // adds the extra information to the document in the database
         db.collection(pheresCollection).document(newPhere.getPhereName()).set(newPhere).addOnSuccessListener(new OnSuccessListener<Void>() {

@@ -1,5 +1,6 @@
 package com.phereapp.phere.api;
 
+import com.phereapp.phere.pojo.SpotifyPlaylist;
 import com.phereapp.phere.pojo.SpotifyPlaylistList;
 import com.phereapp.phere.pojo.SpotifyToken;
 import com.phereapp.phere.pojo.SpotifyUser;
@@ -10,6 +11,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface ApiInterface {
     //Get current user profile
@@ -41,4 +43,11 @@ public interface ApiInterface {
     //getCurrentUserPlaylists
     @GET("/v1/me/playlists")
     Call<SpotifyPlaylistList> getSpotifyPlaylists(@Header("Authorization")String token);
+
+    @GET("/v1/users/{user_id}/playlists/{playlist_id}")
+    Call<SpotifyPlaylist> getSpotifyPlaylist(
+            @Header("Authorization") String Token,
+            @Path("user_id") String userId,
+            @Path("playlist_id") String playlistId
+    );
 }

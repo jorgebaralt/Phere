@@ -34,8 +34,6 @@ public class SelectedPherePlaylistActivity extends AppCompatActivity {
         //spotifyHandler.refreshToken();
         //getSpotifyUser();
         currentPlaylist = (PherePlaylist) SelectedPherePlaylistActivity.this.getIntent().getSerializableExtra("playlist");
-        assert currentPlaylist != null;
-
 
 
     }
@@ -50,7 +48,7 @@ public class SelectedPherePlaylistActivity extends AppCompatActivity {
                 if(response.isSuccessful()) {
                     spotifyUser = response.body();
                     assert spotifyUser!=null;
-                    Log.d(TAG, "onResponse: SpotifyUser = " + spotifyUser.getDisplayName());
+                    Log.d(TAG, "onResponse: SpotifyUserID = " + spotifyUser.getId());
                 }else{
                     Log.e(TAG, "onResponse: Spotify Called but was not successful, response = " + response.body());
                 }
