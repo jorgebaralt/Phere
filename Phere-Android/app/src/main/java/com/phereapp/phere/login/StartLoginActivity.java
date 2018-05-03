@@ -75,7 +75,7 @@ public class StartLoginActivity extends AppCompatActivity {
                 } else if (userEmail.isEmpty()) {
                     Toast.makeText(StartLoginActivity.this, "Please Enter an Email", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(StartLoginActivity.this, "Loging in", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StartLoginActivity.this, "Logging in", Toast.LENGTH_SHORT).show();
                     mAuth.signInWithEmailAndPassword(userEmail, userPassword)
                             .addOnCompleteListener(StartLoginActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
