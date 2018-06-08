@@ -50,8 +50,8 @@ public class RecyclerViewPlaylistAdapter extends RecyclerView.Adapter<RecyclerVi
             public void onClick(View v) {
                 selectedPlaylist = spotifyPlaylists.get(position);
                 spotifyOwner = selectedPlaylist.getOwner();
-
                 Log.d(TAG, "onClick: Selected Playlist" + selectedPlaylist.getName() + " Selected !");
+                //Use Callback to get the values when we return to playlist selection
                 callback.playlistFromDialogFragment(selectedPlaylist,spotifyOwner);
                 dialogFragment.dismiss();
 

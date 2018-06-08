@@ -50,6 +50,7 @@ public class PlaylistDialogFragment extends DialogFragment {
             mRecyclerView = rootView.findViewById(R.id.recycler_view_playlist);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
             mRecyclerView.addItemDecoration(new DividerItemDecoration(this.getActivity(), LinearLayoutManager.VERTICAL));
+            //pass the Callback to the RecyclerView
             mAdapter = new RecyclerViewPlaylistAdapter(spotifyPlaylists,this.getActivity(),mCallback,getDialog());
             mRecyclerView.setAdapter(mAdapter);
         }

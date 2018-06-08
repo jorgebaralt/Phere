@@ -167,7 +167,6 @@ public class ProfileFragment extends Fragment {
         //SPOTIFY
         spotifyHandler.activityResultHandler(requestCode,resultCode,data);
 
-
     }
 
 
