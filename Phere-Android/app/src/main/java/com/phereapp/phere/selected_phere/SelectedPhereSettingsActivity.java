@@ -1,5 +1,7 @@
 package com.phereapp.phere.selected_phere;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -19,6 +20,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.phereapp.phere.MainActivityUser;
 import com.phereapp.phere.R;
+import com.phereapp.phere.dialog_fragments.DressCodeDialogFragment;
 import com.phereapp.phere.dialog_fragments.TimePickerFragment;
 import com.phereapp.phere.pojo.Phere;
 
@@ -29,7 +31,7 @@ public class SelectedPhereSettingsActivity extends AppCompatActivity implements 
     private static final String TAG = "SelectedPhereSettings";
     private Phere selectedPhere;
     private android.support.v7.widget.Toolbar mToolbar;
-    private Button mDeletePhere, mSetTime;
+    private Button mDeletePhere, mSetTime, mDressCode;
     private String phereName, imageURL;
     //Firebase
     private FirebaseFirestore db;
@@ -46,9 +48,10 @@ public class SelectedPhereSettingsActivity extends AppCompatActivity implements 
         phereName = selectedPhere.getPhereName();
         imageURL = selectedPhere.getImageURL();
 
-        mDeletePhere = findViewById(R.id.btn_deletePhere_selectedPhere);
-        mToolbar = findViewById(R.id.toolbar_selectePhere_settings);
+        mDeletePhere = findViewById(R.id.btn_deletePhere_selectedPhere_settings);
+        mToolbar = findViewById(R.id.toolbar_selectedPhere_settings);
         mSetTime = findViewById(R.id.btn_setTime_selectedPhere_settings);
+        mDressCode = findViewById(R.id.btn_dressCode_selectedPhere_settings);
 
         mToolbar.setTitle(selectedPhere.getDisplayPhereName());
 
@@ -64,6 +67,14 @@ public class SelectedPhereSettingsActivity extends AppCompatActivity implements 
             public void onClick(View v) {
                 DialogFragment newFragment = new TimePickerFragment();
                 newFragment.show(getFragmentManager(), "timePicker");
+            }
+        });
+
+        mDressCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment dressCodeFragment = new DressCodeDialogFragment();
+                dressCodeFragment.show(getFragmentManager(), "DressCode");
             }
         });
     }
