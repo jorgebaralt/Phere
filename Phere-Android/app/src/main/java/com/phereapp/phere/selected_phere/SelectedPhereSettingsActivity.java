@@ -3,6 +3,8 @@ package com.phereapp.phere.selected_phere;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -53,12 +56,29 @@ public class SelectedPhereSettingsActivity extends AppCompatActivity implements 
         mSetTime = findViewById(R.id.btn_setTime_selectedPhere_settings);
         mDressCode = findViewById(R.id.btn_dressCode_selectedPhere_settings);
 
+        final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                switch (i){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        Intent homeIntent = new Intent(SelectedPhereSettingsActivity.this, MainActivityUser.class);
+                        startActivity(homeIntent);
+                        deletePhere();
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+            }
+        };
+
         mToolbar.setTitle(selectedPhere.getDisplayPhereName());
 
         mDeletePhere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deletePhere();
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setMessage("Delete Phere?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
             }
         });
 
@@ -92,8 +112,6 @@ public class SelectedPhereSettingsActivity extends AppCompatActivity implements 
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(SelectedPhereSettingsActivity.this, "Phere Deleted", Toast.LENGTH_SHORT).show();
-                            Intent homeIntent = new Intent(SelectedPhereSettingsActivity.this, MainActivityUser.class);
-                            startActivity(homeIntent);
                         }
                     });
                 }
@@ -109,8 +127,6 @@ public class SelectedPhereSettingsActivity extends AppCompatActivity implements 
                 @Override
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(SelectedPhereSettingsActivity.this, "Phere Deleted", Toast.LENGTH_SHORT).show();
-                    Intent homeIntent = new Intent(SelectedPhereSettingsActivity.this, MainActivityUser.class);
-                    startActivity(homeIntent);
                 }
             });
         }
@@ -131,4 +147,6 @@ public class SelectedPhereSettingsActivity extends AppCompatActivity implements 
         dataD.put("dressCode", selectedDressCode);
         db.collection(pheresCollection).document(selectedPhere.getPhereName()).set(dataD, SetOptions.merge());
     }
+
+
 }

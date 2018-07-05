@@ -188,7 +188,8 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
             }
         }
         else {
-            mDressCode.setText("No Dress Code Selected");
+            String nonSelected = "No Dress Code Selected";
+            mDressCode.setText(nonSelected);
             mDressCode.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
 //            ViewGroup.LayoutParams params = mDressCode.getLayoutParams();
 //            params.height = 0;
