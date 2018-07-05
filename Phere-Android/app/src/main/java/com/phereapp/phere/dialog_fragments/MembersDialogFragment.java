@@ -23,7 +23,6 @@ public class MembersDialogFragment extends DialogFragment {
     RecyclerViewMembersAdapter mAdapter;
     Phere mSelectedPhere;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {

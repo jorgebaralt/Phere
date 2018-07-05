@@ -19,6 +19,8 @@ public class Phere implements Serializable{
     private String imageURL;
     private PherePlaylist pherePlaylist;
     private String time;
+    private String dressCode;
+    //TODO add DressCode, Rules and Specials to phere creation.
 
     public Phere(){}
 
@@ -54,9 +56,11 @@ public class Phere implements Serializable{
     public PherePlaylist getPherePlaylist() {
         return pherePlaylist;
     }
-
     public String getTime() {
         return time;
+    }
+    public String getDressCode() {
+        return dressCode;
     }
 
     //setters
@@ -74,6 +78,9 @@ public class Phere implements Serializable{
     }
     public void setPherePlaylist(PherePlaylist pherePlaylist) {
         this.pherePlaylist = pherePlaylist;
+    }
+    public void setDressCode(String dressCode) {
+        this.dressCode = dressCode;
     }
 
     public void setTime(String time) {

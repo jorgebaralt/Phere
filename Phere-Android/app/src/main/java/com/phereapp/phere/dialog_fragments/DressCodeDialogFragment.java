@@ -1,6 +1,7 @@
 package com.phereapp.phere.dialog_fragments;
 
 import android.app.DialogFragment;
+import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,11 +9,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.phereapp.phere.R;
 
 public class DressCodeDialogFragment extends DialogFragment {
     public TextView mFormal, mSemiFormal, mCasual;
+    public DressCodeSet mCallback;
+
+    public interface DressCodeSet {
+        void dressCodeSet (String selectedDressCode);
+    }
 
     @Nullable
     @Override
@@ -26,13 +33,45 @@ public class DressCodeDialogFragment extends DialogFragment {
         mFormal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String dressCodeF = "Formal";
+                mCallback.dressCodeSet(dressCodeF);
+                Toast.makeText(getActivity(), dressCodeF, Toast.LENGTH_SHORT).show();
+                getDialog().dismiss();
+            }
+        });
+
+        mSemiFormal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String dressCodeSF = "SemiFormal";
+                mCallback.dressCodeSet(dressCodeSF);
+                Toast.makeText(getActivity(), dressCodeSF, Toast.LENGTH_SHORT).show();
+                getDialog().dismiss();
+            }
+        });
+
+        mCasual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String dressCodeC = "Casual";
+                mCallback.dressCodeSet(dressCodeC);
+                Toast.makeText(getActivity(), dressCodeC, Toast.LENGTH_SHORT).show();
                 getDialog().dismiss();
             }
         });
 
         this.getDialog().setCanceledOnTouchOutside(true);
-        this.getDialog().setTitle("Dress Code");
 
         return rootView;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mCallback = (DressCodeSet) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + "Most implement DressCodeSet");
+        }
     }
 }

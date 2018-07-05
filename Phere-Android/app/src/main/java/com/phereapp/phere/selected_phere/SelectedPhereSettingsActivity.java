@@ -27,7 +27,7 @@ import com.phereapp.phere.pojo.Phere;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SelectedPhereSettingsActivity extends AppCompatActivity implements TimePickerFragment.TimeFromOnTimeSet {
+public class SelectedPhereSettingsActivity extends AppCompatActivity implements TimePickerFragment.TimeFromOnTimeSet, DressCodeDialogFragment.DressCodeSet {
     private static final String TAG = "SelectedPhereSettings";
     private Phere selectedPhere;
     private android.support.v7.widget.Toolbar mToolbar;
@@ -122,5 +122,13 @@ public class SelectedPhereSettingsActivity extends AppCompatActivity implements 
         Map<String, Object> data = new HashMap<>();
         data.put("time", time);
         db.collection(pheresCollection).document(selectedPhere.getPhereName()).set(data, SetOptions.merge());
+    }
+
+    @Override
+    public void dressCodeSet(String selectedDressCode) {
+        Log.d(TAG, "dressCodeSet: dressCode = " + selectedDressCode);
+        Map<String, Object> dataD = new HashMap<>();
+        dataD.put("dressCode", selectedDressCode);
+        db.collection(pheresCollection).document(selectedPhere.getPhereName()).set(dataD, SetOptions.merge());
     }
 }

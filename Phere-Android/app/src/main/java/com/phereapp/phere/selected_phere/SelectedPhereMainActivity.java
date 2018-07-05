@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,11 +44,11 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
 
     private static String TAG = "SelectedPhereMainActivity";
     private TextView mPhereDescription, mPhereDate, mPhereLocation, mPhereMembers, mPherePlaylist, mPhereSingleLineDesc;
-    private TextView mPhereLocationPopup;
+    private TextView mPhereLocationPopup, mDressCode;
     private DynamicImageView mPhereProfilePicture;
     private ImageButton mToggleDescription;
     CollapsingToolbarLayout mTitle;
-    private String mPhereImageUrl, mHost, mCurrentUser, mPhereDateString, mPhereDescriptionString;
+    private String mPhereImageUrl, mHost, mCurrentUser, mPhereDateString, mPhereDescriptionString, dressCode;
     private android.support.v7.widget.Toolbar mToolbar;
     private Phere selectedPhere;
     private Calendar myCalendar = Calendar.getInstance();
@@ -79,6 +80,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         mPhereMembers = findViewById(R.id.txt_btn_members_selectedPhere);
         mPherePlaylist = findViewById(R.id.txt_btn_playlist_selectedPhere);
         mToggleDescription = findViewById(R.id.btn_toggleDescription_selectedPhere);
+        mDressCode = findViewById(R.id.txt_btn_dressCode_selectedPhere);
 
         mTitle.setTitle(selectedPhere.getDisplayPhereName());
 
@@ -173,6 +175,25 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
                     }
                 }
             });
+
+        dressCode = selectedPhere.getDressCode();
+        if (dressCode != null) {
+            mDressCode.setText(dressCode);
+            if (dressCode.equals("Formal")) {
+                mDressCode.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.tuxedo, 0);
+            } else if (dressCode.equals("SemiFormal")) {
+                mDressCode.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.shirt_semi_formal, 0);
+            } else {
+                mDressCode.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.shirt_yellow, 0);
+            }
+        }
+        else {
+            mDressCode.setText("No Dress Code Selected");
+            mDressCode.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+//            ViewGroup.LayoutParams params = mDressCode.getLayoutParams();
+//            params.height = 0;
+//            mDressCode.setLayoutParams(params);
+        }
 
     }
 
