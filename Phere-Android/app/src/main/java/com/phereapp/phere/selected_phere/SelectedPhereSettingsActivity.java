@@ -59,7 +59,7 @@ public class SelectedPhereSettingsActivity extends AppCompatActivity implements 
         final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                switch (i){
+                switch (i) {
                     case DialogInterface.BUTTON_POSITIVE:
                         Intent homeIntent = new Intent(SelectedPhereSettingsActivity.this, MainActivityUser.class);
                         startActivity(homeIntent);
@@ -147,6 +147,5 @@ public class SelectedPhereSettingsActivity extends AppCompatActivity implements 
         dataD.put("dressCode", selectedDressCode);
         db.collection(pheresCollection).document(selectedPhere.getPhereName()).set(dataD, SetOptions.merge());
     }
-
-
+    
 }

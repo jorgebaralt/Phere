@@ -48,7 +48,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
     private DynamicImageView mPhereProfilePicture;
     private ImageButton mToggleDescription;
     CollapsingToolbarLayout mTitle;
-    private String mPhereImageUrl, mHost, mCurrentUser, mPhereDateString, mPhereDescriptionString, dressCode;
+    private String mPhereImageUrl, mHost, mCurrentUser, mPhereDateString, mPhereDescriptionString, dressCode, time;
     private android.support.v7.widget.Toolbar mToolbar;
     private Phere selectedPhere;
     private Calendar myCalendar = Calendar.getInstance();
@@ -66,7 +66,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         selectedPhere = (Phere) SelectedPhereMainActivity.this.getIntent().getSerializableExtra("SelectedPhere");
-        if(selectedPhere == null){
+        if (selectedPhere == null) {
             Log.e(TAG, "onCreate: Error passing phere to this activity");
         }
         //Initialize the Views
@@ -110,14 +110,14 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
         mCurrentUser = mUser.getDisplayName();
         if (mHost.equals(mCurrentUser)) {
             setSupportActionBar(mToolbar);
-            mToolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.cogwheel_48dp_brighter));
+            mToolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.cogwheel_48dp_brighter));
         }
 
         mPherePlaylist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent playlistIntent = new Intent(SelectedPhereMainActivity.this, SelectedPherePlaylistActivity.class);
-                playlistIntent.putExtra("playlist",selectedPhere.getPherePlaylist());
+                playlistIntent.putExtra("playlist", selectedPhere.getPherePlaylist());
                 startActivity(playlistIntent);
             }
         });
@@ -151,43 +151,48 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
             }
         }
         // Setting the Date on Date type for the calendar
-            mPhereDate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mDate != null) {
-                        myCalendar.setTime(mDate);
-                        // Inflating the custom alertDialog view
-                        LayoutInflater inflater = (LayoutInflater) getLayoutInflater();
-                        customView = inflater.inflate(R.layout.custom_date_show, null);
-                        final DatePicker dateShower = (DatePicker) customView.findViewById(R.id.datePicker_custom_dialog);
-                        final TextView timeShower = (TextView) customView.findViewById(R.id.txt_phereTime_custom_dialog);
-                        // Setting the current Phere selected Date
-                        dateShower.setMaxDate(myCalendar.getTimeInMillis());
-                        dateShower.setMinDate(myCalendar.getTimeInMillis());
-                        // Setting the current Phere selected Time
-                        timeShower.setText(selectedPhere.getTime());
-                        // Creating the Alert Dialog
-                        mBuilder = new AlertDialog.Builder(SelectedPhereMainActivity.this);
-                        mBuilder.setView(customView);
-                        mBuilder.create().show();
-                    } else {
-                        Toast.makeText(SelectedPhereMainActivity.this, "No date yet", Toast.LENGTH_SHORT).show();
-                    }
+        time = selectedPhere.getTime();
+        if (time == null) {
+            mPhereDate.setText("Date");
+        } else {
+            mPhereDate.setText("Date/Time");
+        }
+        mPhereDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mDate != null) {
+                    myCalendar.setTime(mDate);
+                    // Inflating the custom alertDialog view
+                    LayoutInflater inflater = (LayoutInflater) getLayoutInflater();
+                    customView = inflater.inflate(R.layout.custom_date_show, null);
+                    final DatePicker dateShower = (DatePicker) customView.findViewById(R.id.datePicker_custom_dialog);
+                    final TextView timeShower = (TextView) customView.findViewById(R.id.txt_phereTime_custom_dialog);
+                    // Setting the current Phere selected Date
+                    dateShower.setMaxDate(myCalendar.getTimeInMillis());
+                    dateShower.setMinDate(myCalendar.getTimeInMillis());
+                    // Setting the current Phere selected Time
+                    timeShower.setText(selectedPhere.getTime());
+                    // Creating the Alert Dialog
+                    mBuilder = new AlertDialog.Builder(SelectedPhereMainActivity.this);
+                    mBuilder.setView(customView);
+                    mBuilder.create().show();
+                } else {
+                    Toast.makeText(SelectedPhereMainActivity.this, "No date and time yet", Toast.LENGTH_SHORT).show();
                 }
-            });
+            }
+        });
 
         dressCode = selectedPhere.getDressCode();
         if (dressCode != null) {
             mDressCode.setText(dressCode);
             if (dressCode.equals("Formal")) {
-                mDressCode.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.tuxedo, 0);
+                mDressCode.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.tuxedo, 0);
             } else if (dressCode.equals("SemiFormal")) {
-                mDressCode.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.shirt_semi_formal, 0);
+                mDressCode.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.shirt_semi_formal, 0);
             } else {
                 mDressCode.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.shirt_yellow, 0);
             }
-        }
-        else {
+        } else {
             String nonSelected = "No Dress Code Selected";
             mDressCode.setText(nonSelected);
             mDressCode.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
@@ -210,7 +215,7 @@ public class SelectedPhereMainActivity extends AppCompatActivity {
 
             case R.id.settings_selected_phere:
                 Intent settingsIntent = new Intent(SelectedPhereMainActivity.this, SelectedPhereSettingsActivity.class);
-                settingsIntent.putExtra("SelectedPhere",  selectedPhere);
+                settingsIntent.putExtra("SelectedPhere", selectedPhere);
                 startActivity(settingsIntent);
                 break;
         }

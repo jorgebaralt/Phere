@@ -17,6 +17,7 @@ public class DressCodeDialogFragment extends DialogFragment {
     public TextView mFormal, mSemiFormal, mCasual;
     public DressCodeSet mCallback;
 
+    // Interface for when the user selects an option
     public interface DressCodeSet {
         void dressCodeSet (String selectedDressCode);
     }
@@ -30,6 +31,8 @@ public class DressCodeDialogFragment extends DialogFragment {
         mSemiFormal = rootView.findViewById(R.id.txt_dressCode_semiFormal_selectedPhere_settings);
         mCasual = rootView.findViewById(R.id.txt_dressCode_casual_selectedPhere_settings);
 
+
+        // Handling events for user selections and Toasts of selected option.
         mFormal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +68,7 @@ public class DressCodeDialogFragment extends DialogFragment {
         return rootView;
     }
 
+    // Retrieving the User selection
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

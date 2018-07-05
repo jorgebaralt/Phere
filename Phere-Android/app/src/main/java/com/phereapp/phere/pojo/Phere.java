@@ -20,6 +20,8 @@ public class Phere implements Serializable{
     private PherePlaylist pherePlaylist;
     private String time;
     private String dressCode;
+    private List<String> rules;
+    private List<String> specials;
     //TODO add DressCode, Rules and Specials to phere creation.
 
     public Phere(){}
@@ -61,6 +63,12 @@ public class Phere implements Serializable{
     }
     public String getDressCode() {
         return dressCode;
+    }
+    public List<String> getRules() {
+        return rules;
+    }
+    public List<String> getSpecials() {
+        return specials;
     }
 
     //setters
